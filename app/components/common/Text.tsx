@@ -6,46 +6,42 @@ import {
   NotoSans_700Bold,
   useFonts,
 } from "@expo-google-fonts/noto-sans";
-import * as colors from "../../utils/colors";
+import { colors } from "../../utils/colors";
 
-interface TextProps {
+type Color = (string | number)[];
+
+interface TextPropType {
   type: string;
   size?: number | string;
-  color?: {
-    type: string;
-    number: number | string;
-  };
+  color?: Color;
   children: React.ReactNode;
 }
 
-const defaultColor = {
-  type: "neutral",
-  number: 50,
-};
+const defaultColor = ["neutral", 50];
 
 export default function Text({
   type,
   size = 1,
   color = defaultColor,
   children,
-}: TextProps) {
-  let [fontsLoaded] = useFonts({
+}: TextPropType) {
+  const [fontsLoaded] = useFonts({
     NotoSans_400Regular,
     NotoSans_500Medium,
     NotoSans_700Bold,
   });
 
-  // 타입 오류 발생
-  // console.log( > colors[color.type] < [color.number.toString()]);
-  // 이 부분을 고쳐서 style에 color 값으로 넣어야 함
-  console.log(colors[color.type][color.number.toString()]);
-
-  const data = textStyle[type][size.toString()];
+  const {
+    weight,
+    size: textSize,
+    letterSpacing,
+  } = textStyle[type][size.toString()];
 
   const style: any = {
-    fontFamily: data.weight,
-    fontSize: data.size,
-    lineHeight: data.lineHeight,
+    fontFamily: weight,
+    fontSize: textSize,
+    letterSpacing: letterSpacing,
+    color: colors[color[0]][color[1].toString()],
   };
 
   if (fontsLoaded) {
