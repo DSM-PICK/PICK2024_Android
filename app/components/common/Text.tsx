@@ -1,12 +1,12 @@
 import { Text as NativeText } from "react-native";
-import { textStyle } from "../../utils/texts";
+import { textStyle } from "@/utils/texts";
 import {
   NotoSans_400Regular,
   NotoSans_500Medium,
   NotoSans_700Bold,
   useFonts,
 } from "@expo-google-fonts/noto-sans";
-import { colors } from "../../utils/colors";
+import { getColors } from "@/utils/functions/getColors";
 
 type Color = (string | number)[];
 
@@ -41,7 +41,7 @@ export default function Text({
     fontFamily: weight,
     fontSize: textSize,
     letterSpacing: letterSpacing,
-    color: colors[color[0]][color[1].toString()],
+    color: getColors(color),
   };
 
   if (fontsLoaded) {
