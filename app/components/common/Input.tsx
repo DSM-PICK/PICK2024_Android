@@ -1,13 +1,20 @@
 import { useState } from "react";
-import { TextInput, View, StyleSheet } from "react-native";
-import { colors } from "../../utils/colors";
-import { textStyle } from "../../utils/texts";
+import {
+  TextInput,
+  View,
+  StyleSheet,
+  TouchableWithoutFeedback,
+} from "react-native";
+import { colors } from "@/utils/colors";
+import { textStyle } from "@/utils/texts";
 import {
   NotoSans_400Regular,
   NotoSans_500Medium,
   NotoSans_700Bold,
   useFonts,
 } from "@expo-google-fonts/noto-sans";
+import EyeOff from "@icons/eyeOff.svg";
+import EyeOn from "@assets/icons/eyeOn.svg";
 
 type ChangeEventType = {
   text: string;
@@ -24,14 +31,18 @@ interface PropType {
   password?: boolean;
 }
 
+const { size, letterSpacing, weight } = textStyle.caption[2];
+const { neutral, secondary, error } = colors;
+const sizes = { width: 18 };
+
 export default function Input({
-  disabled = false,
+  disabled,
   value,
   onChange,
   placeholder,
   name = "",
   error,
-  password = false,
+  password,
 }: PropType) {
   const [fontsLoaded] = useFonts({
     NotoSans_400Regular,
@@ -41,15 +52,13 @@ export default function Input({
   const [active, setActive] = useState(false);
   const [visible, setVisible] = useState(false);
 
-  const { size, letterSpacing, weight } = textStyle.caption["2"];
-
   if (fontsLoaded) {
     return (
       <View
         style={[
           styles.container,
+          styles.field,
           active && styles.active,
-          !active && styles.field,
           disabled && styles.disabled,
           error && styles.error,
         ]}
@@ -63,17 +72,19 @@ export default function Input({
           placeholder={placeholder}
           placeholderTextColor={error ? colors.error[700] : colors.neutral[500]}
           selectionColor={error ? colors.error[500] : colors.primary[500]}
-          style={
+          style={[
+            textStyle,
             {
-              color: colors.neutral[50],
-              fontSize: size,
-              letterSpacing: letterSpacing,
-              fontFamily: weight,
-              width: password ? "90%" : "100%",
-            } as any
-          }
+              width: password ? "92%" : "100%",
+            },
+          ]}
           secureTextEntry={password && !visible}
         />
+        {password && (
+          <TouchableWithoutFeedback onPress={() => setVisible(!visible)}>
+            {visible ? <EyeOn {...sizes} /> : <EyeOff {...sizes} />}
+          </TouchableWithoutFeedback>
+        )}
       </View>
     );
   }
@@ -81,6 +92,9 @@ export default function Input({
 
 const styles = StyleSheet.create({
   container: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     paddingHorizontal: 16,
     paddingVertical: 5,
     borderRadius: 4,
@@ -88,19 +102,25 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   field: {
-    backgroundColor: colors.neutral[900],
-    borderColor: colors.neutral[900],
+    backgroundColor: neutral[900],
+    borderColor: neutral[900],
   },
   active: {
     backgroundColor: "white",
-    borderColor: colors.secondary[500],
+    borderColor: secondary[500],
   },
   disabled: {
-    backgroundColor: "white",
-    borderColor: colors.secondary[500],
+    backgroundColor: neutral[800],
+    borderColor: neutral[800],
   },
   error: {
-    backgroundColor: colors.error[900],
-    borderColor: colors.error[500],
+    backgroundColor: error[900],
+    borderColor: error[500],
+  },
+  textStyle: {
+    color: neutral[50],
+    fontSize: size,
+    letterSpacing: letterSpacing,
+    fontFamily: weight as any, // 임시 오류 제거용 any
   },
 });
