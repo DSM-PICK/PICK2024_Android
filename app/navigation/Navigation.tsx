@@ -1,7 +1,18 @@
-import { Test } from "@/screens/Test";
-import { createStackNavigator } from "@react-navigation/stack";
+import {
+  createStackNavigator,
+  TransitionPresets,
+} from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
+import { DetailNotice } from "@/screens/DetailNotice";
+import { Onboard } from "@/screens/Onboard";
+import { Notice } from "@/screens/Notice";
 import { Login } from "@/screens/Login";
+import { Test } from "@/screens/Test";
+import { Home } from "@/screens/Home";
+
+const TransitionOptions = {
+  ...TransitionPresets.SlideFromRightIOS,
+};
 
 const Stack = createStackNavigator();
 
@@ -11,21 +22,23 @@ export default function Navigation() {
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
+          ...TransitionOptions,
         }}
-        initialRouteName="login"
+        initialRouteName="홈"
       >
-        <Stack.Screen name="onBoard" component={Test} />
-        <Stack.Screen name="login" component={Login} />
-        <Stack.Screen name="home" component={Test} />
-        <Stack.Screen name="schedule" component={Test} />
-        <Stack.Screen name="notice" component={Test} />
-        <Stack.Screen name="noticeDetail" component={Test} />
-        <Stack.Screen name="my" component={Test} />
-        <Stack.Screen name="apply" component={Test} />
-        <Stack.Screen name="move" component={Test} />
-        <Stack.Screen name="outtingTemp" component={Test} />
-        <Stack.Screen name="outtingHome" component={Test} />
-        <Stack.Screen name="outtingPass" component={Test} />
+        <Stack.Screen name="온보딩" component={Onboard} />
+        <Stack.Screen name="로그인" component={Login} />
+        <Stack.Screen name="홈" component={Home} />
+        <Stack.Screen name="급식" component={Test} />
+        <Stack.Screen name="일정" component={Test} />
+        <Stack.Screen name="공지" component={Notice} />
+        <Stack.Screen name="상세공지" component={DetailNotice} />
+        <Stack.Screen name="My" component={Test} />
+        <Stack.Screen name="신청" component={Test} />
+        <Stack.Screen name="교실이동" component={Test} />
+        <Stack.Screen name="외출" component={Test} />
+        <Stack.Screen name="조기귀가" component={Test} />
+        <Stack.Screen name="외출증" component={Test} />
       </Stack.Navigator>
     </NavigationContainer>
   );
