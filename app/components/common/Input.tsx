@@ -5,16 +5,15 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
 } from "react-native";
-import { colors } from "@/utils/colors";
-import { textStyle } from "@/utils/texts";
 import {
   NotoSans_400Regular,
   NotoSans_500Medium,
   NotoSans_700Bold,
   useFonts,
 } from "@expo-google-fonts/noto-sans";
-import EyeOff from "@icons/eyeOff.svg";
-import EyeOn from "@assets/icons/eyeOn.svg";
+import { textStyle } from "@/components/common/Text/sets";
+import { EyeOff, EyeOn } from "@/assets/icons";
+import { colors } from "@/utils/colors";
 
 type ChangeEventType = {
   text: string;
@@ -32,7 +31,7 @@ interface PropType {
 }
 
 const { size, letterSpacing, weight } = textStyle.caption[2];
-const { neutral, secondary, error } = colors;
+const { primary, neutral, secondary, error: errorColor } = colors;
 const sizes = { width: 18 };
 
 export default function Input({
@@ -64,21 +63,20 @@ export default function Input({
         ]}
       >
         <TextInput
-          onChangeText={(text) => onChange({ text, name })}
-          value={value}
           onBlur={() => setActive(false)}
           onFocus={() => setActive(true)}
+          onChangeText={(text) => onChange({ text, name })}
+          value={value}
           editable={!disabled}
           placeholder={placeholder}
-          placeholderTextColor={error ? colors.error[700] : colors.neutral[500]}
-          selectionColor={error ? colors.error[500] : colors.primary[500]}
+          secureTextEntry={password && !visible}
+          selectionColor={error ? errorColor[500] : primary[500]}
+          placeholderTextColor={error ? errorColor[700] : neutral[500]}
           style={[
-            textStyle,
             {
               width: password ? "92%" : "100%",
             },
           ]}
-          secureTextEntry={password && !visible}
         />
         {password && (
           <TouchableWithoutFeedback onPress={() => setVisible(!visible)}>
@@ -114,8 +112,8 @@ const styles = StyleSheet.create({
     borderColor: neutral[800],
   },
   error: {
-    backgroundColor: error[900],
-    borderColor: error[500],
+    backgroundColor: errorColor[900],
+    borderColor: errorColor[500],
   },
   textStyle: {
     color: neutral[50],
