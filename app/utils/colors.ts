@@ -72,3 +72,7 @@ export const colors: ColorType = {
     "1000": "#FCFCFD",
   },
 };
+
+export const getColors = (color: (string | number)[]) => {
+  return color ? colors[color[0]][color[1]] : undefined;
+};
