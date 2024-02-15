@@ -8,7 +8,7 @@ import Subject from "./Subject";
 
 export default function TimeTable() {
   return (
-    <Box color="white" height="100%">
+    <Box height="100%">
       <View style={styles.container}>
         <View style={styles.headerContainer}>
           <Text type="label" size={1} color={["neutral", 50]}>

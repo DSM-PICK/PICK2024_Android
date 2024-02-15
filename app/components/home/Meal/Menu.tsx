@@ -15,7 +15,7 @@ const timeSet = {
 
 export default function Menu({ time, menu }: PropType) {
   return (
-    <Box color="pink">
+    <Box color={["primary", 1000]}>
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <View
           style={{

@@ -11,7 +11,7 @@ interface PropType {
 
 export default function Subject({ index, name, duration, icon }: PropType) {
   return (
-    <Box>
+    <Box color={["neutral", 1000]}>
       <View style={[styles.flexContainer, { gap: 20 }]}>
         <Text type="subTitle" size={3} weight="B" color={["primary", 100]}>
           {index}

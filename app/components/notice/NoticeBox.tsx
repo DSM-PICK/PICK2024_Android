@@ -15,7 +15,7 @@ export default function NoticeBox({ title, date, index }: PropType) {
   const navigation = useNavigation();
 
   return (
-    <Box color="white" rounded="none">
+    <Box rounded="none">
       <TouchableOpacity
         onPress={() => navigation.navigate("상세공지", { id: index })}
         style={styles.container}
