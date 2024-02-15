@@ -9,6 +9,7 @@ import { Notice } from "@/screens/Notice";
 import { Login } from "@/screens/Login";
 import { Test } from "@/screens/Test";
 import { Home } from "@/screens/Home";
+import { My } from "@/screens/My";
 
 const TransitionOptions = {
   ...TransitionPresets.SlideFromRightIOS,
@@ -33,7 +34,7 @@ export default function Navigation() {
         <Stack.Screen name="일정" component={Test} />
         <Stack.Screen name="공지" component={Notice} />
         <Stack.Screen name="상세공지" component={DetailNotice} />
-        <Stack.Screen name="My" component={Test} />
+        <Stack.Screen name="My" component={My} />
         <Stack.Screen name="신청" component={Test} />
         <Stack.Screen name="교실이동" component={Test} />
         <Stack.Screen name="외출" component={Test} />
