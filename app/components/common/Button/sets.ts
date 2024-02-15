@@ -5,7 +5,7 @@ export const colorSet: any = {
 };
 
 export const sizeSet: any = {
-  full: ["100%", "M"],
+  full: ["100%", "S"],
   extraLarge: ["80%", "S"],
   large: ["60%", "L"],
   medium: ["40%", "M"],
