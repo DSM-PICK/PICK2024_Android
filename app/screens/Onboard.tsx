@@ -49,7 +49,7 @@ export const Onboard = ({ navigation }) => {
       <View style={styles.buttonContainer}>
         <Button
           size="full"
-          color="primary"
+          color={["primary", 400]}
           onPress={() => {
             navigation.navigate("로그인");
           }}

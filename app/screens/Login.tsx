@@ -71,7 +71,7 @@ export const Login = () => {
       <View style={styles.buttonContainer}>
         <Button
           size="full"
-          color="primary"
+          color={["primary", 400]}
           onPress={() => {}}
           disabled={disabled}
         >
