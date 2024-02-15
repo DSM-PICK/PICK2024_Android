@@ -10,7 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 export default function Notice() {
   const navigation = useNavigation();
   return (
-    <Box color="white" height="100%">
+    <Box height="100%">
       <View style={styles.container}>
         <View style={styles.headerContainer}>
           <Text type="label" size={1} color={["neutral", 50]}>
@@ -28,13 +28,7 @@ export default function Notice() {
         <FlatList
           overScrollMode="never"
           ItemSeparatorComponent={() => (
-            <View
-              style={{
-                width: "100%",
-                height: 0.5,
-                backgroundColor: getColors(["primary", 900]),
-              }}
-            />
+            <View style={styles.separatorElement} />
           )}
           data={noticeData}
           renderItem={({ item, index }) => (
@@ -56,5 +50,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     flexDirection: "row",
     alignItems: "center",
+  },
+  separatorElement: {
+    width: "100%",
+    height: 0.5,
+    backgroundColor: getColors(["primary", 900]),
   },
 });
