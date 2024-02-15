@@ -6,7 +6,6 @@ import { StyleSheet, View } from "react-native";
 
 export const DetailNotice = ({ route }) => {
   const { id } = route.params;
-
   const data = noticeData[id];
 
   return (
@@ -42,7 +41,7 @@ const styles = StyleSheet.create({
     gap: 5,
   },
   lineElement: {
-    width: "150%",
+    width: "200%",
     height: 5,
     backgroundColor: getColors(["neutral", 800]),
     marginLeft: -150,
