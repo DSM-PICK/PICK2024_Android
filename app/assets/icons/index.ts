@@ -9,6 +9,7 @@ import Settings from "./settings.svg";
 import NoticeIcon from "./notice.svg";
 import New from "./new.svg";
 import Back from "./back.svg";
+import Photo from "./photo.svg";
 
 export {
   Apply,
@@ -22,4 +23,5 @@ export {
   NoticeIcon,
   New,
   Back,
+  Photo,
 };
