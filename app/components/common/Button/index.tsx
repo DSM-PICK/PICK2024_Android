@@ -4,13 +4,13 @@ import { colorSet, sizeSet } from "./sets";
 import Text from "../Text";
 
 type sizeType = "full" | "extraLarge" | "large" | "medium" | "small";
-type colorType = "primary" | "secondary" | "tertiary";
 
 interface PropType {
   disabled?: boolean;
   children: React.ReactNode;
   onPress: () => void;
-  color: colorType;
+  color: (string | number)[];
+  fontColor?: (string | number)[];
   size: sizeType;
 }
 
@@ -18,6 +18,7 @@ export default function Button({
   disabled,
   children,
   color,
+  fontColor,
   size,
   onPress,
 }: PropType) {
@@ -27,14 +28,19 @@ export default function Button({
         styles.container,
         {
           width: sizeSet[size][0],
-          backgroundColor: getColors(colorSet[color]),
+          backgroundColor: getColors(color),
         },
         disabled && styles.disabled,
       ]}
       disabled={disabled}
+      activeOpacity={0.8}
       onPress={onPress}
     >
-      <Text type="button" size={sizeSet[size][1]} color={["primary", 1000]}>
+      <Text
+        type="button"
+        size={sizeSet[size][1]}
+        color={!!fontColor ? fontColor : ["primary", 1000]}
+      >
         {children}
       </Text>
     </TouchableOpacity>
