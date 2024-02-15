@@ -51,7 +51,7 @@ export default function Layout({
           )}
         </View>
       )}
-      <View style={{ paddingHorizontal: !noHorizontalPadding && 25 }}>
+      <View style={{ flex: 1, paddingHorizontal: !noHorizontalPadding && 25 }}>
         {children}
       </View>
     </SafeAreaView>
