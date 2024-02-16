@@ -51,7 +51,7 @@ export const Home = ({ navigation }) => {
             />
           </View>
         </View>
-        <Carousel height={450}>
+        <Carousel height={500}>
           <TimeTable />
           <Meal />
           <Notice />
