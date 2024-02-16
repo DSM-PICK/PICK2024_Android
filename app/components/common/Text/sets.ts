@@ -70,7 +70,7 @@ export const textStyle: TextStyleType = {
   subTitle: {
     "1": {
       size: 20,
-      lineHeight: 22,
+      lineHeight: 24,
       letterSpacing: defaultSpace,
       weight: {
         M: textWeight.M,
@@ -79,7 +79,7 @@ export const textStyle: TextStyleType = {
     },
     "2": {
       size: 18,
-      lineHeight: 20,
+      lineHeight: 22,
       letterSpacing: defaultSpace,
       weight: {
         M: textWeight.M,
@@ -89,7 +89,7 @@ export const textStyle: TextStyleType = {
     },
     "3": {
       size: 16,
-      lineHeight: 18,
+      lineHeight: 20,
       letterSpacing: defaultSpace,
       weight: {
         M: textWeight.M,
@@ -98,7 +98,7 @@ export const textStyle: TextStyleType = {
     },
     "4": {
       size: 14,
-      lineHeight: 16,
+      lineHeight: 18,
       letterSpacing: defaultSpace,
       weight: textWeight.M,
     },
@@ -106,19 +106,19 @@ export const textStyle: TextStyleType = {
   body: {
     "1": {
       size: 16,
-      lineHeight: 18,
+      lineHeight: 20,
       letterSpacing: defaultSpace,
       weight: textWeight.R,
     },
     "2": {
       size: 14,
-      lineHeight: 16,
+      lineHeight: 18,
       letterSpacing: defaultSpace,
       weight: textWeight.R,
     },
     "3": {
       size: 12,
-      lineHeight: 14,
+      lineHeight: 16,
       letterSpacing: defaultSpace,
       weight: textWeight.R,
     },
@@ -126,19 +126,19 @@ export const textStyle: TextStyleType = {
   caption: {
     "1": {
       size: 16,
-      lineHeight: 18,
+      lineHeight: 20,
       letterSpacing: defaultSpace,
       weight: textWeight.R,
     },
     "2": {
       size: 12,
-      lineHeight: 14,
+      lineHeight: 16,
       letterSpacing: defaultSpace,
       weight: textWeight.R,
     },
     "3": {
       size: 10,
-      lineHeight: 12,
+      lineHeight: 14,
       letterSpacing: defaultSpace,
       weight: textWeight.R,
     },
@@ -146,13 +146,13 @@ export const textStyle: TextStyleType = {
   label: {
     "1": {
       size: 16,
-      lineHeight: 18,
+      lineHeight: 20,
       letterSpacing: defaultSpace,
       weight: textWeight.M,
     },
     "2": {
       size: 12,
-      lineHeight: 14,
+      lineHeight: 16,
       letterSpacing: defaultSpace,
       weight: textWeight.M,
     },
@@ -160,25 +160,25 @@ export const textStyle: TextStyleType = {
   button: {
     L: {
       size: 20,
-      lineHeight: 22,
+      lineHeight: 24,
       letterSpacing: defaultSpace,
       weight: textWeight.M,
     },
     M: {
       size: 18,
-      lineHeight: 20,
+      lineHeight: 22,
       letterSpacing: defaultSpace,
       weight: textWeight.M,
     },
     S: {
       size: 16,
-      lineHeight: 18,
+      lineHeight: 20,
       letterSpacing: defaultSpace,
       weight: textWeight.M,
     },
     ES: {
       size: 12,
-      lineHeight: 14,
+      lineHeight: 16,
       letterSpacing: defaultSpace,
       weight: textWeight.M,
     },
