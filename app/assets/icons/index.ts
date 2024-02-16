@@ -10,6 +10,7 @@ import NoticeIcon from "./notice.svg";
 import New from "./new.svg";
 import Back from "./back.svg";
 import Photo from "./photo.svg";
+import Arrow from "./arrow.svg";
 
 export {
   Apply,
@@ -24,4 +25,5 @@ export {
   New,
   Back,
   Photo,
+  Arrow,
 };
