@@ -1,6 +1,6 @@
 import { View, StyleSheet } from "react-native";
-import Text from "../../common/Text";
-import Box from "../../common/Box";
+import Text from "../common/Text";
+import Box from "../common/Box";
 import NoticeBox from "@/components/notice/NoticeBox";
 import { FlatList } from "react-native-gesture-handler";
 import { noticeData } from "@/tmpData";
