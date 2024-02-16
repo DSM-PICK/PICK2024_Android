@@ -2,11 +2,15 @@ import { View, StyleSheet } from "react-native";
 import Text from "../../common/Text";
 import { getToday } from "@/utils/getToday";
 import Box from "../../common/Box";
-import Menu from "./Menu";
+import Menu from "../../meal/Menu";
 import { mealData } from "@/tmpData";
 import { FlatList } from "react-native-gesture-handler";
 
 export default function Meal() {
+  const { month, date, day } = getToday();
+
+  const today = `${month}월 ${date}일 (${day})`;
+
   return (
     <Box height="100%">
       <View style={styles.container}>
@@ -15,7 +19,7 @@ export default function Meal() {
             급식
           </Text>
           <Text type="body" size={2} color={["neutral", 300]}>
-            {getToday()}
+            {today}
           </Text>
         </View>
         <View>
