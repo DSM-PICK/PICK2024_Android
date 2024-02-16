@@ -1,5 +1,5 @@
 import { View, StyleSheet } from "react-native";
-import { Apply, Schedule, Meals, My, Bell, Settings } from "@assets/icons";
+import { Apply, Schedule, Meals, My, Bell } from "@assets/icons";
 import HomeButton from "@/components/home/HomeButton";
 import Carousel from "@/components/common/Carousel";
 import TimeTable from "@/components/home/TimeTable";
@@ -20,10 +20,7 @@ export const Home = ({ navigation }) => {
             <Text type="heading" size={6} weight="B" color={["primary", 300]}>
               PiCK
             </Text>
-            <View style={styles.headerButtonContainer}>
-              <Bell width={headerIconSize} />
-              <Settings width={headerIconSize} />
-            </View>
+            <Bell width={headerIconSize} />
           </View>
           <Text type="subTitle" size={2} weight="B" color={["neutral", 50]}>
             1학년 3반 11번 육기준
@@ -74,9 +71,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     width: "100%",
-  },
-  headerButtonContainer: {
-    flexDirection: "row",
-    gap: 10,
   },
 });
