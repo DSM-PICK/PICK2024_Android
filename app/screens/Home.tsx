@@ -7,11 +7,16 @@ import Layout from "@/components/common/Layout";
 import Notice from "@/components/home/Notice";
 import Text from "@/components/common/Text";
 import Meal from "@/components/home/Meal";
+import Box from "@/components/common/Box";
+import { useState } from "react";
+import Button from "@/components/common/Button";
 
 const headerIconSize = 16;
 const buttonIconSize = { width: 30, height: 30 };
 
 export const Home = ({ navigation }) => {
+  const [pass, setPass] = useState(true);
+
   return (
     <Layout home noHorizontalPadding>
       <View style={styles.container}>
@@ -26,33 +31,55 @@ export const Home = ({ navigation }) => {
             1학년 3반 11번 육기준
           </Text>
           <View style={styles.multiContainer}>
-            <HomeButton
-              icon={<Schedule {...buttonIconSize} />}
-              name="일정"
-              nav={navigation}
-            />
-            <HomeButton
-              icon={<Apply {...buttonIconSize} />}
-              name="신청"
-              nav={navigation}
-            />
-            <HomeButton
-              icon={<Meals {...buttonIconSize} />}
-              name="급식"
-              nav={navigation}
-            />
-            <HomeButton
-              icon={<My {...buttonIconSize} />}
-              name="My"
-              nav={navigation}
-            />
+            <HomeButton icon={<Schedule {...buttonIconSize} />} name="일정" />
+            <HomeButton icon={<Apply {...buttonIconSize} />} name="신청" />
+            <HomeButton icon={<Meals {...buttonIconSize} />} name="급식" />
+            <HomeButton icon={<My {...buttonIconSize} />} name="My" />
           </View>
+          <Box>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <View>
+                <Text type="caption" size={2} color={["neutral", 400]}>
+                  육기준님의 외출 시간은
+                </Text>
+                <Text type="caption" size={1} color={["neutral", 50]}>
+                  <Text
+                    type="subTitle"
+                    size={3}
+                    weight="M"
+                    color={["primary", 400]}
+                  >
+                    12 : 34 ~ 03 : 58
+                  </Text>
+                  입니다
+                </Text>
+              </View>
+              <View style={{ width: "30%" }}>
+                <Button
+                  size="full"
+                  fontType={["button", "ES"]}
+                  onPress={() => navigation.navigate("외출증")}
+                  color={["secondary", 500]}
+                >
+                  외출증 보기
+                </Button>
+              </View>
+            </View>
+          </Box>
         </View>
-        <Carousel height={500}>
-          <TimeTable />
-          <Meal />
-          <Notice />
-        </Carousel>
+        <View style={{ height: pass ? "58%" : "63%" }}>
+          <Carousel height="100%">
+            <TimeTable />
+            <Meal />
+            <Notice />
+          </Carousel>
+        </View>
       </View>
     </Layout>
   );
