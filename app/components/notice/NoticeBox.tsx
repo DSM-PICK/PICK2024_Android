@@ -1,10 +1,11 @@
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { StyleSheet, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { StyleSheet, View } from "react-native";
 import { New, NoticeIcon } from "@/assets/icons";
 import { getDiff } from "@/utils/getDiff";
 import Text from "../common/Text";
 import Box from "../common/Box";
+
 interface PropType {
   title: string;
   date: string;
@@ -13,11 +14,12 @@ interface PropType {
 
 export default function NoticeBox({ title, date, index }: PropType) {
   const navigation = useNavigation();
+  const path = ["상세공지", { id: index }];
 
   return (
     <Box rounded="none">
       <TouchableOpacity
-        onPress={() => navigation.navigate("상세공지", { id: index })}
+        onPress={() => navigation.navigate(...(path as never))}
         style={styles.container}
       >
         <NoticeIcon />

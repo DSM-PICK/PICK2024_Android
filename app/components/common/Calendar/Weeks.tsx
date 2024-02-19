@@ -1,4 +1,7 @@
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import {
+  FlatList,
+  TouchableWithoutFeedback,
+} from "react-native-gesture-handler";
 import { StyleSheet, View } from "react-native";
 import { getDates } from "@/utils/getDates";
 import { getToday } from "@/utils/getToday";
@@ -17,6 +20,7 @@ interface PropType {
 }
 
 const { year, month, date: _date } = getToday();
+const days = ["일", "월", "화", "수", "목", "금", "토"];
 
 export default function Weeks({
   date,
@@ -35,9 +39,9 @@ export default function Weeks({
   let _weeks = [];
   let _days = [];
 
-  const handlePress = (item: number) => {
-    setSelected([date[0], date[1], item]);
-    onPress({ year: date[0], month: date[1], date: item });
+  const handlePress = (_date: number, day: number) => {
+    setSelected([date[0], date[1], _date]);
+    onPress({ year: date[0], month: date[1], date: _date, day: days[day] });
   };
 
   arr.map((item, index) => {
@@ -51,13 +55,13 @@ export default function Weeks({
           isSelected && item + 1 === selected[2] && styles.pickContainer,
         ]}
         onPress={() => {
-          onPress && item !== "" && handlePress(item + 1);
+          onPress && item !== "" && handlePress(item + 1, _days.length);
         }}
       >
         <Text
           type="button"
           size="S"
-          color={["neutral", isTodate && _date === item + 1 ? 1000 : 50]}
+          color={isTodate && _date === item + 1 && ["neutral", 1000]}
         >
           {item !== "" ? item + 1 : ""}
         </Text>

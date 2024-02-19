@@ -11,9 +11,11 @@ import { FlatList } from "react-native-gesture-handler";
 // 얘도 한번 구조 손봐야 함
 // 뷰 구조하고 스타일링 코드가 조금 이상해
 
+const { year, month, date: _date } = getToday();
+
 export const Meal = () => {
-  const { year, month, date } = getToday();
-  const [selected, setSelected] = useState(`${month}월 ${date}일`);
+  const [date, setDate] = useState([year, month]);
+  const [selected, setSelected] = useState(`${month}월 ${_date}일`);
 
   const testF = ({ month, date }) => {
     setSelected(`${month}월 ${date}일`);
@@ -22,7 +24,7 @@ export const Meal = () => {
   return (
     <Layout name="급식">
       <View style={styles.container}>
-        <Calendar onPress={testF} />
+        <Calendar onPress={testF} date={date} setDate={setDate} />
         <Text type="subTitle" size={3} weight="M">
           {selected} 급식
         </Text>

@@ -1,19 +1,21 @@
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import Text from "../common/Text";
 
 interface PropType {
   icon: React.ReactElement;
   name: string;
-  nav: any;
 }
 
-export default function HomeButton({ icon, name, nav }: PropType) {
+export default function HomeButton({ icon, name }: PropType) {
+  const navigation = useNavigation();
+
   return (
-    <View style={{ gap: 10, alignItems: "center" }}>
+    <View style={styles.container}>
       <TouchableOpacity
-        style={{ padding: 15, backgroundColor: "white", borderRadius: 20 }}
-        onPress={() => nav.navigate(name)}
+        style={styles.iconElement}
+        onPress={() => navigation.navigate(name as never)}
       >
         {icon}
       </TouchableOpacity>
@@ -23,3 +25,15 @@ export default function HomeButton({ icon, name, nav }: PropType) {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    gap: 10,
+    alignItems: "center",
+  },
+  iconElement: {
+    padding: 15,
+    backgroundColor: "white",
+    borderRadius: 20,
+  },
+});

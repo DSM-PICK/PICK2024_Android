@@ -1,10 +1,10 @@
-import { useState } from "react";
 import {
   TextInput,
   View,
   StyleSheet,
   TouchableWithoutFeedback,
 } from "react-native";
+import { useState } from "react";
 import {
   NotoSans_400Regular,
   NotoSans_500Medium,
@@ -21,12 +21,12 @@ type ChangeEventType = {
 };
 
 interface PropType {
-  disabled?: boolean;
   value: string;
-  onChange: ({ text, name }: ChangeEventType) => void;
   placeholder: string;
+  onChange: ({ text, name }: ChangeEventType) => void;
   name?: string;
   error?: boolean;
+  disabled?: boolean;
   password?: boolean;
 }
 
@@ -35,12 +35,12 @@ const { primary, neutral, secondary, error: errorColor } = colors;
 const sizes = { width: 18 };
 
 export default function Input({
-  disabled,
   value,
-  onChange,
   placeholder,
+  onChange,
   name = "",
   error,
+  disabled,
   password,
 }: PropType) {
   const [fontsLoaded] = useFonts({
@@ -55,30 +55,25 @@ export default function Input({
     return (
       <View
         style={[
-          styles.container,
-          styles.field,
           active && styles.active,
           disabled && styles.disabled,
           error && styles.error,
+          styles.container,
         ]}
       >
         <TextInput
-          onBlur={() => setActive(false)}
-          onFocus={() => setActive(true)}
-          onChangeText={(text) => onChange({ text, name })}
           value={value}
           editable={!disabled}
           placeholder={placeholder}
+          onBlur={() => setActive(false)}
+          onFocus={() => setActive(true)}
           secureTextEntry={password && !visible}
+          onChangeText={(text) => onChange({ text, name })}
           selectionColor={error ? errorColor[500] : primary[500]}
           placeholderTextColor={error ? errorColor[700] : neutral[500]}
-          style={[
-            {
-              width: password ? "92%" : "100%",
-            },
-          ]}
+          style={{ width: password ? "92%" : "100%" }}
         />
-        {password && (
+        {!!password && (
           <TouchableWithoutFeedback onPress={() => setVisible(!visible)}>
             {visible ? <EyeOn {...sizes} /> : <EyeOff {...sizes} />}
           </TouchableWithoutFeedback>
@@ -98,8 +93,6 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     borderWidth: 1,
     width: "100%",
-  },
-  field: {
     backgroundColor: neutral[900],
     borderColor: neutral[900],
   },

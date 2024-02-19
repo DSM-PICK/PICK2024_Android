@@ -9,11 +9,12 @@ import { useNavigation } from "@react-navigation/native";
 
 export default function Notice() {
   const navigation = useNavigation();
+
   return (
     <Box height="100%">
       <View style={styles.container}>
         <View style={styles.headerContainer}>
-          <Text type="label" size={1} color={["neutral", 50]}>
+          <Text type="label" size={1}>
             공지
           </Text>
           <Text
@@ -27,10 +28,10 @@ export default function Notice() {
         </View>
         <FlatList
           overScrollMode="never"
+          data={noticeData}
           ItemSeparatorComponent={() => (
             <View style={styles.separatorElement} />
           )}
-          data={noticeData}
           renderItem={({ item, index }) => (
             <NoticeBox title={item.title} date={item.date} index={index} />
           )}

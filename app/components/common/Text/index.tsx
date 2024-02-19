@@ -1,34 +1,34 @@
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { Text as NativeText } from "react-native";
-import { getColors } from "@/utils/colors";
-import { textStyle } from "./sets";
 import {
   NotoSans_400Regular,
   NotoSans_500Medium,
   NotoSans_700Bold,
   useFonts,
 } from "@expo-google-fonts/noto-sans";
+import { ColorPropType, getColors } from "@/utils/colors";
+import { textStyle } from "./sets";
 
-type Color = (string | number)[];
+type WeightType = "B" | "M" | "R";
 
 interface PropType {
   type: string;
-  size?: number | string;
-  color?: Color;
-  weight?: "B" | "M" | "R";
+  size: number | string;
   children: React.ReactNode;
   hidden?: boolean;
+  weight?: WeightType;
   onPress?: () => void;
+  color?: ColorPropType;
 }
 
 export default function Text({
   type,
-  size = 1,
-  color = ["neutral", 50],
-  weight,
   children,
   hidden,
+  weight,
   onPress,
+  color = ["neutral", 50],
+  size = 1,
 }: PropType) {
   const [fontsLoaded] = useFonts({
     NotoSans_400Regular,

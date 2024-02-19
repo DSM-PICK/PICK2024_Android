@@ -1,6 +1,5 @@
 import { View, StyleSheet } from "react-native";
 import { useState } from "react";
-import { getToday } from "@/utils/getToday";
 import { Arrow } from "@/assets/icons";
 import Weeks from "./Weeks";
 import Text from "../Text";
@@ -12,13 +11,13 @@ import Box from "../Box";
 interface PropType {
   onPress?: ({}) => void;
   picks?: number[];
+  date: number[];
+  setDate: any;
 }
 
-const { year, month } = getToday();
 const hitSlop = { top: 10, left: 10, right: 10, bottom: 10 };
 
-export default function Calendar({ onPress, picks }: PropType) {
-  const [date, setDate] = useState([year, month]);
+export default function Calendar({ onPress, picks, date, setDate }: PropType) {
   const [selected, setSelected] = useState(undefined);
 
   const handleDate = (to: boolean) => {

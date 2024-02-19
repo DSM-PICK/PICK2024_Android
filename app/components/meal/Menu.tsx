@@ -1,10 +1,10 @@
-import Box from "@/components/common/Box";
+import { StyleSheet, View } from "react-native";
 import Text from "@/components/common/Text";
-import { View } from "react-native";
+import Box from "@/components/common/Box";
 
 interface PropType {
   time: string;
-  menu: any[]; // 여기 수정해야 함
+  menu: any[];
 }
 
 const timeSet = {
@@ -16,26 +16,15 @@ const timeSet = {
 export default function Menu({ time, menu }: PropType) {
   return (
     <Box color={["primary", 1000]}>
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "center",
-            width: "50%",
-          }}
-        >
+      <View style={styles.container}>
+        <View style={styles.dateContainer}>
           <Text type="subTitle" size={2} weight="B" color={["primary", 200]}>
             {timeSet[time]}
           </Text>
         </View>
-        <View
-          style={{
-            width: "50%",
-            gap: 10,
-          }}
-        >
+        <View style={styles.menuContainer}>
           {menu.map((item, index) => (
-            <Text key={index} type="body" size={1} color={["neutral", 50]}>
+            <Text key={index} type="body" size={1}>
               {item}
             </Text>
           ))}
@@ -44,3 +33,19 @@ export default function Menu({ time, menu }: PropType) {
     </Box>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  dateContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    width: "50%",
+  },
+  menuContainer: {
+    width: "50%",
+    gap: 10,
+  },
+});

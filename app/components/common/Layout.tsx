@@ -7,9 +7,9 @@ import Text from "./Text";
 
 interface PropTypes {
   children: React.ReactNode;
-  home?: boolean;
   name?: string;
-  doneAction?: () => void;
+  home?: boolean;
+  onDone?: () => void;
   noHorizontalPadding?: boolean;
 }
 
@@ -19,7 +19,7 @@ export default function Layout({
   children,
   home,
   name,
-  doneAction,
+  onDone,
   noHorizontalPadding,
 }: PropTypes) {
   const navigation = useNavigation();
@@ -28,11 +28,11 @@ export default function Layout({
     <SafeAreaView
       style={{
         flex: 1,
-        backgroundColor: home ? getColors(["primary", 1000]) : "white",
-        paddingVertical: !name && 25,
+        backgroundColor: !!home ? getColors(["primary", 1000]) : "white",
+        paddingVertical: !!!name && 25,
       }}
     >
-      {name && (
+      {!!name && (
         <View style={styles.headerContainer}>
           <Back
             style={styles.backElement}
@@ -42,9 +42,9 @@ export default function Layout({
           <Text type="subTitle" size={3} weight="M">
             {name}
           </Text>
-          {doneAction && (
+          {!!onDone && (
             <View style={styles.doneElement}>
-              <Text type="subTitle" size={3} weight="M" onPress={() => {}}>
+              <Text type="subTitle" size={3} weight="M" onPress={onDone}>
                 확인
               </Text>
             </View>

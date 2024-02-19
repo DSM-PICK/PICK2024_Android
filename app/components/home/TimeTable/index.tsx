@@ -14,7 +14,7 @@ export default function TimeTable() {
     <Box height="100%">
       <View style={styles.container}>
         <View style={styles.headerContainer}>
-          <Text type="label" size={1} color={["neutral", 50]}>
+          <Text type="label" size={1}>
             시간표
           </Text>
           <Text type="body" size={2} color={["neutral", 300]}>

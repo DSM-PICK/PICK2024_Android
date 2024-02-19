@@ -1,20 +1,18 @@
-import { View } from "react-native";
-import { getColors } from "@/utils/colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { ColorPropType, getColors } from "@/utils/colors";
 
-type colorType = (string | number)[];
 type roundType = "none" | "sm" | "lg" | "full";
 
 interface PropType {
-  color?: colorType | string;
-  rounded?: roundType;
   children: React.ReactNode;
+  rounded?: roundType;
+  onPress?: () => void;
+  color?: ColorPropType;
   width?: string | number;
   height?: string | number;
-  onPress?: () => void;
 }
 
-export const roundedSet = {
+const roundedSet = {
   none: 0,
   sm: 4,
   lg: 8,
@@ -22,47 +20,28 @@ export const roundedSet = {
 };
 
 export default function Box({
-  color = "white",
+  color = ["neutral", 1100],
   rounded = "sm",
   width = "100%",
   height,
   children,
   onPress,
 }: PropType) {
-  if (onPress) {
-    return (
-      <TouchableOpacity
-        style={
-          {
-            width: width,
-            height: height && height,
-            backgroundColor:
-              color === "white" ? "white" : getColors(color as colorType),
-            padding: 16,
-            borderRadius: roundedSet[rounded],
-          } as any
-        }
-        onPress={onPress}
-      >
-        {children}
-      </TouchableOpacity>
-    );
-  } else {
-    return (
-      <View
-        style={
-          {
-            width: width,
-            height: height && height,
-            backgroundColor:
-              color === "white" ? "white" : getColors(color as colorType),
-            padding: 16,
-            borderRadius: roundedSet[rounded],
-          } as any
-        }
-      >
-        {children}
-      </View>
-    );
-  }
+  return (
+    <TouchableOpacity
+      style={
+        {
+          width: width,
+          height: height,
+          backgroundColor: getColors(color),
+          padding: 16,
+          borderRadius: roundedSet[rounded],
+        } as any
+      }
+      onPress={onPress}
+      activeOpacity={!!onPress ? 0.6 : 1}
+    >
+      {children}
+    </TouchableOpacity>
+  );
 }

@@ -4,11 +4,11 @@ import React from "react";
 import Box from "./Box";
 
 interface PropType {
-  visible: boolean;
-  setVisible: (visible: boolean) => void;
   type: number;
-  children: React.ReactElement;
+  visible: boolean;
   onAccept: () => void;
+  children: React.ReactElement;
+  setVisible: (visible: boolean) => void;
 }
 
 const textSet = [
@@ -19,22 +19,23 @@ const textSet = [
 ];
 
 export default function Modal({
-  visible,
-  setVisible,
   type,
-  children,
+  visible,
   onAccept,
+  children,
+  setVisible,
 }: PropType) {
   const { cancel, accept } = textSet[type + 1];
+
   return (
     <ModalView
-      transparent={true}
       visible={visible}
+      transparent={true}
+      animationType="fade"
+      statusBarTranslucent={true}
       onRequestClose={() => {
         setVisible(false);
       }}
-      animationType="fade"
-      statusBarTranslucent={true}
     >
       <View style={styles.container}>
         <Box rounded="lg">
