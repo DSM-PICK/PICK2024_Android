@@ -11,6 +11,9 @@ import { Test } from "@/screens/Test";
 import { Home } from "@/screens/Home";
 import { Meal } from "@/screens/Meal";
 import { My } from "@/screens/My";
+import { Schedule } from "@/screens/Schedule";
+import { Apply } from "@/screens/Apply";
+import { Pass } from "@/screens/Pass";
 
 const TransitionOptions = {
   ...TransitionPresets.SlideFromRightIOS,
@@ -32,15 +35,15 @@ export default function Navigation() {
         <Stack.Screen name="로그인" component={Login} />
         <Stack.Screen name="홈" component={Home} />
         <Stack.Screen name="급식" component={Meal} />
-        <Stack.Screen name="일정" component={Test} />
+        <Stack.Screen name="일정" component={Schedule} />
         <Stack.Screen name="공지" component={Notice} />
         <Stack.Screen name="상세공지" component={DetailNotice} />
         <Stack.Screen name="My" component={My} />
-        <Stack.Screen name="신청" component={Test} />
+        <Stack.Screen name="신청" component={Apply} />
         <Stack.Screen name="교실이동" component={Test} />
         <Stack.Screen name="외출" component={Test} />
         <Stack.Screen name="조기귀가" component={Test} />
-        <Stack.Screen name="외출증" component={Test} />
+        <Stack.Screen name="외출증" component={Pass} />
       </Stack.Navigator>
     </NavigationContainer>
   );
