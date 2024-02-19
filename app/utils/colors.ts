@@ -1,3 +1,5 @@
+export type ColorPropType = [string, string | number];
+
 interface ColorType {
   [key: string]: {
     [key: string]: string;
@@ -70,9 +72,10 @@ export const colors: ColorType = {
     "800": "#F2F4F7",
     "900": "#F9FAFB",
     "1000": "#FCFCFD",
+    "1100": "#FFFFFF",
   },
 };
 
-export const getColors = (color: (string | number)[]) => {
+export const getColors = (color: ColorPropType) => {
   return color ? colors[color[0]][color[1]] : undefined;
 };
