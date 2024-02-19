@@ -59,8 +59,7 @@ export default function Weeks({
         }}
       >
         <Text
-          type="button"
-          size="S"
+          type={["button", "S"]}
           color={isTodate && _date === item + 1 && ["neutral", 1000]}
         >
           {item !== "" ? item + 1 : ""}

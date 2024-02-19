@@ -14,12 +14,9 @@ export default function Notice() {
     <Box height="100%">
       <View style={styles.container}>
         <View style={styles.headerContainer}>
-          <Text type="label" size={1}>
-            공지
-          </Text>
+          <Text type={["label", 1]}>공지</Text>
           <Text
-            type="body"
-            size={2}
+            type={["body", 2]}
             color={["neutral", 300]}
             onPress={() => navigation.navigate("공지" as never)}
           >

@@ -13,9 +13,7 @@ export const TimeTables = () => {
   return (
     <View style={styles.container}>
       <View style={styles.dateContainer}>
-        <Text type="subTitle" size={3} weight="M">
-          {today}
-        </Text>
+        <Text type={["subTitle", 3, "M"]}>{today}</Text>
       </View>
 
       <Carousel height="100%">

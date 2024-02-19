@@ -16,15 +16,15 @@ export const DetailNotice = ({ route }) => {
     >
       <View style={styles.container}>
         <View style={styles.titleContainer}>
-          <Text type="subTitle" size={2} weight="M" color={["neutral", 50]}>
+          <Text type={["subTitle", 2, "M"]} color={["neutral", 50]}>
             {data.title}
           </Text>
-          <Text type="caption" size={2} color={["neutral", 400]}>
+          <Text type={["caption", 2]} color={["neutral", 400]}>
             {data.date}
           </Text>
         </View>
         <View style={styles.lineElement} />
-        <Text type="caption" size={1} color={["neutral", 50]}>
+        <Text type={["caption", 3]} color={["neutral", 50]}>
           {data.content}
         </Text>
       </View>

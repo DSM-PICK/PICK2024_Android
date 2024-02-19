@@ -21,12 +21,7 @@ export const My = () => {
             <Photo style={styles.photoElement} />
           </View>
 
-          <Text
-            type="body"
-            size={2}
-            color={["neutral", 100]}
-            onPress={() => {}}
-          >
+          <Text type={["body", 2]} color={["neutral", 100]} onPress={() => {}}>
             변경하기
           </Text>
         </View>
@@ -36,16 +31,12 @@ export const My = () => {
         <InfoBox type="id" data="dragonis132" />
         <View style={styles.lineElement} />
         <View style={styles.accountContainer}>
-          <Text type="subTitle" size={3} weight="M">
-            계정 관리
-          </Text>
-          <Text type="body" size={3} color={["neutral", 300]}>
+          <Text type={["subTitle", 3, "M"]}>계정 관리</Text>
+          <Text type={["body", 3]} color={["neutral", 300]}>
             기기내 계정에서 로그아웃 할 수 있어요.
           </Text>
           <Box color={["primary", 1200]} onPress={() => setVisible(true)}>
-            <Text type="body" size={3}>
-              로그아웃
-            </Text>
+            <Text type={["body", 3]}>로그아웃</Text>
           </Box>
         </View>
         <Modal
@@ -54,7 +45,7 @@ export const My = () => {
           type={1}
           onAccept={() => {}}
         >
-          <Text type="subTitle" size={3} weight="M" color={["neutral", 50]}>
+          <Text type={["subTitle", 3, "M"]} color={["neutral", 50]}>
             정말 로그아웃 하시겠습니까?
           </Text>
         </Modal>

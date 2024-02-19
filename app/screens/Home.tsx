@@ -22,12 +22,12 @@ export const Home = ({ navigation }) => {
       <View style={styles.container}>
         <View style={styles.topContainer}>
           <View style={styles.multiContainer}>
-            <Text type="heading" size={6} weight="B" color={["primary", 300]}>
+            <Text type={["heading", 6, "B"]} color={["primary", 300]}>
               PiCK
             </Text>
             <Bell width={headerIconSize} />
           </View>
-          <Text type="subTitle" size={2} weight="B" color={["neutral", 50]}>
+          <Text type={["subTitle", 2, "B"]} color={["neutral", 50]}>
             1학년 3반 11번 육기준
           </Text>
           <View style={styles.multiContainer}>
@@ -45,16 +45,11 @@ export const Home = ({ navigation }) => {
               }}
             >
               <View>
-                <Text type="caption" size={2} color={["neutral", 400]}>
+                <Text type={["caption", 2]} color={["neutral", 400]}>
                   육기준님의 외출 시간은
                 </Text>
-                <Text type="caption" size={1} color={["neutral", 50]}>
-                  <Text
-                    type="subTitle"
-                    size={3}
-                    weight="M"
-                    color={["primary", 400]}
-                  >
+                <Text type={["caption", 1]} color={["neutral", 50]}>
+                  <Text type={["subTitle", 3, "M"]} color={["primary", 400]}>
                     12 : 34 ~ 03 : 58
                   </Text>
                   입니다

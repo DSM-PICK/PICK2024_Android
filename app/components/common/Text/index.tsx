@@ -12,11 +12,9 @@ import { textStyle } from "./sets";
 type WeightType = "B" | "M" | "R";
 
 interface PropType {
-  type: string;
-  size: number | string;
+  type: (string | number)[] | [string, string | number, WeightType];
   children: React.ReactNode;
   hidden?: boolean;
-  weight?: WeightType;
   onPress?: () => void;
   color?: ColorPropType;
 }
@@ -25,10 +23,8 @@ export default function Text({
   type,
   children,
   hidden,
-  weight,
   onPress,
   color = ["neutral", 50],
-  size = 1,
 }: PropType) {
   const [fontsLoaded] = useFonts({
     NotoSans_400Regular,
@@ -41,10 +37,10 @@ export default function Text({
     size: textSize,
     letterSpacing,
     lineHeight,
-  } = textStyle[type][size.toString()];
+  } = textStyle[type[0]][type[1]];
 
   const style: any = {
-    fontFamily: weight ? fontFamily[weight] : fontFamily,
+    fontFamily: type[2] ? fontFamily[type[2]] : fontFamily,
     fontSize: textSize,
     letterSpacing: letterSpacing,
     color: color && getColors(color),

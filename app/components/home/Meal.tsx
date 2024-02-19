@@ -14,10 +14,8 @@ export default function Meal() {
     <Box height="100%">
       <View style={styles.container}>
         <View style={styles.headerContainer}>
-          <Text type="label" size={1}>
-            급식
-          </Text>
-          <Text type="body" size={2} color={["neutral", 300]}>
+          <Text type={["label", 1]}>급식</Text>
+          <Text type={["body", 3]} color={["neutral", 300]}>
             {today}
           </Text>
         </View>

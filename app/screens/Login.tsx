@@ -25,10 +25,10 @@ export const Login = () => {
   return (
     <Layout>
       <View style={styles.inputContainer}>
-        <Text type="heading" size={3} color={["primary", 300]}>
+        <Text type={["heading", 3]} color={["primary", 300]}>
           PiCK
         </Text>
-        <Text type="body" size={2} color={["neutral", 400]}>
+        <Text type={["body", 2]} color={["neutral", 400]}>
           스퀘어 계정으로 로그인해주세요.
         </Text>
         <View style={styles.innerInputContainer}>
@@ -40,8 +40,7 @@ export const Login = () => {
             error={error.accountID}
           />
           <Text
-            type="caption"
-            size={2}
+            type={["caption", 2]}
             color={["error", 400]}
             hidden={!error.accountID}
           >
@@ -59,8 +58,7 @@ export const Login = () => {
             password
           />
           <Text
-            type="caption"
-            size={2}
+            type={["caption", 2]}
             color={["error", 400]}
             hidden={!error.password}
           >

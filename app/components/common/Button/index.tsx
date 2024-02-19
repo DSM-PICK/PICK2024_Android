@@ -37,7 +37,7 @@ export default function Button({
       activeOpacity={0.6}
       onPress={onPress}
     >
-      <Text type={fontType[0]} size={fontType[1]} color={fontColor}>
+      <Text type={fontType} color={fontColor}>
         {children}
       </Text>
     </TouchableOpacity>

@@ -24,7 +24,7 @@ export const Onboard = ({ navigation }) => {
     <Layout noHorizontalPadding>
       <View style={styles.inputContainer}>
         <View style={{ paddingHorizontal: 25 }}>
-          <Text type="heading" size={3} color={["primary", 300]}>
+          <Text type={["heading", 3]} color={["primary", 300]}>
             PiCK
           </Text>
         </View>
@@ -34,9 +34,7 @@ export const Onboard = ({ navigation }) => {
             return (
               <View key={index} style={styles.carouselContainer}>
                 <View style={styles.carouselContainer}>
-                  <Text type="body" size={2}>
-                    {item.text}
-                  </Text>
+                  <Text type={["body", 2]}>{item.text}</Text>
                 </View>
 
                 <Image source={item.imgSrc} />

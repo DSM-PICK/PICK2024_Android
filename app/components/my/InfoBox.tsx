@@ -6,7 +6,7 @@ interface PropType {
   data: string;
 }
 
-const defaultStyle = { type: "body", size: 2 };
+const fontType = ["body", 2];
 
 const typeSet = {
   name: "이름",
@@ -18,10 +18,10 @@ const typeSet = {
 export default function InfoBox({ type, data }: PropType) {
   return (
     <View style={styles.container}>
-      <Text {...defaultStyle} color={["neutral", 200]}>
+      <Text type={fontType} color={["neutral", 200]}>
         {typeSet[type]}
       </Text>
-      <Text {...defaultStyle}>{data}</Text>
+      <Text type={fontType}>{data}</Text>
     </View>
   );
 }

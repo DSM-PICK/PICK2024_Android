@@ -35,7 +35,7 @@ export default function Calendar({ onPress, picks, date, setDate }: PropType) {
       <View style={styles.container}>
         <View style={styles.headerContainer}>
           <Arrow onPress={() => handleDate(false)} hitSlop={hitSlop} />
-          <Text type="subTitle" size={3} weight="M">
+          <Text type={["subTitle", 3, "M"]}>
             {date[0]}년 {date[1].toString().padStart(2, "0")}월
           </Text>
           <Arrow

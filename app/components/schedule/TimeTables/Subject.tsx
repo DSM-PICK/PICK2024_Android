@@ -13,15 +13,13 @@ export default function Subject({ index, name, duration, icon }: PropType) {
   return (
     <Box>
       <View style={[styles.flexContainer, styles.indexContainer]}>
-        <Text type="subTitle" size={3} weight="B" color={["primary", 100]}>
+        <Text type={["subTitle", 3, "M"]} color={["primary", 100]}>
           {index}교시
         </Text>
         {icon}
         <View style={styles.subjectContainer}>
-          <Text type="subTitle" size={3} weight="M">
-            {name}
-          </Text>
-          <Text type="caption" size={2} color={["neutral", 500]}>
+          <Text type={["subTitle", 3, "M"]}>{name}</Text>
+          <Text type={["caption", 2]} color={["neutral", 500]}>
             {duration}
           </Text>
         </View>

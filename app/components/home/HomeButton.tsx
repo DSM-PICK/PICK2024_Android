@@ -19,9 +19,7 @@ export default function HomeButton({ icon, name }: PropType) {
       >
         {icon}
       </TouchableOpacity>
-      <Text type="body" size={3}>
-        {name}
-      </Text>
+      <Text type={["body", 3]}>{name}</Text>
     </View>
   );
 }

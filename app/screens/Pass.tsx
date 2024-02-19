@@ -14,31 +14,25 @@ export const Pass = () => {
           />
         </Box>
         <View style={{ gap: 10 }}>
-          <Text type="label" size={1}>
-            외출 시간
-          </Text>
+          <Text type={["label", 1]}>외출 시간</Text>
           <Box color={["primary", 1200]}>
-            <Text type="subTitle" size={3} weight="M" color={["neutral", 100]}>
+            <Text type={["subTitle", 3, "M"]} color={["neutral", 100]}>
               16:30 ~ 20:30
             </Text>
           </Box>
         </View>
         <View style={{ gap: 10 }}>
-          <Text type="label" size={1}>
-            사유
-          </Text>
+          <Text type={["label", 1]}>사유</Text>
           <Box color={["primary", 1200]}>
-            <Text type="subTitle" size={3} weight="M" color={["neutral", 100]}>
+            <Text type={["subTitle", 3, "M"]} color={["neutral", 100]}>
               집에 가고 싶어요
             </Text>
           </Box>
         </View>
         <View style={{ gap: 10 }}>
-          <Text type="label" size={1}>
-            확인 교사
-          </Text>
+          <Text type={["label", 1]}>확인 교사</Text>
           <Box color={["primary", 1200]}>
-            <Text type="subTitle" size={3} weight="M" color={["neutral", 100]}>
+            <Text type={["subTitle", 3, "M"]} color={["neutral", 100]}>
               이기혁 선생님
             </Text>
           </Box>

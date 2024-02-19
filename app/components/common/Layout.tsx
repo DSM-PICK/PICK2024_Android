@@ -14,6 +14,7 @@ interface PropTypes {
 }
 
 const hitSlop = { top: 10, left: 10, right: 10, bottom: 10 };
+const fontType = ["subTitle", 3, "M"];
 
 export default function Layout({
   children,
@@ -39,12 +40,10 @@ export default function Layout({
             onPress={() => navigation.goBack()}
             hitSlop={hitSlop}
           />
-          <Text type="subTitle" size={3} weight="M">
-            {name}
-          </Text>
+          <Text type={fontType}>{name}</Text>
           {!!onDone && (
             <View style={styles.doneElement}>
-              <Text type="subTitle" size={3} weight="M" onPress={onDone}>
+              <Text type={fontType} onPress={onDone}>
                 확인
               </Text>
             </View>

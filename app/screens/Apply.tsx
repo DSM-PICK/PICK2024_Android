@@ -1,13 +1,14 @@
-import Box from "@/components/common/Box";
+import { StyleSheet, View } from "react-native";
+import { useState } from "react";
 import Button from "@/components/common/Button";
 import Layout from "@/components/common/Layout";
+import Move from "@/assets/applicons/move.svg";
 import Modal from "@/components/common/Modal";
+import Out from "@/assets/applicons/out.svg";
 import Text from "@/components/common/Text";
 import { getToday } from "@/utils/getToday";
-import { useState } from "react";
-import { StyleSheet, View } from "react-native";
-import Move from "@/assets/applicons/move.svg";
-import Out from "@/assets/applicons/out.svg";
+import Box from "@/components/common/Box";
+import ApplyBox from "@/components/Apply/ApplyBox";
 
 const { month } = getToday();
 const buttonOptions = {
@@ -18,33 +19,29 @@ const buttonOptions = {
 };
 
 export const Apply = () => {
-  const [visible, setVisible] = useState([false, false]);
-  const [meal, setMeal] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [meal, setMeal] = useState(undefined);
 
   return (
     <Layout name="신청">
       <View style={styles.container}>
-        <View style={styles.endMealContainer}>
-          <Text type="subTitle" size={3} weight="M" color={["neutral", 50]}>
-            주말 급식 신청
-          </Text>
-          <Text type="body" size={3} color={["neutral", 300]}>
+        <View style={styles.gapContainer}>
+          <Text type={["subTitle", 3, "M"]}>주말 급식 신청</Text>
+          <Text type={["body", 3]} color={["neutral", 300]}>
             신청 여부는 담임 선생님이 확인 후 영양사 선생님에게 전달돼요.
           </Text>
           <Box color={["primary", 1200]}>
             <View style={styles.endMealBoxContainer}>
-              <Text type="body" size={3} color={["neutral", 50]}>
-                {month}월 주말 급식 신청
-              </Text>
+              <Text type={["body", 3]}>{month}월 주말 급식 신청</Text>
               <View style={styles.buttonContainer}>
                 <Button
-                  onPress={() => setVisible([true, true])}
+                  onPress={() => setVisible(true)}
                   {...(buttonOptions as any)}
                 >
                   신청
                 </Button>
                 <Button
-                  onPress={() => setVisible([true, false])}
+                  onPress={() => setVisible(true)}
                   {...(buttonOptions as any)}
                 >
                   미신청
@@ -53,51 +50,22 @@ export const Apply = () => {
             </View>
           </Box>
         </View>
-        <View style={{ gap: 10 }}>
-          <Box color={["primary", 1200]}>
-            <View style={{ gap: 5 }}>
-              <Text type="body" size={3} color={["neutral", 300]}>
-                오늘
-              </Text>
-              <Text type="subTitle" size={3} weight="M" color={["neutral", 50]}>
-                교실 이동
-              </Text>
-              <Move style={{ alignSelf: "flex-end" }} />
-            </View>
-          </Box>
-          <Box color={["primary", 1200]}>
-            <View style={{ gap: 5 }}>
-              <Text type="body" size={3} color={["neutral", 300]}>
-                오늘
-              </Text>
-              <Text type="subTitle" size={3} weight="M" color={["neutral", 50]}>
-                외출
-              </Text>
-              <Out style={{ alignSelf: "flex-end" }} />
-            </View>
-          </Box>
-          <Box color={["primary", 1200]}>
-            <View style={{ gap: 5 }}>
-              <Text type="body" size={3} color={["neutral", 300]}>
-                오늘
-              </Text>
-              <Text type="subTitle" size={3} weight="M" color={["neutral", 50]}>
-                조기 귀가
-              </Text>
-              <Out style={{ alignSelf: "flex-end" }} />
-            </View>
-          </Box>
+        <View style={styles.gapContainer}>
+          <ApplyBox date="오늘" title="교실 이동" icon={<Move />} />
+          <ApplyBox date="오늘" title="외출" icon={<Out />} />
+          <ApplyBox date="오늘" title="조기 귀가" icon={<Out />} />
         </View>
       </View>
 
       <Modal
-        visible={visible[0]}
-        setVisible={(visible) => setVisible([visible, false])}
+        visible={visible}
+        setVisible={setVisible}
         type={0}
         onAccept={() => setMeal(visible[1])}
       >
-        <Text type="subTitle" size={3} weight="M" color={["neutral", 50]}>
-          주말 급식을 {visible[1] ? "신청" : "미신청"}하시겠습니까?
+        <Text type={["subTitle", 3, "M"]} color={["neutral", 50]}>
+          주말 급식을 {meal === "미신청" || !!!meal ? "신청" : "미신청"}
+          하시겠습니까?
         </Text>
       </Modal>
     </Layout>
@@ -108,7 +76,7 @@ const styles = StyleSheet.create({
   container: {
     gap: 20,
   },
-  endMealContainer: {
+  gapContainer: {
     gap: 10,
   },
   endMealBoxContainer: {

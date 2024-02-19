@@ -18,13 +18,13 @@ export default function Menu({ time, menu }: PropType) {
     <Box color={["primary", 1000]}>
       <View style={styles.container}>
         <View style={styles.dateContainer}>
-          <Text type="subTitle" size={2} weight="B" color={["primary", 200]}>
+          <Text type={["subTitle", 2, "B"]} color={["primary", 200]}>
             {timeSet[time]}
           </Text>
         </View>
         <View style={styles.menuContainer}>
           {menu.map((item, index) => (
-            <Text key={index} type="body" size={1}>
+            <Text key={index} type={["body", 1]}>
               {item}
             </Text>
           ))}

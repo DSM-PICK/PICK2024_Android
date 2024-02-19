@@ -23,16 +23,10 @@ export const ScheduleBox = ({ item, date }: PropType) => {
         <View style={styles.container}>
           <View style={styles.dateContainer}>
             <View style={styles.lineElement} />
-            <Text type="subTitle" size={2} weight="M">
-              {item.date}
-            </Text>
-            <Text type="body" size={3}>
-              {days[_date.getDay()]}요일
-            </Text>
+            <Text type={["subTitle", 2, "M"]}>{item.date}</Text>
+            <Text type={["body", 3]}>{days[_date.getDay()]}요일</Text>
           </View>
-          <Text type="subTitle" size={2} weight="M">
-            {item.content}
-          </Text>
+          <Text type={["subTitle", 2, "M"]}>{item.content}</Text>
         </View>
       </Box>
     </View>

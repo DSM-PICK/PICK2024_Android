@@ -25,12 +25,10 @@ export default function NoticeBox({ title, date, index }: PropType) {
         <NoticeIcon />
         <View style={styles.textContainer}>
           <View style={styles.titleContainer}>
-            <Text type="body" size={2}>
-              {title}
-            </Text>
+            <Text type={["body", 2]}>{title}</Text>
             {!!!index && <New />}
           </View>
-          <Text type="caption" size={2} color={["neutral", 200]}>
+          <Text type={["body", 2]} color={["neutral", 200]}>
             {getDiff(date)}
           </Text>
         </View>

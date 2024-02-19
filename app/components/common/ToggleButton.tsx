@@ -51,9 +51,7 @@ export const ToggleButton = ({ items, onPress }: PropType) => {
             style={[styles.buttonElement, { width: `${100 / items.length}%` }]}
             onPress={() => handlePress(index, item)}
           >
-            <Text type="body" size={2}>
-              {item}
-            </Text>
+            <Text type={["body", 2]}>{item}</Text>
           </Pressable>
         ))}
       </View>

@@ -25,9 +25,7 @@ export const Meal = () => {
     <Layout name="급식">
       <View style={styles.container}>
         <Calendar onPress={testF} date={date} setDate={setDate} />
-        <Text type="subTitle" size={3} weight="M">
-          {selected} 급식
-        </Text>
+        <Text type={["subTitle", 3, "M"]}>{selected} 급식</Text>
         <FlatList
           overScrollMode="never"
           contentContainerStyle={{

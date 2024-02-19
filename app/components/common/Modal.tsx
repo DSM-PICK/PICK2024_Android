@@ -27,6 +27,11 @@ export default function Modal({
 }: PropType) {
   const { cancel, accept } = textSet[type + 1];
 
+  const handleAccept = () => {
+    setVisible(false);
+    onAccept();
+  };
+
   return (
     <ModalView
       visible={visible}
@@ -56,7 +61,11 @@ export default function Modal({
               )}
 
               <View style={styles.buttonElement}>
-                <Button onPress={onAccept} size="full" color={["primary", 600]}>
+                <Button
+                  onPress={handleAccept}
+                  size="full"
+                  color={["primary", 600]}
+                >
                   {accept}
                 </Button>
               </View>
