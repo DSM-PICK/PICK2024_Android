@@ -8,7 +8,7 @@ interface PropType {
   visible: boolean;
   onAccept: () => void;
   children: React.ReactElement;
-  setVisible: (visible: boolean) => void;
+  setVisible: (visible: any) => void;
 }
 
 const textSet = [
@@ -25,7 +25,7 @@ export default function Modal({
   children,
   setVisible,
 }: PropType) {
-  const { cancel, accept } = textSet[type + 1];
+  const { cancel, accept } = textSet[type];
 
   const handleAccept = () => {
     setVisible(false);
@@ -45,7 +45,7 @@ export default function Modal({
       <View style={styles.container}>
         <Box rounded="lg">
           <View style={styles.contentContainer}>
-            <View style={styles.childrenContainer}>{children}</View>
+            <View style={{ paddingVertical: 10 }}>{children}</View>
             <View style={styles.buttonContainer}>
               {!!cancel && (
                 <View style={styles.buttonElement}>
@@ -60,7 +60,9 @@ export default function Modal({
                 </View>
               )}
 
-              <View style={styles.buttonElement}>
+              <View
+                style={[styles.buttonElement, !!!cancel && { width: "100%" }]}
+              >
                 <Button
                   onPress={handleAccept}
                   size="full"
@@ -88,9 +90,6 @@ const styles = StyleSheet.create({
   contentContainer: {
     alignItems: "center",
     gap: 10,
-  },
-  childrenContainer: {
-    paddingVertical: 10,
   },
   buttonContainer: {
     flexDirection: "row",
