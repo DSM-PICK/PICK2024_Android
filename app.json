@@ -19,7 +19,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./app/assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.sevenstandard.PICK"
     },
     "web": {
       "favicon": "./app/assets/favicon.png"
@@ -39,6 +40,11 @@
         "wasm",
         "svg"
       ]
+    },
+    "extra": {
+      "eas": {
+        "projectId": "342bfabd-2278-47bd-9ac9-a10c9042ccb3"
+      }
     }
   }
 }
