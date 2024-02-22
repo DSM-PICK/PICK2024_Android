@@ -9,6 +9,7 @@ interface PropTypes {
   children: React.ReactNode;
   name?: string;
   home?: boolean;
+  isDone?: boolean;
   onDone?: () => void;
   noHorizontalPadding?: boolean;
 }
@@ -20,6 +21,7 @@ export default function Layout({
   children,
   home,
   name,
+  isDone,
   onDone,
   noHorizontalPadding,
 }: PropTypes) {
@@ -43,7 +45,11 @@ export default function Layout({
           <Text type={fontType}>{name}</Text>
           {!!onDone && (
             <View style={styles.doneElement}>
-              <Text type={fontType} onPress={onDone}>
+              <Text
+                type={fontType}
+                color={isDone ? ["neutral", 50] : ["neutral", 500]}
+                onPress={isDone && onDone}
+              >
                 확인
               </Text>
             </View>
@@ -58,9 +64,6 @@ export default function Layout({
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   headerContainer: {
     paddingHorizontal: 25,
     paddingVertical: 10,
