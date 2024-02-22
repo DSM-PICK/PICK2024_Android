@@ -1,5 +1,5 @@
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { ColorPropType, getColors } from "@/utils/colors";
+import { TouchableOpacity } from "react-native";
 
 type roundType = "none" | "sm" | "lg" | "full";
 
