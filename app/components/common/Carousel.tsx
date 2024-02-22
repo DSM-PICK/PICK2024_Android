@@ -6,11 +6,21 @@ import { getColors } from "@/utils/colors";
 const gap = 16;
 const offset = 16;
 
-export default function Carousel({ children, height }) {
+interface PropType {
+  children: any;
+  height: string;
+  onScroll?: (item: boolean) => void;
+}
+
+export default function Carousel({ children, height, onScroll }: PropType) {
   const [width, setWidth] = useState(0);
   const [page, setPage] = useState(0);
+
   const handleScroll = (e: any) => {
     const newPage = Math.ceil(e.nativeEvent.contentOffset.x / (width + gap));
+    if (newPage !== page && onScroll) {
+      onScroll(newPage > page);
+    }
     setPage(newPage);
   };
 
@@ -27,16 +37,18 @@ export default function Carousel({ children, height }) {
         decelerationRate={0.875}
         showsHorizontalScrollIndicator={false}
         snapToInterval={width - gap / 2 - 26.5}
-        contentContainerStyle={styles.container}
+        contentContainerStyle={{ paddingHorizontal: offset }}
         keyExtractor={(item, index) => index.toString()}
         onLayout={(event) => setWidth(event.nativeEvent.layout.width)}
         renderItem={({ item }) => (
           <View
-            style={{
-              height: height,
-              width: width - 50,
-              marginHorizontal: gap / 2,
-            }}
+            style={
+              {
+                height: height,
+                width: width - 50,
+                marginHorizontal: gap / 2,
+              } as any
+            }
           >
             {item}
           </View>
@@ -63,9 +75,6 @@ export default function Carousel({ children, height }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: offset,
-  },
   indicatorContainer: {
     flexDirection: "row",
     gap: 5,
