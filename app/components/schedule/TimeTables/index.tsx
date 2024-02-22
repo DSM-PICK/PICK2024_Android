@@ -1,28 +1,60 @@
 import { FlatList } from "react-native-gesture-handler";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
+import { useState } from "react";
 import Carousel from "@/components/common/Carousel";
 import { moreTimeTableData } from "@/tmpData";
-import { getToday } from "@/utils/getToday";
+import { getToday, days } from "@/utils/getToday";
 import Text from "../../common/Text";
 import Subject from "./Subject";
 
-const { month, date, day } = getToday();
-const today = `${month}월 ${date}일 (${day})`;
+const { year, month, date, day } = getToday();
 
 export const TimeTables = () => {
+  const [_date, _setDate] = useState([year, month, date, day]);
+
+  const handleScroll = (item: boolean) => {
+    if (item) {
+      const tmp = new Date(
+        Number(_date[0]),
+        Number((_date[1] as number) - 1),
+        Number((_date[2] as number) + 1)
+      );
+      _setDate([
+        tmp.getFullYear(),
+        tmp.getMonth() + 1,
+        tmp.getDate(),
+        days[tmp.getDay()],
+      ]);
+    } else {
+      const tmp = new Date(
+        Number(_date[0]),
+        Number((_date[1] as number) - 1),
+        Number((_date[2] as number) - 1)
+      );
+      _setDate([
+        tmp.getFullYear(),
+        tmp.getMonth() + 1,
+        tmp.getDate(),
+        days[tmp.getDay()],
+      ]);
+    }
+  };
+
   return (
-    <View style={styles.container}>
-      <View style={styles.dateContainer}>
-        <Text type={["subTitle", 3, "M"]}>{today}</Text>
+    <View style={{ height: "80%" }}>
+      <View style={{ paddingHorizontal: 25 }}>
+        <Text type={["subTitle", 3, "M"]}>
+          {_date[1]}월 {_date[2]}일 ({_date[3]})
+        </Text>
       </View>
 
-      <Carousel height="100%">
+      <Carousel height="100%" onScroll={handleScroll}>
         {moreTimeTableData.map((item, index) => {
           return (
             <FlatList
               initialNumToRender={1}
               key={index}
-              style={styles.listContainer}
+              style={{ height: "100%" }}
               data={item}
               keyExtractor={(item) => item.index.toString()}
               renderItem={({ item }) => (
@@ -40,15 +72,3 @@ export const TimeTables = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    height: "80%",
-  },
-  listContainer: {
-    height: "100%",
-  },
-  dateContainer: {
-    paddingHorizontal: 25,
-  },
-});
