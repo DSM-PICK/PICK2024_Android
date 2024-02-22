@@ -3,21 +3,8 @@ import {
   TransitionPresets,
 } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
-import { DetailNotice } from "@/screens/DetailNotice";
-import { Onboard } from "@/screens/Onboard";
-import { Notice } from "@/screens/Notice";
-import { Login } from "@/screens/Login";
 import { Test } from "@/screens/Test";
-import { Home } from "@/screens/Home";
-import { Meal } from "@/screens/Meal";
-import { My } from "@/screens/My";
-import { Schedule } from "@/screens/Schedule";
-import { Apply } from "@/screens/Apply";
-import { Pass } from "@/screens/Pass";
-
-const TransitionOptions = {
-  ...TransitionPresets.SlideFromRightIOS,
-};
+import * as _ from "@/screens/";
 
 const Stack = createStackNavigator();
 
@@ -27,23 +14,23 @@ export default function Navigation() {
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
-          ...TransitionOptions,
+          ...TransitionPresets.SlideFromRightIOS,
         }}
         initialRouteName="홈"
       >
-        <Stack.Screen name="온보딩" component={Onboard} />
-        <Stack.Screen name="로그인" component={Login} />
-        <Stack.Screen name="홈" component={Home} />
-        <Stack.Screen name="급식" component={Meal} />
-        <Stack.Screen name="일정" component={Schedule} />
-        <Stack.Screen name="공지" component={Notice} />
-        <Stack.Screen name="상세공지" component={DetailNotice} />
-        <Stack.Screen name="My" component={My} />
-        <Stack.Screen name="신청" component={Apply} />
-        <Stack.Screen name="교실이동" component={Test} />
-        <Stack.Screen name="외출" component={Test} />
-        <Stack.Screen name="조기귀가" component={Test} />
-        <Stack.Screen name="외출증" component={Pass} />
+        <Stack.Screen name="온보딩" component={_.Onboard} />
+        <Stack.Screen name="로그인" component={_.Login} />
+        <Stack.Screen name="홈" component={_.Home} />
+        <Stack.Screen name="급식" component={_.Meal} />
+        <Stack.Screen name="일정" component={_.Schedule} />
+        <Stack.Screen name="공지" component={_.Notice} />
+        <Stack.Screen name="상세공지" component={_.DetailNotice} />
+        <Stack.Screen name="My" component={_.My} />
+        <Stack.Screen name="신청" component={_.Apply} />
+        <Stack.Screen name="교실이동" component={_.Move} />
+        <Stack.Screen name="외출" component={_.Out} />
+        <Stack.Screen name="조기귀가" component={_.Out} />
+        <Stack.Screen name="외출증" component={_.Pass} />
       </Stack.Navigator>
     </NavigationContainer>
   );
