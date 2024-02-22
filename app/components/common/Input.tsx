@@ -28,6 +28,7 @@ interface PropType {
   error?: boolean;
   disabled?: boolean;
   password?: boolean;
+  multiLine?: number;
 }
 
 const { size, letterSpacing, weight } = textStyle.caption[2];
@@ -42,6 +43,7 @@ export default function Input({
   error,
   disabled,
   password,
+  multiLine,
 }: PropType) {
   const [fontsLoaded] = useFonts({
     NotoSans_400Regular,
@@ -71,7 +73,13 @@ export default function Input({
           onChangeText={(text) => onChange({ text, name })}
           selectionColor={error ? errorColor[500] : primary[500]}
           placeholderTextColor={error ? errorColor[700] : neutral[500]}
-          style={{ width: password ? "92%" : "100%" }}
+          style={{
+            width: password ? "92%" : "100%",
+            textAlignVertical: "top",
+            paddingVertical: !!multiLine && 11,
+          }}
+          multiline={!!multiLine}
+          numberOfLines={!!multiLine && multiLine}
         />
         {!!password && (
           <TouchableWithoutFeedback onPress={() => setVisible(!visible)}>
