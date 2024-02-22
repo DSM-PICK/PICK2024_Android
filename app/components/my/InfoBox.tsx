@@ -7,7 +7,6 @@ interface PropType {
 }
 
 const fontType = ["body", 2];
-
 const typeSet = {
   name: "이름",
   birth: "생년월일",

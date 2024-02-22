@@ -16,6 +16,7 @@ export default function HomeButton({ icon, name }: PropType) {
       <TouchableOpacity
         style={styles.iconElement}
         onPress={() => navigation.navigate(name as never)}
+        activeOpacity={0.6}
       >
         {icon}
       </TouchableOpacity>

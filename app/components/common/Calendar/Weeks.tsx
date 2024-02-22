@@ -60,7 +60,9 @@ export default function Weeks({
       >
         <Text
           type={["button", "S"]}
-          color={isTodate && _date === item + 1 && ["neutral", 1000]}
+          color={
+            isTodate && _date === item + 1 ? ["neutral", 1000] : ["neutral", 50]
+          }
         >
           {item !== "" ? item + 1 : ""}
         </Text>
@@ -76,9 +78,7 @@ export default function Weeks({
     }
   });
 
-  return (
-    <View style={styles.weeksContainer}>{_weeks.map((item) => item)}</View>
-  );
+  return <View style={{ gap: 2 }}>{_weeks.map((item) => item)}</View>;
 }
 
 const styles = StyleSheet.create({
@@ -90,9 +90,6 @@ const styles = StyleSheet.create({
   },
   weekLineContainer: {
     flexDirection: "row",
-    gap: 2,
-  },
-  weeksContainer: {
     gap: 2,
   },
   pickContainer: {

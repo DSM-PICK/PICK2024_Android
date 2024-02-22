@@ -23,7 +23,7 @@ export default function NoticeBox({ title, date, index }: PropType) {
         style={styles.container}
       >
         <NoticeIcon />
-        <View style={styles.textContainer}>
+        <View style={{ gap: 5 }}>
           <View style={styles.titleContainer}>
             <Text type={["body", 2]}>{title}</Text>
             {!!!index && <New />}
@@ -46,9 +46,6 @@ const styles = StyleSheet.create({
   titleContainer: {
     flexDirection: "row",
     alignContent: "center",
-    gap: 5,
-  },
-  textContainer: {
     gap: 5,
   },
 });

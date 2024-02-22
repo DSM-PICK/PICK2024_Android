@@ -1,5 +1,6 @@
 import { StyleSheet, View } from "react-native";
 import { useState } from "react";
+import ApplyBox from "@/components/apply/ApplyBox";
 import Button from "@/components/common/Button";
 import Layout from "@/components/common/Layout";
 import Move from "@/assets/applicons/move.svg";
@@ -8,11 +9,10 @@ import Out from "@/assets/applicons/out.svg";
 import Text from "@/components/common/Text";
 import { getToday } from "@/utils/getToday";
 import Box from "@/components/common/Box";
-import ApplyBox from "@/components/Apply/ApplyBox";
 
 const { month } = getToday();
 const buttonOptions = {
-  size: "medium",
+  size: "auto",
   fontType: ["button", "ES"],
   fontColor: ["neutral", 50],
   color: ["neutral", 1000],
@@ -24,7 +24,7 @@ export const Apply = () => {
 
   return (
     <Layout name="신청">
-      <View style={styles.container}>
+      <View style={{ gap: 20 }}>
         <View style={styles.gapContainer}>
           <Text type={["subTitle", 3, "M"]}>주말 급식 신청</Text>
           <Text type={["body", 3]} color={["neutral", 300]}>
@@ -32,13 +32,14 @@ export const Apply = () => {
           </Text>
           <Box color={["primary", 1200]}>
             <View style={styles.endMealBoxContainer}>
-              <Text type={["body", 3]}>{month}월 주말 급식 신청</Text>
+              <Text type={["body", 2]}>{month}월 주말 급식 신청</Text>
               <View style={styles.buttonContainer}>
                 <Button
                   onPress={() => setVisible(true)}
                   {...(buttonOptions as any)}
                 >
-                  신청
+                  {" "}
+                  신청{" "}
                 </Button>
                 <Button
                   onPress={() => setVisible(true)}
@@ -51,9 +52,19 @@ export const Apply = () => {
           </Box>
         </View>
         <View style={styles.gapContainer}>
-          <ApplyBox date="오늘" title="교실 이동" icon={<Move />} />
-          <ApplyBox date="오늘" title="외출" icon={<Out />} />
-          <ApplyBox date="오늘" title="조기 귀가" icon={<Out />} />
+          <ApplyBox
+            date="오늘"
+            title="교실 이동"
+            to="교실이동"
+            icon={<Move />}
+          />
+          <ApplyBox date="오늘" title="외출" to="외출" icon={<Out />} />
+          <ApplyBox
+            date="오늘"
+            title="조기 귀가"
+            to="조기귀가"
+            icon={<Out />}
+          />
         </View>
       </View>
 
@@ -73,9 +84,6 @@ export const Apply = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    gap: 20,
-  },
   gapContainer: {
     gap: 10,
   },
@@ -85,9 +93,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   buttonContainer: {
-    width: "50%",
     justifyContent: "flex-end",
-    gap: 10,
+    gap: 5,
     flexDirection: "row",
   },
 });

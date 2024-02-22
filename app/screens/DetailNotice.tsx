@@ -15,7 +15,7 @@ export const DetailNotice = ({ route }) => {
       }
     >
       <View style={styles.container}>
-        <View style={styles.titleContainer}>
+        <View style={{ gap: 5 }}>
           <Text type={["subTitle", 2, "M"]} color={["neutral", 50]}>
             {data.title}
           </Text>
@@ -36,9 +36,6 @@ const styles = StyleSheet.create({
   container: {
     paddingVertical: 20,
     gap: 15,
-  },
-  titleContainer: {
-    gap: 5,
   },
   lineElement: {
     width: "200%",

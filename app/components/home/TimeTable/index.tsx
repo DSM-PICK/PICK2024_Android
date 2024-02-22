@@ -6,10 +6,10 @@ import Text from "../../common/Text";
 import Box from "../../common/Box";
 import Subject from "./Subject";
 
-export default function TimeTable() {
-  const { month, date, day } = getToday();
+const { month, date, day } = getToday();
+const today = `${month}월 ${date}일 (${day})`;
 
-  const today = `${month}월 ${date}일 (${day})`;
+export default function TimeTable() {
   return (
     <Box height="100%">
       <View style={styles.container}>
@@ -22,7 +22,7 @@ export default function TimeTable() {
         <View>
           <FlatList
             overScrollMode="never"
-            contentContainerStyle={styles.listContainer}
+            contentContainerStyle={{ gap: 10 }}
             data={timeTableData}
             keyExtractor={(item) => item.index.toString()}
             renderItem={({ item }) => (
@@ -49,9 +49,6 @@ const styles = StyleSheet.create({
   headerContainer: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 10,
-  },
-  listContainer: {
     gap: 10,
   },
 });

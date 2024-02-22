@@ -32,7 +32,7 @@ export default function Calendar({ onPress, picks, date, setDate }: PropType) {
 
   return (
     <Box color={["primary", 1200]}>
-      <View style={styles.container}>
+      <View style={{ gap: 10 }}>
         <View style={styles.headerContainer}>
           <Arrow onPress={() => handleDate(false)} hitSlop={hitSlop} />
           <Text type={["subTitle", 3, "M"]}>
@@ -40,11 +40,11 @@ export default function Calendar({ onPress, picks, date, setDate }: PropType) {
           </Text>
           <Arrow
             onPress={() => handleDate(true)}
-            style={styles.rotationContainer}
+            style={{ transform: [{ rotate: "180deg" }] }}
             hitSlop={hitSlop}
           />
         </View>
-        <View style={styles.weeksContainer}>
+        <View style={{ alignItems: "center" }}>
           <Weeks
             date={date}
             picks={picks}
@@ -59,19 +59,10 @@ export default function Calendar({ onPress, picks, date, setDate }: PropType) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    gap: 10,
-  },
   headerContainer: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
     gap: 10,
-  },
-  rotationContainer: {
-    transform: [{ rotate: "180deg" }],
-  },
-  weeksContainer: {
-    alignItems: "center",
   },
 });

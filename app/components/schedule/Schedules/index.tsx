@@ -22,7 +22,7 @@ export default function Schedules() {
         data={scheduleData}
         overScrollMode="never"
         initialNumToRender={2}
-        contentContainerStyle={styles.contentContainer}
+        contentContainerStyle={{ gap: 15 }}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => <ScheduleBox item={item} date={date} />}
       />
@@ -35,6 +35,6 @@ const styles = StyleSheet.create({
     height: "90%",
     gap: 15,
     paddingHorizontal: 25,
+    paddingBottom: 20,
   },
-  contentContainer: { gap: 15 },
 });

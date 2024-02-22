@@ -12,12 +12,12 @@ interface PropType {
 export default function Subject({ index, name, duration, icon }: PropType) {
   return (
     <Box>
-      <View style={[styles.flexContainer, styles.indexContainer]}>
+      <View style={[styles.flexContainer, { gap: 20 }]}>
         <Text type={["subTitle", 3, "M"]} color={["primary", 100]}>
           {index}교시
         </Text>
         {icon}
-        <View style={styles.subjectContainer}>
+        <View style={{ gap: 2 }}>
           <Text type={["subTitle", 3, "M"]}>{name}</Text>
           <Text type={["caption", 2]} color={["neutral", 500]}>
             {duration}
@@ -32,11 +32,5 @@ const styles = StyleSheet.create({
   flexContainer: {
     flexDirection: "row",
     alignItems: "center",
-  },
-  indexContainer: {
-    gap: 20,
-  },
-  subjectContainer: {
-    gap: 2,
   },
 });

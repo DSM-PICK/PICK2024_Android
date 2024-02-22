@@ -23,7 +23,7 @@ export default function Meal() {
           <FlatList
             data={mealData}
             overScrollMode="never"
-            contentContainerStyle={styles.contentContainer}
+            contentContainerStyle={{ gap: 10 }}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => (
               <Menu time={item.time} menu={item.menu} />
@@ -44,9 +44,6 @@ const styles = StyleSheet.create({
   headerContainer: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 10,
-  },
-  contentContainer: {
     gap: 10,
   },
 });

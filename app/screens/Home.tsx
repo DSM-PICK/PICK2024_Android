@@ -1,4 +1,5 @@
 import { View, StyleSheet } from "react-native";
+import { useState } from "react";
 import { Apply, Schedule, Meals, My, Bell } from "@assets/icons";
 import HomeButton from "@/components/home/HomeButton";
 import Carousel from "@/components/common/Carousel";
@@ -7,19 +8,17 @@ import Layout from "@/components/common/Layout";
 import Notice from "@/components/home/Notice";
 import Text from "@/components/common/Text";
 import Meal from "@/components/home/Meal";
-import Box from "@/components/common/Box";
-import { useState } from "react";
-import Button from "@/components/common/Button";
+import Pass from "@/components/home/Pass";
 
 const headerIconSize = 16;
 const buttonIconSize = { width: 30, height: 30 };
 
-export const Home = ({ navigation }) => {
+export const Home = () => {
   const [pass, setPass] = useState(true);
 
   return (
     <Layout home noHorizontalPadding>
-      <View style={styles.container}>
+      <View style={{ gap: 20 }}>
         <View style={styles.topContainer}>
           <View style={styles.multiContainer}>
             <Text type={["heading", 6, "B"]} color={["primary", 300]}>
@@ -36,39 +35,9 @@ export const Home = ({ navigation }) => {
             <HomeButton icon={<Meals {...buttonIconSize} />} name="급식" />
             <HomeButton icon={<My {...buttonIconSize} />} name="My" />
           </View>
-          <Box>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <View>
-                <Text type={["caption", 2]} color={["neutral", 400]}>
-                  육기준님의 외출 시간은
-                </Text>
-                <Text type={["caption", 1]} color={["neutral", 50]}>
-                  <Text type={["subTitle", 3, "M"]} color={["primary", 400]}>
-                    12 : 34 ~ 03 : 58
-                  </Text>
-                  입니다
-                </Text>
-              </View>
-              <View style={{ width: "30%" }}>
-                <Button
-                  size="full"
-                  fontType={["button", "ES"]}
-                  onPress={() => navigation.navigate("외출증")}
-                  color={["secondary", 500]}
-                >
-                  외출증 보기
-                </Button>
-              </View>
-            </View>
-          </Box>
+          <Pass visible={pass} type="out" name="test" data="10:20" />
         </View>
-        <View style={{ height: pass ? "58%" : "63%" }}>
+        <View style={{ height: pass ? "58%" : "71%" }}>
           <Carousel height="100%">
             <TimeTable />
             <Meal />
@@ -81,9 +50,6 @@ export const Home = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    gap: 20,
-  },
   topContainer: {
     paddingHorizontal: 25,
     gap: 20,
