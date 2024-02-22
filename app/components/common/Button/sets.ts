@@ -10,4 +10,5 @@ export const sizeSet: any = {
   large: ["60%", "L"],
   medium: ["40%", "M"],
   small: ["20%", "S"],
+  auto: ["auto", "M"],
 };

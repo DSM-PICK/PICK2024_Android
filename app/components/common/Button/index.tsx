@@ -4,10 +4,18 @@ import { getColors } from "@/utils/colors";
 import { sizeSet } from "./sets";
 import Text from "../Text";
 
-type sizeType = "full" | "extraLarge" | "large" | "medium" | "small";
+type sizeType =
+  | "custom"
+  | "full"
+  | "extraLarge"
+  | "large"
+  | "medium"
+  | "small"
+  | "auto";
 
 interface PropType {
   size: sizeType;
+  customSize?: string | number;
   onPress: () => void;
   color: ColorPropType;
   children: React.ReactNode;
@@ -18,6 +26,7 @@ interface PropType {
 
 export default function Button({
   size,
+  customSize,
   onPress,
   color,
   children,
@@ -26,13 +35,13 @@ export default function Button({
   fontType = ["button", sizeSet[size][1]],
 }: PropType) {
   const style = {
-    width: sizeSet[size][0],
+    width: size !== "custom" ? sizeSet[size][0] : customSize,
     backgroundColor: getColors(disabled ? ["neutral", 600] : color),
   };
 
   return (
     <TouchableOpacity
-      style={[styles.container, style]}
+      style={[styles.container, style as any]}
       disabled={disabled}
       activeOpacity={0.6}
       onPress={onPress}
@@ -47,7 +56,7 @@ export default function Button({
 const styles = StyleSheet.create({
   container: {
     padding: 10,
-    paddingTop: 13,
+    paddingHorizontal: 15,
     borderRadius: 8,
     alignItems: "center",
   },
