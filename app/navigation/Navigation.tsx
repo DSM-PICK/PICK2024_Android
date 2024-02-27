@@ -3,12 +3,11 @@ import {
   TransitionPresets,
 } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
-import { Test } from "@/screens/Test";
 import * as _ from "@/screens/";
 
 const Stack = createStackNavigator();
 
-export default function Navigation() {
+export default function Navigation({ auth }) {
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -16,7 +15,7 @@ export default function Navigation() {
           headerShown: false,
           ...TransitionPresets.SlideFromRightIOS,
         }}
-        initialRouteName="홈"
+        initialRouteName={auth ? "홈" : "온보딩"}
       >
         <Stack.Screen name="온보딩" component={_.Onboard} />
         <Stack.Screen name="로그인" component={_.Login} />
@@ -31,6 +30,7 @@ export default function Navigation() {
         <Stack.Screen name="외출" component={_.Out} />
         <Stack.Screen name="조기귀가" component={_.Out} />
         <Stack.Screen name="외출증" component={_.Pass} />
+        <Stack.Screen name="개발" component={_.Dev} />
       </Stack.Navigator>
     </NavigationContainer>
   );
