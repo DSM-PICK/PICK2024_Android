@@ -10,3 +10,4 @@ export { Pass } from "./Pass";
 export { Schedule } from "./Schedule";
 export { Move } from "./Move";
 export { Out } from "./Out";
+export { Dev } from "./Dev";
