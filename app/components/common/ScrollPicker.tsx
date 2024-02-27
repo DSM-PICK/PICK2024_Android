@@ -1,8 +1,9 @@
-import { FlatList } from "react-native";
+import { Dimensions, FlatList, PixelRatio } from "react-native";
 import { View } from "react-native";
 import { getColors } from "@/utils/colors";
 import Text from "./Text";
 import { debounce } from "@/utils/debounce";
+import { useState } from "react";
 
 interface PropType {
   items: (string | number)[];
@@ -17,18 +18,22 @@ export default function ScrollPicker({
   onScroll,
   id,
 }: PropType) {
+  const [height, setHeight] = useState(undefined);
+
   const handleScroll = (e) => {
     const index = Math.ceil(e.nativeEvent.contentOffset.y / interval);
-    debounce(() => {
-      onScroll(items[index], id);
-    }, 200);
+    if (!!items[index]) {
+      debounce(() => {
+        onScroll(items[index], id);
+      }, 200);
+    }
   };
 
   return (
     <View
       style={{
         width: "30%",
-        height: 101,
+        height: 102,
         justifyContent: "center",
         alignItems: "center",
         position: "relative",
@@ -50,22 +55,29 @@ export default function ScrollPicker({
       <FlatList
         onScroll={handleScroll}
         data={items}
-        style={{ width: "100%" }}
+        style={{ width: "100%", height: "100%" }}
         contentContainerStyle={{
           paddingVertical: 30,
         }}
         overScrollMode="never"
         renderItem={({ item }) => (
           <View
-            style={{ marginVertical: 10, alignItems: "center" }}
-            onStartShouldSetResponder={(): boolean => true}
+            onLayout={(e) => {
+              const { height: _height } = e.nativeEvent.layout;
+              height !== _height && setHeight(_height);
+            }}
           >
-            <Text type={["subTitle", 3, "M"]}>{item}</Text>
+            <View
+              style={{ marginVertical: 10, alignItems: "center" }}
+              onStartShouldSetResponder={(): boolean => true}
+            >
+              <Text type={["subTitle", 3, "M"]}>{item}</Text>
+            </View>
           </View>
         )}
         maxToRenderPerBatch={6}
         removeClippedSubviews
-        snapToInterval={interval}
+        snapToInterval={height || 0}
         showsVerticalScrollIndicator={false}
       />
     </View>
