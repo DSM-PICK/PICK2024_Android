@@ -75,11 +75,11 @@ export default function Input({
           placeholderTextColor={error ? errorColor[700] : neutral[500]}
           style={{
             width: password ? "92%" : "100%",
-            textAlignVertical: "top",
-            paddingVertical: !!multiLine && 11,
+            textAlignVertical: !!multiLine ? "top" : "auto",
+            paddingVertical: !!multiLine ? 11 : 0,
           }}
           multiline={!!multiLine}
-          numberOfLines={!!multiLine && multiLine}
+          numberOfLines={multiLine || 1}
         />
         {!!password && (
           <TouchableWithoutFeedback onPress={() => setVisible(!visible)}>
