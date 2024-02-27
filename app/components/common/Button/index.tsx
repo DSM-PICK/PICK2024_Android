@@ -1,8 +1,13 @@
-import { TouchableOpacity, StyleSheet } from "react-native";
+import {
+  TouchableOpacity,
+  StyleSheet,
+  GestureResponderEvent,
+} from "react-native";
 import { ColorPropType } from "@/utils/colors";
 import { getColors } from "@/utils/colors";
 import { sizeSet } from "./sets";
 import Text from "../Text";
+import React from "react";
 
 type sizeType =
   | "custom"
@@ -14,17 +19,19 @@ type sizeType =
   | "auto";
 
 interface PropType {
+  id: string;
   size: sizeType;
-  customSize?: string | number;
-  onPress: () => void;
+  onPress: (e: GestureResponderEvent, id?: string) => void;
   color: ColorPropType;
-  children: React.ReactNode;
+  children: string;
   disabled?: boolean;
   fontColor?: ColorPropType;
+  customSize?: string | number;
   fontType?: [string, number | string];
 }
 
 export default function Button({
+  id,
   size,
   customSize,
   onPress,
@@ -41,10 +48,14 @@ export default function Button({
 
   return (
     <TouchableOpacity
-      style={[styles.container, style as any]}
+      style={[
+        styles.container,
+        style as any,
+        { minWidth: children.length * 15 },
+      ]}
       disabled={disabled}
       activeOpacity={0.6}
-      onPress={onPress}
+      onPress={(e) => onPress(e, id)}
     >
       <Text type={fontType} color={fontColor}>
         {children}

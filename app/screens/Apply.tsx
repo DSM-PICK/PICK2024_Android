@@ -9,18 +9,28 @@ import Out from "@/assets/applicons/out.svg";
 import Text from "@/components/common/Text";
 import { getToday } from "@/utils/getToday";
 import Box from "@/components/common/Box";
+import { useMutation } from "@tanstack/react-query";
+import { weekendMeal } from "@/api/weekendMeal";
 
 const { month } = getToday();
 const buttonOptions = {
   size: "auto",
   fontType: ["button", "ES"],
-  fontColor: ["neutral", 50],
-  color: ["neutral", 1000],
 };
 
 export const Apply = () => {
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState([false, ""]);
   const [meal, setMeal] = useState(undefined);
+
+  const { mutate: weekendMealMutate } = useMutation({
+    mutationFn: (id: string) => weekendMeal(id),
+    onSuccess: (res) => {
+      console.log(res);
+    },
+    onError: (err) => {
+      console.log(err);
+    },
+  });
 
   return (
     <Layout name="신청">
@@ -35,14 +45,24 @@ export const Apply = () => {
               <Text type={["body", 2]}>{month}월 주말 급식 신청</Text>
               <View style={styles.buttonContainer}>
                 <Button
-                  onPress={() => setVisible(true)}
+                  onPress={() => setVisible([true, "OK"])}
+                  id="OK"
+                  fontColor={
+                    meal === "OK" ? ["neutral", 1100] : ["neutral", 50]
+                  }
+                  color={meal === "OK" ? ["primary", 500] : ["neutral", 1000]}
                   {...(buttonOptions as any)}
                 >
                   {" "}
                   신청{" "}
                 </Button>
                 <Button
-                  onPress={() => setVisible(true)}
+                  onPress={() => setVisible([true, "NO"])}
+                  id="NO"
+                  fontColor={
+                    meal === "NO" ? ["neutral", 1100] : ["neutral", 50]
+                  }
+                  color={meal === "NO" ? ["primary", 500] : ["neutral", 1000]}
                   {...(buttonOptions as any)}
                 >
                   미신청
@@ -69,14 +89,16 @@ export const Apply = () => {
       </View>
 
       <Modal
-        visible={visible}
-        setVisible={setVisible}
+        visible={visible[0] as boolean}
+        setVisible={(data) => setVisible([data, visible[1]])}
         type={0}
-        onAccept={() => setMeal(visible[1])}
+        onAccept={() => {
+          setMeal(visible[1]);
+          weekendMealMutate(visible[1] as string);
+        }}
       >
         <Text type={["subTitle", 3, "M"]} color={["neutral", 50]}>
-          주말 급식을 {meal === "미신청" || !!!meal ? "신청" : "미신청"}
-          하시겠습니까?
+          주말 급식을 {visible[1] === "OK" ? "신청" : "미신청"}하시겠습니까?
         </Text>
       </Modal>
     </Layout>
