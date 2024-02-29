@@ -1,10 +1,4 @@
-export type ColorPropType = [string, string | number];
-
-interface ColorType {
-  [key: string]: {
-    [key: string]: string;
-  };
-}
+import { ColorType } from "@/types/color";
 
 export const colors: ColorType = {
   primary: {
@@ -74,8 +68,4 @@ export const colors: ColorType = {
     "1000": "#FCFCFD",
     "1100": "#FFFFFF",
   },
-};
-
-export const getColors = (color: ColorPropType) => {
-  return color ? colors[color[0]][color[1]] : undefined;
 };
