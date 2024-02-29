@@ -1,9 +1,11 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
-import { getColors } from "@/utils/colors";
 import { StyleSheet, View } from "react-native";
+import { HiddenView } from "@/components/layouts";
+import { getColors } from "@/utils/colors";
+import { hitSlop } from "@/constants";
 import { Back } from "@/assets/icons";
-import Text from "./Text";
+import { Text } from "@commonents";
 
 interface PropTypes {
   children: React.ReactNode;
@@ -14,7 +16,6 @@ interface PropTypes {
   noHorizontalPadding?: boolean;
 }
 
-const hitSlop = { top: 10, left: 10, right: 10, bottom: 10 };
 const fontType = ["subTitle", 3, "M"];
 
 export default function Layout({
@@ -27,15 +28,21 @@ export default function Layout({
 }: PropTypes) {
   const navigation = useNavigation();
 
+  const styleInline = {
+    container: {
+      flex: 1,
+      backgroundColor: !!home ? getColors(["primary", 1000]) : "white",
+      paddingVertical: !!!name && 25,
+    },
+    childrenElement: {
+      flex: 1,
+      paddingHorizontal: !noHorizontalPadding && 25,
+    },
+  };
+
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        backgroundColor: !!home ? getColors(["primary", 1000]) : "white",
-        paddingVertical: !!!name && 25,
-      }}
-    >
-      {!!name && (
+    <SafeAreaView style={styleInline.container}>
+      <HiddenView data={name}>
         <View style={styles.headerContainer}>
           <Back
             style={styles.backElement}
@@ -43,7 +50,7 @@ export default function Layout({
             hitSlop={hitSlop}
           />
           <Text type={fontType}>{name}</Text>
-          {!!onDone && (
+          <HiddenView data={onDone}>
             <View style={styles.doneElement}>
               <Text
                 type={fontType}
@@ -53,12 +60,10 @@ export default function Layout({
                 확인
               </Text>
             </View>
-          )}
+          </HiddenView>
         </View>
-      )}
-      <View style={{ flex: 1, paddingHorizontal: !noHorizontalPadding && 25 }}>
-        {children}
-      </View>
+      </HiddenView>
+      <View style={styleInline.childrenElement}>{children}</View>
     </SafeAreaView>
   );
 }

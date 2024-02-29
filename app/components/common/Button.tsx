@@ -3,11 +3,10 @@ import {
   StyleSheet,
   GestureResponderEvent,
 } from "react-native";
-import { ColorPropType } from "@/utils/colors";
-import { getColors } from "@/utils/colors";
-import { sizeSet } from "./sets";
-import Text from "../Text";
 import React from "react";
+import { ColorPropType } from "@/types/color";
+import { getColors } from "@/utils/colors";
+import { Text } from "@/components/common";
 
 type sizeType =
   | "custom"
@@ -19,40 +18,46 @@ type sizeType =
   | "auto";
 
 interface PropType {
-  id: string;
   size: sizeType;
-  onPress: (e: GestureResponderEvent, id?: string) => void;
-  color: ColorPropType;
   children: string;
+  color: ColorPropType;
+  onPress: (e?: GestureResponderEvent, id?: string) => void;
+  id?: string;
   disabled?: boolean;
   fontColor?: ColorPropType;
   customSize?: string | number;
   fontType?: [string, number | string];
 }
 
+const sizes: { [key: string]: string[] } = {
+  full: ["100%", "S"],
+  extraLarge: ["80%", "S"],
+  large: ["60%", "L"],
+  medium: ["40%", "M"],
+  small: ["20%", "S"],
+  auto: ["auto", "M"],
+};
+
 export default function Button({
-  id,
   size,
   customSize,
   onPress,
+  id,
   color,
   children,
   disabled,
   fontColor = ["primary", 1000],
-  fontType = ["button", sizeSet[size][1]],
+  fontType = ["button", sizes[size][1]],
 }: PropType) {
   const style = {
-    width: size !== "custom" ? sizeSet[size][0] : customSize,
+    width: size !== "custom" ? sizes[size][0] : customSize,
     backgroundColor: getColors(disabled ? ["neutral", 600] : color),
-  };
+    minWidth: children.length * 15,
+  } as any;
 
   return (
     <TouchableOpacity
-      style={[
-        styles.container,
-        style as any,
-        { minWidth: children.length * 15 },
-      ]}
+      style={[styles.container, style]}
       disabled={disabled}
       activeOpacity={0.6}
       onPress={(e) => onPress(e, id)}

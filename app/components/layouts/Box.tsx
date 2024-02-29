@@ -1,5 +1,12 @@
-import { ColorPropType, getColors } from "@/utils/colors";
-import { TouchableOpacity } from "react-native";
+import {
+  AnimatableNumericValue,
+  DimensionValue,
+  StyleProp,
+  TouchableOpacity,
+  ViewStyle,
+} from "react-native";
+import { ColorPropType } from "@/types/color";
+import { getColors } from "@/utils/colors";
 
 type roundType = "none" | "sm" | "lg" | "full";
 
@@ -27,17 +34,17 @@ export default function Box({
   children,
   onPress,
 }: PropType) {
+  const style: StyleProp<ViewStyle> = {
+    width: width as DimensionValue,
+    height: height as DimensionValue,
+    backgroundColor: getColors(color),
+    padding: 16,
+    borderRadius: roundedSet[rounded] as AnimatableNumericValue,
+  };
+
   return (
     <TouchableOpacity
-      style={
-        {
-          width: width,
-          height: height,
-          backgroundColor: getColors(color),
-          padding: 16,
-          borderRadius: roundedSet[rounded],
-        } as any
-      }
+      style={style}
       onPress={onPress}
       activeOpacity={!!onPress ? 0.6 : 1}
     >

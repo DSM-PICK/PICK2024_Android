@@ -1,5 +1,11 @@
 import { FlatList } from "react-native-gesture-handler";
-import { StyleSheet, View } from "react-native";
+import {
+  DimensionValue,
+  StyleProp,
+  StyleSheet,
+  View,
+  ViewStyle,
+} from "react-native";
 import { useState } from "react";
 import { getColors } from "@/utils/colors";
 
@@ -7,7 +13,7 @@ const gap = 16;
 const offset = 16;
 
 interface PropType {
-  children: any;
+  children: React.ReactElement[];
   height: string;
   onScroll?: (item: boolean) => void;
 }
@@ -24,6 +30,14 @@ export default function Carousel({ children, height, onScroll }: PropType) {
     setPage(newPage);
   };
 
+  const style: StyleProp<ViewStyle> = {
+    height: height as DimensionValue,
+    width: width - 50,
+    marginHorizontal: gap / 2,
+  };
+
+  const Renderor = ({ item }) => <View style={style}>{item}</View>;
+
   return (
     <View style={{ alignItems: "center", gap: 10 }}>
       <FlatList
@@ -38,21 +52,9 @@ export default function Carousel({ children, height, onScroll }: PropType) {
         showsHorizontalScrollIndicator={false}
         snapToInterval={width - gap / 2 - 26.5}
         contentContainerStyle={{ paddingHorizontal: offset }}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={(_, index) => index.toString()}
         onLayout={(event) => setWidth(event.nativeEvent.layout.width)}
-        renderItem={({ item }) => (
-          <View
-            style={
-              {
-                height: height,
-                width: width - 50,
-                marginHorizontal: gap / 2,
-              } as any
-            }
-          >
-            {item}
-          </View>
-        )}
+        renderItem={Renderor}
       />
       <View style={styles.indicatorContainer}>
         {Array.from(Array(children.length).keys()).map((item) => (
