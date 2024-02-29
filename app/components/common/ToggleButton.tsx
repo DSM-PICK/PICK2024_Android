@@ -8,10 +8,11 @@ interface PropType {
   onPress: (item: string) => void;
 }
 
-export const ToggleButton = ({ items, onPress }: PropType) => {
+export default function ToggleButton({ items, onPress }: PropType) {
   const [selected, setSelected] = useState(0);
   const [width, setWidth] = useState(0);
   const animation = useRef(new Animated.Value(0)).current;
+  const widthBySize: any = `${100 / items.length}%`;
 
   useEffect(() => {
     Animated.timing(animation, {
@@ -39,7 +40,7 @@ export const ToggleButton = ({ items, onPress }: PropType) => {
           styles.barElement,
           {
             transform: [{ translateX: animation }],
-            width: `${100 / items.length}%`,
+            width: widthBySize,
           },
         ]}
       />
@@ -48,7 +49,7 @@ export const ToggleButton = ({ items, onPress }: PropType) => {
         {items.map((item, index) => (
           <Pressable
             key={index}
-            style={[styles.buttonElement, { width: `${100 / items.length}%` }]}
+            style={[styles.buttonElement, { width: widthBySize }]}
             onPress={() => handlePress(index, item)}
           >
             <Text type={["body", 2]}>{item}</Text>
@@ -57,7 +58,7 @@ export const ToggleButton = ({ items, onPress }: PropType) => {
       </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {

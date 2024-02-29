@@ -1,7 +1,7 @@
 import { Modal as ModalView, StyleSheet, View } from "react-native";
-import Button from "./Button";
 import React from "react";
-import Box from "./Box";
+import { Button } from "@/components/common";
+import { Box, HiddenView } from "@/components/layouts";
 
 interface PropType {
   type: number;
@@ -47,7 +47,7 @@ export default function Modal({
           <View style={styles.contentContainer}>
             <View style={{ paddingVertical: 10 }}>{children}</View>
             <View style={styles.buttonContainer}>
-              {!!cancel && (
+              <HiddenView data={cancel}>
                 <View style={styles.buttonElement}>
                   <Button
                     onPress={() => setVisible(false)}
@@ -58,8 +58,7 @@ export default function Modal({
                     {cancel}
                   </Button>
                 </View>
-              )}
-
+              </HiddenView>
               <View
                 style={[styles.buttonElement, !!!cancel && { width: "100%" }]}
               >

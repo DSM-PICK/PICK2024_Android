@@ -4,16 +4,17 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
 } from "react-native";
-import { useState } from "react";
 import {
   NotoSans_400Regular,
   NotoSans_500Medium,
   NotoSans_700Bold,
   useFonts,
 } from "@expo-google-fonts/noto-sans";
-import { textStyle } from "@/components/common/Text/sets";
+import { useState } from "react";
+import { colors } from "@/utils/colors/contant";
 import { EyeOff, EyeOn } from "@/assets/icons";
-import { colors } from "@/utils/colors";
+import { textStyle } from "./Text/constants";
+import { HiddenView } from "@/components/layouts";
 
 type ChangeEventType = {
   text: string;
@@ -53,6 +54,12 @@ export default function Input({
   const [active, setActive] = useState(false);
   const [visible, setVisible] = useState(false);
 
+  const style = {
+    width: password ? "92%" : "100%",
+    textAlignVertical: !!multiLine ? "top" : "auto",
+    paddingVertical: !!multiLine ? 11 : 0,
+  } as any;
+
   if (fontsLoaded) {
     return (
       <View
@@ -73,19 +80,15 @@ export default function Input({
           onChangeText={(text) => onChange({ text, name })}
           selectionColor={error ? errorColor[500] : primary[500]}
           placeholderTextColor={error ? errorColor[700] : neutral[500]}
-          style={{
-            width: password ? "92%" : "100%",
-            textAlignVertical: !!multiLine ? "top" : "auto",
-            paddingVertical: !!multiLine ? 11 : 0,
-          }}
+          style={style}
           multiline={!!multiLine}
           numberOfLines={multiLine || 1}
         />
-        {!!password && (
+        <HiddenView data={password}>
           <TouchableWithoutFeedback onPress={() => setVisible(!visible)}>
             {visible ? <EyeOn {...sizes} /> : <EyeOff {...sizes} />}
           </TouchableWithoutFeedback>
-        )}
+        </HiddenView>
       </View>
     );
   }
@@ -120,6 +123,6 @@ const styles = StyleSheet.create({
     color: neutral[50],
     fontSize: size,
     letterSpacing: letterSpacing,
-    fontFamily: weight as any, // 임시 오류 제거용 any
+    fontFamily: weight as any,
   },
 });

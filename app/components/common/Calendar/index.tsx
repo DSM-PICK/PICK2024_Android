@@ -1,45 +1,46 @@
 import { View, StyleSheet } from "react-native";
 import { useState } from "react";
+import { getToday } from "@/utils/getToday";
+import { Text } from "@commonents";
+import { Box } from "@/components/layouts";
 import { Arrow } from "@/assets/icons";
+import { hitSlop } from "@/constants";
 import Weeks from "./Weeks";
-import Text from "../Text";
-import Box from "../Box";
-
-// 캘린더는 나중에 한번 싹 갈아엎어야 함
-// 로직을 잘못 만들어서 수정하기 어렵게 꼬여버렸어
 
 interface PropType {
-  onPress?: ({}) => void;
   picks?: number[];
-  date: number[];
-  setDate: any;
+  onMove?: ({}) => void;
+  onSelect?: ({}) => void;
 }
 
-const hitSlop = { top: 10, left: 10, right: 10, bottom: 10 };
+const { year, month, date: _date } = getToday();
 
-export default function Calendar({ onPress, picks, date, setDate }: PropType) {
+export default function Calendar({ picks, onMove, onSelect }: PropType) {
+  const [date, setDate] = useState([year, month]);
   const [selected, setSelected] = useState(undefined);
+  const [calYear, calMonth] = date;
 
-  const handleDate = (to: boolean) => {
+  const handleMove = (to: boolean) => {
     if (to) {
-      const isOver = date[1] + 1 > 12;
-      setDate(isOver ? [date[0] + 1, 1] : [date[0], date[1] + 1]);
+      const isOver = calMonth + 1 > 12;
+      setDate((prev) => (isOver ? [prev[0] + 1, 1] : [prev[0], prev[1] + 1]));
     } else {
-      const isUnder = date[1] - 1 < 1;
-      setDate(isUnder ? [date[0] - 1, 12] : [date[0], date[1] - 1]);
+      const isUnder = calMonth - 1 < 1;
+      setDate((prev) => (isUnder ? [prev[0] - 1, 12] : [prev[0], prev[1] - 1]));
     }
+    !!onMove && onMove({ year: calYear, month: calMonth });
   };
 
   return (
     <Box color={["primary", 1200]}>
       <View style={{ gap: 10 }}>
         <View style={styles.headerContainer}>
-          <Arrow onPress={() => handleDate(false)} hitSlop={hitSlop} />
+          <Arrow onPress={() => handleMove(false)} hitSlop={hitSlop} />
           <Text type={["subTitle", 3, "M"]}>
             {date[0]}년 {date[1].toString().padStart(2, "0")}월
           </Text>
           <Arrow
-            onPress={() => handleDate(true)}
+            onPress={() => handleMove(true)}
             style={{ transform: [{ rotate: "180deg" }] }}
             hitSlop={hitSlop}
           />
@@ -48,7 +49,7 @@ export default function Calendar({ onPress, picks, date, setDate }: PropType) {
           <Weeks
             date={date}
             picks={picks}
-            onPress={onPress}
+            onSelect={onSelect}
             selected={selected}
             setSelected={setSelected}
           />
@@ -60,9 +61,9 @@ export default function Calendar({ onPress, picks, date, setDate }: PropType) {
 
 const styles = StyleSheet.create({
   headerContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
     gap: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

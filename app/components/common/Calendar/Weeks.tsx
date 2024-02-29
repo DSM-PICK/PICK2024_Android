@@ -1,47 +1,42 @@
-import {
-  FlatList,
-  TouchableWithoutFeedback,
-} from "react-native-gesture-handler";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { StyleSheet, View } from "react-native";
 import { getDates } from "@/utils/getDates";
-import { getToday } from "@/utils/getToday";
+import { getToday, days } from "@/utils/getToday";
 import { getColors } from "@/utils/colors";
-import Text from "../Text";
-
-// 캘린더는 나중에 한번 싹 갈아엎어야 함
-// 로직을 잘못 만들어서 수정하기 어렵게 꼬여버렸어
+import { Text } from "@commonents";
 
 interface PropType {
   date: number[];
-  picks: number[] | undefined;
-  onPress: (({}) => void) | undefined;
-  selected: number[] | undefined;
   setSelected: ([]) => void;
+  picks: number[] | undefined;
+  selected: number[] | undefined;
+  onSelect: (({}) => void) | undefined;
 }
 
 const { year, month, date: _date } = getToday();
-const days = ["일", "월", "화", "수", "목", "금", "토"];
 
 export default function Weeks({
   date,
+  setSelected,
   picks,
   selected,
-  setSelected,
-  onPress,
+  onSelect,
 }: PropType) {
-  const { startDay, endDate } = getDates(date);
-  const isTodate = date[0] === year && date[1] === month;
-  const isSelected =
-    selected && date[0] === selected[0] && date[1] === selected[1];
-  const arr = new Array(startDay)
+  const [calYear, calMonth] = date;
+  const [selYear, selMonth, selDate] = selected || [0, 0, 0];
+
+  const { startDay, endDate } = getDates(date); // 첫 날의 요일과 마지막 날의 날짜 가져오기
+  const isToday = calYear === year && calMonth === month;
+  const isSelected = selected && calYear === selYear && calMonth === selMonth;
+  const arr = new Array(startDay) // 캘린더 날짜 배열 생성 (시작 요일 이전 날짜는 공백)
     .fill("")
     .concat(Array.from(new Array(endDate).keys()));
   let _weeks = [];
   let _days = [];
 
-  const handlePress = (_date: number, day: number) => {
-    setSelected([date[0], date[1], _date]);
-    onPress({ year: date[0], month: date[1], date: _date, day: days[day] });
+  const handleSelect = (_date: number, day: number) => {
+    setSelected([calYear, calMonth, _date]);
+    onSelect({ year: calYear, month: calMonth, date: _date, day: days[day] });
   };
 
   arr.map((item, index) => {
@@ -50,18 +45,18 @@ export default function Weeks({
         key={index}
         style={[
           styles.dayContainer,
-          isTodate && _date === item + 1 && styles.todayContainer,
-          picks && picks.includes(item + 1) && styles.pickContainer,
-          isSelected && item + 1 === selected[2] && styles.pickContainer,
+          picks?.includes(item + 1) && styles.pickContainer,
+          isToday && _date === item + 1 && styles.todayContainer,
+          isSelected && item + 1 === selDate && styles.pickContainer,
         ]}
         onPress={() => {
-          onPress && item !== "" && handlePress(item + 1, _days.length);
+          !!onSelect && item !== "" && handleSelect(item + 1, _days.length);
         }}
       >
         <Text
           type={["button", "S"]}
           color={
-            isTodate && _date === item + 1 ? ["neutral", 1000] : ["neutral", 50]
+            isToday && _date === item + 1 ? ["neutral", 1000] : ["neutral", 50]
           }
         >
           {item !== "" ? item + 1 : ""}

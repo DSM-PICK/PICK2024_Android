@@ -1,18 +1,21 @@
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
-import { Text as NativeText } from "react-native";
+import { Text as NativeText, StyleProp, TextStyle } from "react-native";
 import {
   NotoSans_400Regular,
   NotoSans_500Medium,
   NotoSans_700Bold,
   useFonts,
 } from "@expo-google-fonts/noto-sans";
-import { ColorPropType, getColors } from "@/utils/colors";
-import { textStyle } from "./sets";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { ColorPropType } from "@/types/color";
+import { getColors } from "@/utils/colors";
+import { textStyle } from "./constants";
+import { hitSlop } from "@/constants";
 
 type WeightType = "B" | "M" | "R";
+type PropTypeType = (string | number)[] | [string, string | number, WeightType];
 
 interface PropType {
-  type: (string | number)[] | [string, string | number, WeightType];
+  type: PropTypeType;
   children: React.ReactNode;
   hidden?: boolean;
   onPress?: () => void;
@@ -31,16 +34,17 @@ export default function Text({
     NotoSans_500Medium,
     NotoSans_700Bold,
   });
+  const [_type, _size, _weight] = type;
 
   const {
     weight: fontFamily,
     size: textSize,
     letterSpacing,
     lineHeight,
-  } = textStyle[type[0]][type[1]];
+  } = textStyle[_type][_size];
 
-  const style: any = {
-    fontFamily: type[2] ? fontFamily[type[2]] : fontFamily,
+  const style: StyleProp<TextStyle> = {
+    fontFamily: _weight ? fontFamily[_weight] : fontFamily,
     fontSize: textSize,
     letterSpacing: letterSpacing,
     color: color && getColors(color),
@@ -50,10 +54,7 @@ export default function Text({
   if (fontsLoaded && !hidden) {
     if (onPress) {
       return (
-        <TouchableWithoutFeedback
-          onPress={onPress}
-          hitSlop={{ top: 10, left: 10, right: 10, bottom: 10 }}
-        >
+        <TouchableWithoutFeedback onPress={onPress} hitSlop={hitSlop}>
           <NativeText style={style}>{children}</NativeText>
         </TouchableWithoutFeedback>
       );
