@@ -1,5 +1,5 @@
-import Layout from "@/components/common/Layout";
 import { Text, View } from "react-native";
+import { Layout } from "@layouts";
 
 export const Dev = () => {
   return (
