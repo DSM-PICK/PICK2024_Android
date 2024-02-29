@@ -1,57 +1,44 @@
-import { Dimensions, FlatList, PixelRatio } from "react-native";
-import { View } from "react-native";
-import { getColors } from "@/utils/colors";
-import Text from "./Text";
-import { debounce } from "@/utils/debounce";
+import {
+  FlatList,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+  StyleSheet,
+  View,
+} from "react-native";
+import * as Haptics from "expo-haptics";
 import { useState } from "react";
+import { debounce } from "@/utils/debounce";
+import { getColors } from "@/utils/colors";
+import { Text } from "@/components/common";
+
+const hitSlop = { top: 20, bottom: 20, right: 20, left: 20 };
 
 interface PropType {
   items: (string | number)[];
-  interval: number;
   onScroll: (selected: string | number, id: string | number) => void;
   id?: string | number;
 }
 
-export default function ScrollPicker({
-  items,
-  interval,
-  onScroll,
-  id,
-}: PropType) {
+export default function ScrollPicker({ items, onScroll, id }: PropType) {
   const [height, setHeight] = useState(undefined);
+  const [before, setBefore] = useState(0);
 
-  const handleScroll = (e) => {
-    const index = Math.ceil(e.nativeEvent.contentOffset.y / interval);
+  const handleScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
+    const index = Math.ceil(e.nativeEvent.contentOffset.y / height);
+    if (index !== before) {
+      setBefore(index);
+      Haptics.selectionAsync();
+    }
     if (!!items[index]) {
       debounce(() => {
         onScroll(items[index], id);
-      }, 200);
+      }, 10);
     }
   };
 
   return (
-    <View
-      style={{
-        width: "30%",
-        height: 102,
-        justifyContent: "center",
-        alignItems: "center",
-        position: "relative",
-      }}
-    >
-      <View
-        style={{
-          zIndex: 1,
-          height: 40,
-          position: "absolute",
-          borderTopColor: getColors(["primary", 500]),
-          borderBottomColor: getColors(["primary", 500]),
-          borderTopWidth: 2,
-          borderBottomWidth: 2,
-          width: "100%",
-        }}
-        pointerEvents="none"
-      />
+    <View style={styles.container}>
+      <View style={styles.listContainer} pointerEvents="none" />
       <FlatList
         onScroll={handleScroll}
         data={items}
@@ -60,11 +47,14 @@ export default function ScrollPicker({
           paddingVertical: 30,
         }}
         overScrollMode="never"
-        renderItem={({ item }) => (
+        hitSlop={hitSlop}
+        renderItem={({ item, index }) => (
           <View
             onLayout={(e) => {
               const { height: _height } = e.nativeEvent.layout;
-              height !== _height && setHeight(_height);
+              if (index === 0) {
+                height !== _height && setHeight(_height);
+              }
             }}
           >
             <View
@@ -75,7 +65,6 @@ export default function ScrollPicker({
             </View>
           </View>
         )}
-        maxToRenderPerBatch={6}
         removeClippedSubviews
         snapToInterval={height || 0}
         showsVerticalScrollIndicator={false}
@@ -83,3 +72,23 @@ export default function ScrollPicker({
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    width: "30%",
+    height: 101,
+    justifyContent: "center",
+    alignItems: "center",
+    position: "relative",
+  },
+  listContainer: {
+    zIndex: 1,
+    height: 40,
+    position: "absolute",
+    borderTopColor: getColors(["primary", 500]),
+    borderBottomColor: getColors(["primary", 500]),
+    borderTopWidth: 2,
+    borderBottomWidth: 2,
+    width: "100%",
+  },
+});
