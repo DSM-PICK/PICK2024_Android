@@ -5,10 +5,10 @@
     "typeRoots": ["./node_modules/@types", "@types"],
     "paths": {
       "@/*": ["./app/*"],
-      "@assets/*": ["./app/assets/*"],
-      "@screens/*": ["./app/screenss/*"],
-      "@components/*": ["./app/components/*"],
-      "@icons/*": ["./app/assets/icons/*"]
+      "@icons": ["./app/assets/icons/"],
+      "@types/*": ["./app/types/*"],
+      "@commonents": ["./app/components/common"],
+      "@layouts": ["./app/components/layouts"]
     }
   }
 }
