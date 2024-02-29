@@ -1,21 +1,19 @@
 import { View, StyleSheet, Image } from "react-native";
-import Carousel from "@/components/common/Carousel";
-import Layout from "@/components/common/Layout";
-import Button from "@/components/common/Button";
-import Text from "@/components/common/Text";
+import { Layout, Carousel } from "@layouts";
+import { Button, Text } from "@commonents";
 
 const boards = [
   {
     text: "편리한 학교 생활을편리한 학교 생활을ㅍ편리한 학교 생활을",
-    imgSrc: require("@assets/boards/b1.png"),
+    imgSrc: require("@/assets/boards/b1.png"),
   },
   {
     text: "편리한 학교 생활을편리한 학교 생활을ㅍ편리한 학교 생활을",
-    imgSrc: require("@assets/boards/b2.png"),
+    imgSrc: require("@/assets/boards/b2.png"),
   },
   {
     text: "편리한 학교 생활을편리한 학교 생활을ㅍ편리한 학교 생활을",
-    imgSrc: require("@assets/boards/b3.png"),
+    imgSrc: require("@/assets/boards/b3.png"),
   },
 ];
 

@@ -1,16 +1,12 @@
-import { StyleSheet } from "react-native";
-import { View } from "react-native";
-import { useState } from "react";
-import Button from "@/components/common/Button";
-import Layout from "@/components/common/Layout";
-import Input from "@/components/common/Input";
-import Text from "@/components/common/Text";
-import { getEmpty } from "@/utils/getEmpty";
-import { login } from "@/api";
-import { useMutation } from "@tanstack/react-query";
-import { setToken } from "@/utils/token";
 import { useNavigation } from "@react-navigation/native";
-import { AxiosError, AxiosResponse } from "axios";
+import { useMutation } from "@tanstack/react-query";
+import { StyleSheet, View } from "react-native";
+import { AxiosResponse } from "axios";
+import { useState } from "react";
+import { Text, Input, Button } from "@commonents";
+import { setToken } from "@/utils";
+import { Layout } from "@layouts";
+import { login } from "@/api";
 
 export const Login = () => {
   const [data, setData] = useState({
@@ -21,7 +17,7 @@ export const Login = () => {
     account_id: false,
     password: false,
   });
-  const disabled = getEmpty(data.account_id) || getEmpty(data.password);
+  const disabled = data.account_id === "" || data.password === "";
   const navigation = useNavigation();
 
   const handleChange = ({ text, name }) => {
@@ -37,7 +33,6 @@ export const Login = () => {
     },
     onSuccess: async (res: AxiosResponse) => {
       const { access_token, refresh_token } = res?.data;
-      console.log(res?.data);
       await setToken(access_token, refresh_token);
       navigation.reset({ routes: [{ name: "홈" as never }] });
     },
@@ -91,7 +86,7 @@ export const Login = () => {
         <Button
           size="full"
           color={["primary", 400]}
-          onPress={loginFn}
+          onPress={loginFn as any}
           disabled={disabled}
         >
           로그인

@@ -1,18 +1,17 @@
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { StyleSheet, View } from "react-native";
-import { useState } from "react";
-import ApplyBox from "@/components/apply/ApplyBox";
-import Button from "@/components/common/Button";
-import Layout from "@/components/common/Layout";
+import { useEffect, useState } from "react";
+import { Button, Modal, Text } from "@commonents";
+import { weekendMeal, weekendMealMy } from "@/api/weekendMeal";
 import Move from "@/assets/applicons/move.svg";
-import Modal from "@/components/common/Modal";
 import Out from "@/assets/applicons/out.svg";
-import Text from "@/components/common/Text";
+import ApplyBox from "./components/ApplyBox";
 import { getToday } from "@/utils/getToday";
-import Box from "@/components/common/Box";
-import { useMutation } from "@tanstack/react-query";
-import { weekendMeal } from "@/api/weekendMeal";
+import { queryKeys } from "@/constants";
+import { Layout, Box } from "@layouts";
 
 const { month } = getToday();
+
 const buttonOptions = {
   size: "auto",
   fontType: ["button", "ES"],
@@ -21,16 +20,27 @@ const buttonOptions = {
 export const Apply = () => {
   const [visible, setVisible] = useState([false, ""]);
   const [meal, setMeal] = useState(undefined);
+  const queryClient = useQueryClient();
+
+  const { data: weekendMealData } = useQuery({
+    queryKey: queryKeys.weekendMeal,
+    queryFn: weekendMealMy,
+    select: (res) => res?.data,
+  });
 
   const { mutate: weekendMealMutate } = useMutation({
     mutationFn: (id: string) => weekendMeal(id),
     onSuccess: (res) => {
-      console.log(res);
+      queryClient.invalidateQueries({ queryKey: queryKeys.weekendMeal });
     },
     onError: (err) => {
       console.log(err);
     },
   });
+
+  useEffect(() => {
+    setMeal(weekendMealData && weekendMealData);
+  }, [weekendMealData]);
 
   return (
     <Layout name="신청">
@@ -53,8 +63,8 @@ export const Apply = () => {
                   color={meal === "OK" ? ["primary", 500] : ["neutral", 1000]}
                   {...(buttonOptions as any)}
                 >
-                  {" "}
-                  신청{" "}
+                  {"  "}
+                  신청{"  "}
                 </Button>
                 <Button
                   onPress={() => setVisible([true, "NO"])}
@@ -65,7 +75,8 @@ export const Apply = () => {
                   color={meal === "NO" ? ["primary", 500] : ["neutral", 1000]}
                   {...(buttonOptions as any)}
                 >
-                  미신청
+                  {" "}
+                  미신청{" "}
                 </Button>
               </View>
             </View>
@@ -93,7 +104,6 @@ export const Apply = () => {
         setVisible={(data) => setVisible([data, visible[1]])}
         type={0}
         onAccept={() => {
-          setMeal(visible[1]);
           weekendMealMutate(visible[1] as string);
         }}
       >

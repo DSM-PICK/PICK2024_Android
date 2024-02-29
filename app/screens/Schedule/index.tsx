@@ -1,14 +1,14 @@
-import Layout from "@/components/common/Layout";
-import { ToggleButton } from "@/components/common/ToggleButton";
-import Schedules from "@/components/schedule/Schedules";
-import { TimeTables } from "@/components/schedule/TimeTables";
+import Layout from "@/components/layouts/Layout";
+import { ToggleButton } from "@/components/common";
+import Schedules from "@/screens/Schedule/components/Schedules";
+import { TimeTables } from "@/screens/Schedule/components/TimeTables";
 import { useState } from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
+import { StyleSheet, View } from "react-native";
 
 export const Schedule = () => {
   const [page, setPage] = useState("시간표");
 
+  // 시간표 5개 출력되는거 월, 화, 수, 목, 금으로 해서 다섯개 고정으로 뜨게 하기
   return (
     <Layout name="일정" noHorizontalPadding>
       <View style={styles.container}>

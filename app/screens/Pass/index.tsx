@@ -1,7 +1,7 @@
-import Box from "@/components/common/Box";
-import Layout from "@/components/common/Layout";
+import Box from "@/components/layouts/Box";
+import Layout from "@/components/layouts/Layout";
 import Text from "@/components/common/Text";
-import Label from "@/components/home/Pass/Label";
+import Label from "@/screens/Pass/components/Label";
 import { Image, StyleSheet, View } from "react-native";
 
 const types = {

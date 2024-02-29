@@ -1,15 +1,12 @@
 import Calendar from "@/components/common/Calendar";
-import Layout from "@/components/common/Layout";
+import Layout from "@/components/layouts/Layout";
 import Text from "@/components/common/Text";
-import Menu from "@/components/meal/Menu";
+import Menu from "@/screens/Meal/components/Menu";
 import { mealData } from "@/tmpData";
 import { getToday } from "@/utils/getToday";
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-
-// 얘도 한번 구조 손봐야 함
-// 뷰 구조하고 스타일링 코드가 조금 이상해
 
 const { year, month, date: _date } = getToday();
 

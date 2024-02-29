@@ -1,10 +1,10 @@
 import { View } from "react-native";
 import { useState } from "react";
-import Layout from "@/components/common/Layout";
+import Layout from "@/components/layouts/Layout";
 import Text from "@/components/common/Text";
-import Box from "@/components/common/Box";
-import TimePicker from "@/components/out/TimePicker";
-import Label from "@/components/out/Label";
+import Box from "@/components/layouts/Box";
+import TimePicker from "@/screens/Out/components/TimePicker";
+import Label from "@/screens/Out/components/Label";
 import Input from "@/components/common/Input";
 import Modal from "@/components/common/Modal";
 

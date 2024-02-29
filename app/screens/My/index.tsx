@@ -1,16 +1,30 @@
-import { View, StyleSheet, Image } from "react-native";
-import Layout from "@/components/common/Layout";
-import InfoBox from "@/components/my/InfoBox";
+import { View, StyleSheet } from "react-native";
+import Layout from "@/components/layouts/Layout";
+import InfoBox from "@/screens/My/components/InfoBox";
 import Text from "@/components/common/Text";
 import { getColors } from "@/utils/colors";
-import Box from "@/components/common/Box";
-import { Photo } from "@/assets/icons";
+import Box from "@/components/layouts/Box";
 import Modal from "@/components/common/Modal";
 import { useState } from "react";
 import { removeToken } from "@/utils/token";
+import { useQuery } from "@tanstack/react-query";
+import { queryKeys } from "@/constants";
+import { details } from "@/api";
+
+const dateType = ["년", "월", "일"];
 
 export const My = ({ navigation }) => {
   const [visible, setVisible] = useState(false);
+
+  const { data: detailData } = useQuery({
+    queryKey: queryKeys.detail,
+    queryFn: details,
+    select: (res) => {
+      let { data } = res;
+      data = { ...data, birth_day: data.birth_day.split("-") };
+      return data;
+    },
+  });
 
   const handleLogout = async () => {
     await removeToken();
@@ -20,10 +34,24 @@ export const My = ({ navigation }) => {
   return (
     <Layout name="My">
       <View style={styles.container}>
-        <InfoBox type="name" data="육기준" />
-        <InfoBox type="birth" data="2007년 11월 27일" />
-        <InfoBox type="num" data="1학년 3반 11번" />
-        <InfoBox type="id" data="dragonis132" />
+        <InfoBox type="name" data={detailData?.name || "홍길동"} />
+        <InfoBox
+          type="birth"
+          data={
+            detailData?.birth_day
+              ?.map((item: string, index: number) => item + dateType[index])
+              .join(" ") || "2000년 01월 01일"
+          }
+        />
+        <InfoBox
+          type="num"
+          data={
+            (detailData?.grade &&
+              `${detailData.grade}학년 ${detailData.class_num}반 ${detailData.num}번`) ||
+            "1학년 1반 1번"
+          }
+        />
+        <InfoBox type="id" data={detailData?.account_id || "gildong"} />
         <View style={styles.lineElement} />
         <View style={styles.accountContainer}>
           <Text type={["subTitle", 3, "M"]}>계정 관리</Text>

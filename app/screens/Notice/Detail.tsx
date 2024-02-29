@@ -1,4 +1,4 @@
-import Layout from "@/components/common/Layout";
+import Layout from "@/components/layouts/Layout";
 import Text from "@/components/common/Text";
 import { noticeData } from "@/tmpData";
 import { getColors } from "@/utils/colors";
