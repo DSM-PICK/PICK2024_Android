@@ -1,4 +1,4 @@
-let timer;
+let timer: any;
 
 export const debounce = (action: () => void, delay: number) => {
   clearTimeout(timer);
