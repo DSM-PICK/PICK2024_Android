@@ -1,26 +1,38 @@
-import { useNavigation } from "@react-navigation/native";
 import { StyleSheet, View } from "react-native";
-import Box from "../../../../components/layouts/Box";
+import { Box } from "@/components/layouts";
+import Move from "./Move";
 import Home from "./Home";
 import Out from "./Out";
-import Move from "./Move";
+
+interface PropType {
+  visible: boolean;
+  type: string;
+  name: string;
+  data: any;
+}
 
 const Types = {
-  home: ({ name, data }) => Home({ name: name, date: data }),
-  out: ({ name, data }) => Out({ name: name, date: data }),
-  move: ({ name, data }) => Move({ name: name, place: data }),
+  home: ({ username, end_time }) => Home({ name: username, data: end_time }),
+  move: ({ username, classroom }) => Move({ name: username, data: classroom }),
+  out: ({ username, end_time, start_time }) =>
+    Out({ name: username, data: [start_time, end_time] }),
 };
 
-export default function Pass({ visible, type, name, data }) {
-  const navigation = useNavigation();
+export default function Pass({ visible, type, data }: PropType) {
+  let { username, end_time, start_time, classroom } = data;
+  end_time = end_time?.split(":").splice(0, 2).join(":");
+  start_time = start_time?.split(":").splice(0, 2).join(":");
 
   if (visible) {
     return (
       <Box>
-        <View style={styles.container}>{Types[type]({ name, data })}</View>
+        <View style={styles.container}>
+          {Types[type]({ username, end_time, start_time, classroom })}
+        </View>
       </Box>
     );
   }
+  return <></>;
 }
 
 const styles = StyleSheet.create({

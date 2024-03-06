@@ -3,5 +3,6 @@ export const queryKeys = {
   simple: ["simple"],
   detail: ["detail"],
   teacher: ["teacher"],
+  anyApply: ["anyApply"],
   weekendMeal: ["weekendMeal"],
 };

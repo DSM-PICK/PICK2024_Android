@@ -1,17 +1,17 @@
 import { useNavigation } from "@react-navigation/native";
 import { View } from "react-native";
-import Button from "@/components/common/Button";
-import Text from "@/components/common/Text";
+import { Button, Text } from "@commonents";
 
 interface PropType {
   name: string;
-  date: string;
+  data: any;
 }
 
 const path = ["외출증", { type: "out" }];
 
-export default function Out({ name, date }: PropType) {
+export default function Out({ name, data }: PropType) {
   const navigation = useNavigation();
+  const date = `${data[0]} ~ ${data[1]}`;
 
   return (
     <>

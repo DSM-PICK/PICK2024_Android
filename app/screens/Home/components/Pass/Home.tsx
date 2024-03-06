@@ -1,16 +1,15 @@
 import { useNavigation } from "@react-navigation/native";
 import { View } from "react-native";
-import Button from "@/components/common/Button";
-import Text from "@/components/common/Text";
+import { Button, Text } from "@/components/common";
 
 interface PropType {
   name: string;
-  date: string;
+  data: string;
 }
 
 const path = ["외출증", { type: "home" }];
 
-export default function Home({ name, date }: PropType) {
+export default function Home({ name, data }: PropType) {
   const navigation = useNavigation();
 
   return (
@@ -21,7 +20,7 @@ export default function Home({ name, date }: PropType) {
         </Text>
         <Text type={["caption", 1]}>
           <Text type={["subTitle", 3, "M"]} color={["primary", 400]}>
-            {date}
+            {data}
           </Text>
           부터입니다
         </Text>

@@ -4,21 +4,25 @@ import { HomeButton, TimeTable, Notice, Meal, Pass } from "./components";
 import { Apply, Schedule, Meals, My, Bell, Teacher } from "@icons";
 import { hitSlop, queryKeys } from "@/constants";
 import { Carousel, Layout } from "@layouts";
+import { checkApply, simple } from "@/api";
 import { Text } from "@commonents";
-import { simple } from "@/api";
 
 const headerIconOptions = { hitSlop: hitSlop, width: 20 };
 const buttonIconSize = { width: 30, height: 30 };
+const texts = ["학년 ", "반 ", "번 ", ""];
 
 export const Home = ({ navigation }) => {
-  const passData = false;
+  const { data: applyData } = useQuery({
+    queryKey: queryKeys.anyApply,
+    queryFn: checkApply,
+  });
 
   const { data: simpleData } = useQuery({
     queryKey: queryKeys.simple,
     queryFn: simple,
     select: (res) => {
       const { class_num, grade, name, num } = res?.data;
-      return `${grade}학년 ${class_num}반 ${num}번 ${name}`;
+      return [grade, class_num, num, name];
     },
   });
 
@@ -37,7 +41,9 @@ export const Home = ({ navigation }) => {
               <Bell {...headerIconOptions} onPress={() => navigate("개발")} />
             </View>
           </View>
-          <Text type={["subTitle", 2, "B"]}>{simpleData}</Text>
+          <Text type={["subTitle", 2, "B"]}>
+            {simpleData?.map((item, index) => item + texts[index])}
+          </Text>
           <View style={styles.multiContainer}>
             <HomeButton icon={<Schedule {...buttonIconSize} />} name="일정" />
             <HomeButton icon={<Apply {...buttonIconSize} />} name="신청" />
@@ -47,9 +53,16 @@ export const Home = ({ navigation }) => {
               name="선생님 조회"
             />
           </View>
-          <Pass visible={passData} type="out" name="test" data="10:20" />
+          {applyData && (
+            <Pass
+              visible={!!applyData}
+              type={applyData[0]}
+              name={applyData[1]?.username}
+              data={applyData && applyData[1]}
+            />
+          )}
         </View>
-        <View style={{ height: passData ? "58%" : "71%" }}>
+        <View style={{ height: !!applyData ? "58%" : "71%" }}>
           <Carousel height="100%">
             <TimeTable />
             <Meal />

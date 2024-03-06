@@ -1,13 +1,23 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { View } from "react-native";
-import Button from "@/components/common/Button";
-import Text from "@/components/common/Text";
+import { Button, Text } from "@commonents";
+import { queryKeys } from "@/constants";
+import { returnClass } from "@/api";
 
 interface PropType {
   name: string;
-  place: string;
+  data: string;
 }
 
-export default function Move({ name, place }: PropType) {
+export default function Move({ name, data }: PropType) {
+  const queryClient = useQueryClient();
+
+  const { mutate: returnFn } = useMutation({
+    mutationFn: returnClass,
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: queryKeys.anyApply }),
+  });
+
   return (
     <>
       <View>
@@ -16,7 +26,7 @@ export default function Move({ name, place }: PropType) {
         </Text>
         <Text type={["caption", 1]}>
           <Text type={["subTitle", 3, "M"]} color={["primary", 400]}>
-            {place}
+            {data}
           </Text>
           에 있습니다
         </Text>
@@ -26,7 +36,7 @@ export default function Move({ name, place }: PropType) {
         <Button
           size="full"
           fontType={["button", "ES"]}
-          onPress={() => {}}
+          onPress={() => returnFn()}
           color={["secondary", 500]}
         >
           돌아가기
