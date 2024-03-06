@@ -1,21 +1,17 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { StyleSheet, View } from "react-native";
 import { useEffect, useState } from "react";
-import { Button, Modal, Text } from "@commonents";
-import { weekendMeal, weekendMealMy } from "@/api/weekendMeal";
+import { weekendMeal, weekendMealMy } from "@/api";
+import MealButton from "./components/MealButton";
 import Move from "@/assets/applicons/move.svg";
 import Out from "@/assets/applicons/out.svg";
 import ApplyBox from "./components/ApplyBox";
-import { getToday } from "@/utils/getToday";
+import { Modal, Text } from "@commonents";
 import { queryKeys } from "@/constants";
 import { Layout, Box } from "@layouts";
+import { getToday } from "@/utils";
 
 const { month } = getToday();
-
-const buttonOptions = {
-  size: "auto",
-  fontType: ["button", "ES"],
-};
 
 export const Apply = () => {
   const [visible, setVisible] = useState([false, ""]);
@@ -30,7 +26,7 @@ export const Apply = () => {
 
   const { mutate: weekendMealMutate } = useMutation({
     mutationFn: (id: string) => weekendMeal(id),
-    onSuccess: (res) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.weekendMeal });
     },
     onError: (err) => {
@@ -54,30 +50,18 @@ export const Apply = () => {
             <View style={styles.endMealBoxContainer}>
               <Text type={["body", 2]}>{month}월 주말 급식 신청</Text>
               <View style={styles.buttonContainer}>
-                <Button
-                  onPress={() => setVisible([true, "OK"])}
+                <MealButton
+                  setVisible={setVisible}
                   id="OK"
-                  fontColor={
-                    meal === "OK" ? ["neutral", 1100] : ["neutral", 50]
-                  }
-                  color={meal === "OK" ? ["primary", 500] : ["neutral", 1000]}
-                  {...(buttonOptions as any)}
-                >
-                  {"  "}
-                  신청{"  "}
-                </Button>
-                <Button
-                  onPress={() => setVisible([true, "NO"])}
+                  value={meal}
+                  text=" 신청 "
+                />
+                <MealButton
+                  setVisible={setVisible}
                   id="NO"
-                  fontColor={
-                    meal === "NO" ? ["neutral", 1100] : ["neutral", 50]
-                  }
-                  color={meal === "NO" ? ["primary", 500] : ["neutral", 1000]}
-                  {...(buttonOptions as any)}
-                >
-                  {" "}
-                  미신청{" "}
-                </Button>
+                  value={meal}
+                  text="미신청"
+                />
               </View>
             </View>
           </Box>

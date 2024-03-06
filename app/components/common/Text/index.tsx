@@ -7,9 +7,9 @@ import {
 } from "@expo-google-fonts/noto-sans";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { ColorPropType } from "@/types/color";
-import { getColors } from "@/utils/colors";
 import { textStyle } from "./constants";
 import { hitSlop } from "@/constants";
+import { getColors } from "@/utils";
 
 type WeightType = "B" | "M" | "R";
 type PropTypeType = (string | number)[] | [string, string | number, WeightType];

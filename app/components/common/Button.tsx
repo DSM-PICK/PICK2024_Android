@@ -5,8 +5,8 @@ import {
 } from "react-native";
 import React from "react";
 import { ColorPropType } from "@/types/color";
-import { getColors } from "@/utils/colors";
-import { Text } from "@/components/common";
+import { getColors } from "@/utils";
+import { Text } from "@commonents";
 
 type sizeType =
   | "custom"

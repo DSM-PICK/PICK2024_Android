@@ -1,15 +1,15 @@
 import { FlatList } from "react-native-gesture-handler";
 import { View } from "react-native";
 import { useState } from "react";
-import Carousel from "@/components/layouts/Carousel";
-import { moreTimeTableData } from "@/tmpData";
 import { getToday, days } from "@/utils/getToday";
-import Text from "../../../../components/common/Text";
+import { Carousel } from "@/components/layouts";
+import { moreTimeTableData } from "@/tmpData";
+import { Text } from "@commonents";
 import Subject from "./Subject";
 
 const { year, month, date, day } = getToday();
 
-export const TimeTables = () => {
+export default function TimeTables() {
   const [_date, _setDate] = useState([year, month, date, day]);
 
   const handleScroll = (item: boolean) => {
@@ -71,4 +71,4 @@ export const TimeTables = () => {
       </Carousel>
     </View>
   );
-};
+}

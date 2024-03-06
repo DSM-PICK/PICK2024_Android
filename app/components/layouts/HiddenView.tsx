@@ -2,7 +2,7 @@ import React from "react";
 
 interface PropTypes {
   data: any;
-  children: React.ReactElement;
+  children: React.ReactElement[] | React.ReactElement;
 }
 
 export default function HiddenView({ data, children }: PropTypes) {

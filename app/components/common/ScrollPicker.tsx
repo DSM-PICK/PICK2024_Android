@@ -7,9 +7,8 @@ import {
 } from "react-native";
 import * as Haptics from "expo-haptics";
 import { useState } from "react";
-import { debounce } from "@/utils/debounce";
-import { getColors } from "@/utils/colors";
-import { Text } from "@/components/common";
+import { debounce, getColors } from "@/utils";
+import { Text } from "@commonents";
 
 const hitSlop = { top: 20, bottom: 20, right: 20, left: 20 };
 

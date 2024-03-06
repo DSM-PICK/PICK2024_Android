@@ -12,9 +12,9 @@ import {
 } from "@expo-google-fonts/noto-sans";
 import { useState } from "react";
 import { colors } from "@/utils/colors/contant";
-import { EyeOff, EyeOn } from "@/assets/icons";
 import { textStyle } from "./Text/constants";
-import { HiddenView } from "@/components/layouts";
+import { EyeOff, EyeOn } from "@icons";
+import { HiddenView } from "@layouts";
 
 type ChangeEventType = {
   text: string;

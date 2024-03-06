@@ -6,7 +6,7 @@ import {
   ViewStyle,
 } from "react-native";
 import { ColorPropType } from "@/types/color";
-import { getColors } from "@/utils/colors";
+import { getColors } from "@/utils";
 
 type roundType = "none" | "sm" | "lg" | "full";
 

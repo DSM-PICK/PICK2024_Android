@@ -1,11 +1,11 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import { StyleSheet, View } from "react-native";
-import { HiddenView } from "@/components/layouts";
-import { getColors } from "@/utils/colors";
+import { HiddenView } from "@layouts";
 import { hitSlop } from "@/constants";
-import { Back } from "@/assets/icons";
+import { getColors } from "@/utils";
 import { Text } from "@commonents";
+import { Back } from "@icons";
 
 interface PropTypes {
   children: React.ReactNode;

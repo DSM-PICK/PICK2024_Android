@@ -5,19 +5,14 @@ import Text from "../../../components/common/Text";
 import { useState } from "react";
 
 interface PropType {
-  visible: boolean;
+  visible: [boolean, string];
   setVisible: (visible: any) => void;
   onDone: (time: any, type: string) => void;
-  type: string;
 }
 
-export default function TimePicker({
-  visible,
-  setVisible,
-  onDone,
-  type,
-}: PropType) {
+export default function TimePicker({ visible, setVisible, onDone }: PropType) {
   const [time, setTime] = useState({ hour: 0, minute: 0 });
+  const { hour, minute } = time;
 
   const handleScroll = (item: number, id: string) => {
     setTime({ ...time, [id]: item.toString().padStart(2, "0") });
@@ -26,9 +21,9 @@ export default function TimePicker({
   return (
     <Modal
       type={0}
-      visible={visible}
-      onAccept={() => onDone(time, type)}
-      setVisible={setVisible}
+      visible={visible[0]}
+      onAccept={() => onDone(`${hour}:${minute}`, visible[1])}
+      setVisible={(res) => setVisible([res, ""])}
     >
       <View
         style={{
@@ -40,14 +35,12 @@ export default function TimePicker({
       >
         <ScrollPicker
           items={Array.from(new Array(24).keys())}
-          interval={40}
           onScroll={handleScroll}
           id="hour"
         />
         <Text type={["heading", 5]}>:</Text>
         <ScrollPicker
           items={Array.from(new Array(59).keys()).map((i) => i + 1)}
-          interval={40}
           onScroll={handleScroll}
           id="minute"
         />

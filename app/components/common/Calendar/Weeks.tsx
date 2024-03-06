@@ -1,8 +1,7 @@
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { StyleSheet, View } from "react-native";
-import { getDates } from "@/utils/getDates";
-import { getToday, days } from "@/utils/getToday";
-import { getColors } from "@/utils/colors";
+import { getColors, getDates, getToday } from "@/utils";
+import { days } from "@/utils/getToday";
 import { Text } from "@commonents";
 
 interface PropType {

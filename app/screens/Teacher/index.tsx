@@ -2,10 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import { StyleSheet, View } from "react-native";
 import { useState } from "react";
 import { Calendar, Text } from "@commonents";
-import { getToday } from "@/utils/getToday";
 import { queryKeys } from "@/constants";
-import { today } from "@/api/teacher";
 import { Layout, Box } from "@layouts";
+import { getToday } from "@/utils";
+import { today } from "@/api";
 
 const { year, month, date: _date } = getToday();
 
@@ -16,7 +16,7 @@ export const Teacher = () => {
     queryKey: queryKeys.teacher,
     queryFn: today,
     select: (res) => {
-      // res.data.map(i => i.teacher_name);
+      console.log(res.data);
       return ["", "김도경", "박현아", "조영준"];
     },
   });

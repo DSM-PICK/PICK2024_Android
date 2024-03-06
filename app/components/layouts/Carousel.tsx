@@ -1,4 +1,3 @@
-import { FlatList } from "react-native-gesture-handler";
 import {
   DimensionValue,
   StyleProp,
@@ -6,8 +5,9 @@ import {
   View,
   ViewStyle,
 } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
 import { useState } from "react";
-import { getColors } from "@/utils/colors";
+import { getColors } from "@/utils";
 
 const gap = 16;
 const offset = 16;

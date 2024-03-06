@@ -1,7 +1,7 @@
 import { Modal as ModalView, StyleSheet, View } from "react-native";
 import React from "react";
-import { Button } from "@/components/common";
-import { Box, HiddenView } from "@/components/layouts";
+import { Box, HiddenView } from "@layouts";
+import { Button } from "@commonents";
 
 interface PropType {
   type: number;
@@ -29,7 +29,9 @@ export default function Modal({
 
   const handleAccept = () => {
     setVisible(false);
-    onAccept();
+    setTimeout(() => {
+      onAccept();
+    }, 200);
   };
 
   return (

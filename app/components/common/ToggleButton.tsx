@@ -1,7 +1,7 @@
-import { getColors } from "@/utils/colors";
 import { Animated, Pressable, StyleSheet, View } from "react-native";
 import { useEffect, useRef, useState } from "react";
-import Text from "./Text";
+import { getColors } from "@/utils";
+import { Text } from "@commonents";
 
 interface PropType {
   items: string[];
@@ -12,7 +12,7 @@ export default function ToggleButton({ items, onPress }: PropType) {
   const [selected, setSelected] = useState(0);
   const [width, setWidth] = useState(0);
   const animation = useRef(new Animated.Value(0)).current;
-  const widthBySize: any = `${100 / items.length}%`;
+  const widthBySize: `${number}%` = `${100 / items.length}%`;
 
   useEffect(() => {
     Animated.timing(animation, {

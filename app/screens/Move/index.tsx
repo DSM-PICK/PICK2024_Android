@@ -1,16 +1,18 @@
 import { FlatList } from "react-native-gesture-handler";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { StyleSheet, View } from "react-native";
 import { useState } from "react";
 import { ClassButton, FloorButton } from "./components";
-import { moveClass } from "@/api/classRoom";
 import { Modal, Text } from "@commonents";
+import { queryKeys } from "@/constants";
 import { floorData } from "@/tmpData";
 import { Layout } from "@layouts";
+import { moveClass } from "@/api";
 
 const floors = Array.from(new Array(5).keys()).map((i) => i + 1);
 
 export const Move = ({ navigation }) => {
+  const queryClient = useQueryClient();
   const [width, setWidth] = useState(0);
   const [visible, setVisible] = useState(false);
   const [selected, setSelected] = useState({
@@ -22,7 +24,8 @@ export const Move = ({ navigation }) => {
 
   const { mutate: moveMutate } = useMutation({
     mutationFn: () => moveClass(selected),
-    onSuccess: (res) => {
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.anyApply });
       setVisible(true);
     },
   });
@@ -64,10 +67,7 @@ export const Move = ({ navigation }) => {
         visible={visible}
         setVisible={setVisible}
         onAccept={() => {
-          setTimeout(() => {
-            moveMutate();
-            navigation.reset({ routes: [{ name: "홈" as never }] });
-          }, 200);
+          navigation.reset({ routes: [{ name: "홈" as never }] });
         }}
       >
         <Text type={["subTitle", 3, "M"]}>

@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
+import { Image, StyleSheet, View } from "react-native";
 import { useMutation } from "@tanstack/react-query";
-import { StyleSheet, View } from "react-native";
 import { AxiosResponse } from "axios";
 import { useState } from "react";
 import { Text, Input, Button } from "@commonents";
@@ -27,6 +27,7 @@ export const Login = () => {
   const { mutate: loginFn } = useMutation({
     mutationFn: () => login(data),
     onError: (err: any) => {
+      console.log(err);
       if (err.response.data.status === 404) {
         setError({ ...error, account_id: true });
       }
@@ -41,9 +42,10 @@ export const Login = () => {
   return (
     <Layout>
       <View style={styles.inputContainer}>
-        <Text type={["heading", 3]} color={["primary", 300]}>
-          PiCK
-        </Text>
+        <Image
+          source={require("@/assets/Logo.png")}
+          style={{ width: 120, height: 40 }}
+        />
         <Text type={["body", 2]} color={["neutral", 400]}>
           스퀘어 계정으로 로그인해주세요.
         </Text>

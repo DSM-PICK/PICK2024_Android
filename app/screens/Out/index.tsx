@@ -1,101 +1,88 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { View } from "react-native";
 import { useState } from "react";
-import Layout from "@/components/layouts/Layout";
-import Text from "@/components/common/Text";
-import Box from "@/components/layouts/Box";
-import TimePicker from "@/screens/Out/components/TimePicker";
-import Label from "@/screens/Out/components/Label";
-import Input from "@/components/common/Input";
-import Modal from "@/components/common/Modal";
+import { Label, TimePicker, PickerBox } from "./components";
+import { Text, Input, Modal } from "@/components/common";
+import { applyReturn } from "@/api/apply";
+import { Layout, HiddenView } from "@/components/layouts";
+import { applyOut } from "@/api/apply";
+import { queryKeys } from "@/constants";
 
-// 얘는 무조건 코드 리팩해야 함
-// 진짜 안하면 나중에 손해봄
 const types = {
   외출: {
     title: "외출",
-    firstLabel: "외출",
-    secondLabel: "외출",
+    label: "외출",
   },
   조기귀가: {
     title: "조기 귀가",
-    firstLabel: "귀가",
-    secondLabel: "조기 귀가",
+    label: "귀가",
   },
 };
 
-export const Out = ({ route }) => {
-  const { type: _type } = route.params;
-  const { title, firstLabel, secondLabel } = types[_type];
-  const [visible, setVisible] = useState(false);
-  const [type, setType] = useState("start");
+export const Out = ({ navigation, route }) => {
+  const queryClient = useQueryClient();
+  const { type } = route.params;
+  const [sucVisible, setSucVisible] = useState(false);
   const [out, setOut] = useState({
-    start: undefined,
-    end: undefined,
+    start_time: undefined,
+    end_time: undefined,
     reason: "",
   });
-  const [sucVisible, setSucVisible] = useState(false);
+  const [pickVisible, setPickVisible] = useState<[boolean, string]>([
+    false,
+    "",
+  ]);
+  const { start_time: start, end_time: end } = out;
+  const { title, label } = types[type];
 
-  const handleDone = (item: any, type: string) => {
+  const isOut = (value: any[]) => (title === "외출" ? value[0] : value[1]);
+
+  const { mutate: outMutate } = useMutation({
+    mutationFn: () => {
+      return isOut([applyOut(out), applyReturn(out)]);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.anyApply });
+      setSucVisible(true);
+    },
+    onError: (err) => console.log(err),
+  });
+
+  const handleChange = (item: any, type: string) => {
     setOut({ ...out, [type]: item });
-  };
-
-  const handleVisible = (type: string) => {
-    setVisible(true);
-    setType(type);
   };
 
   return (
     <Layout
       name={title + " 신청"}
-      onDone={() => setSucVisible(true)}
-      isDone={
-        (title === "외출" ? out.start && out.end : out.start) &&
-        out.reason !== ""
-      }
+      onDone={outMutate}
+      isDone={isOut([start && end, start]) && out.reason !== ""}
     >
       <View style={{ gap: 40 }}>
-        <Label title={`희망 ${firstLabel} 시간을 적어주세요`}>
-          {title === "외출" ? (
-            <>
-              <Box
-                width="43%"
-                color={["neutral", 900]}
-                onPress={() => handleVisible("start")}
-              >
-                <Text type={["caption", 2]}>
-                  {!!out.start
-                    ? Object.values(out.start).join(" : ")
-                    : "출발 시간"}
-                </Text>
-              </Box>
-              <Text type={["subTitle", 1, "M"]}>~</Text>
-              <Box
-                width="43%"
-                color={["neutral", 900]}
-                onPress={() => handleVisible("end")}
-              >
-                <Text type={["caption", 2]}>
-                  {!!out.end ? Object.values(out.end).join(" : ") : "도착 시간"}
-                </Text>
-              </Box>
-            </>
-          ) : (
-            <>
-              <Box
-                width="100%"
-                color={["neutral", 900]}
-                onPress={() => handleVisible("start")}
-              >
-                <Text type={["caption", 2]}>
-                  {!!out.start
-                    ? Object.values(out.start).join(" : ")
-                    : "출발 시간"}
-                </Text>
-              </Box>
-            </>
-          )}
+        <Label title={`희망 ${label} 시간을 적어주세요`}>
+          <HiddenView data={title === "외출"}>
+            <PickerBox
+              setVisible={() => setPickVisible([true, "start_time"])}
+              time={out.start_time}
+              placeholder="출발 시간"
+            />
+            <Text type={["subTitle", 1, "M"]}>~</Text>
+            <PickerBox
+              setVisible={() => setPickVisible([true, "end_time"])}
+              time={end}
+              placeholder="도착 시간"
+            />
+          </HiddenView>
+          <HiddenView data={title !== "외출"}>
+            <PickerBox
+              full
+              setVisible={() => setPickVisible([true, "start_time"])}
+              time={start}
+              placeholder="출발 시간"
+            />
+          </HiddenView>
         </Label>
-        <Label title={`${secondLabel} 사유를 적어주세요`}>
+        <Label title={`${label} 사유를 적어주세요`}>
           <Input
             multiLine={4}
             onChange={({ text }) => {
@@ -107,16 +94,17 @@ export const Out = ({ route }) => {
         </Label>
       </View>
       <TimePicker
-        visible={visible}
-        setVisible={setVisible}
-        onDone={handleDone}
-        type={type}
+        visible={pickVisible}
+        setVisible={setPickVisible}
+        onDone={handleChange}
       />
       <Modal
         visible={sucVisible}
         setVisible={setSucVisible}
         type={3}
-        onAccept={() => {}}
+        onAccept={() => {
+          navigation.reset({ routes: [{ name: "홈" as never }] });
+        }}
       >
         <Text type={["subTitle", 3, "M"]}>{title} 신청이 완료 되었습니다</Text>
       </Modal>

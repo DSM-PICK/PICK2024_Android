@@ -1,10 +1,10 @@
 import { FlatList } from "react-native-gesture-handler";
 import { View, StyleSheet } from "react-native";
-import { getToday } from "@/utils/getToday";
 import { timeTableData } from "@/tmpData";
-import Text from "../../../../components/common/Text";
-import Box from "../../../../components/layouts/Box";
+import { getToday } from "@/utils";
+import { Text } from "@commonents";
 import Subject from "./Subject";
+import { Box } from "@layouts";
 
 const { month, date, day } = getToday();
 const today = `${month}월 ${date}일 (${day})`;
@@ -26,12 +26,7 @@ export default function TimeTable() {
             data={timeTableData}
             keyExtractor={(item) => item.index.toString()}
             renderItem={({ item }) => (
-              <Subject
-                index={item.index}
-                name={item.name}
-                duration={item.duration}
-                icon={item.icon}
-              />
+              <Subject index={item.index} name={item.name} icon={item.icon} />
             )}
           />
         </View>

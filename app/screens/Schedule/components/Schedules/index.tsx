@@ -1,10 +1,10 @@
 import { FlatList } from "react-native-gesture-handler";
 import { StyleSheet, View } from "react-native";
 import { useState } from "react";
-import Calendar from "../../../../components/common/Calendar";
-import { getToday } from "@/utils/getToday";
 import { ScheduleBox } from "./ScheduleBox";
 import { scheduleData } from "@/tmpData";
+import { Calendar } from "@commonents";
+import { getToday } from "@/utils";
 
 const { year, month } = getToday();
 
@@ -15,15 +15,14 @@ export default function Schedules() {
     <View style={styles.container}>
       <Calendar
         picks={scheduleData.map((i) => i.date)}
-        date={date}
-        setDate={setDate}
+        onMove={({ year, month }) => setDate([year, month])}
       />
       <FlatList
         data={scheduleData}
         overScrollMode="never"
         initialNumToRender={2}
         contentContainerStyle={{ gap: 15 }}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={(_, index) => index.toString()}
         renderItem={({ item }) => <ScheduleBox item={item} date={date} />}
       />
     </View>

@@ -4,15 +4,15 @@ import { Button, Text } from "@commonents";
 
 const boards = [
   {
-    text: "편리한 학교 생활을편리한 학교 생활을ㅍ편리한 학교 생활을",
+    text: "학교 생활을 한 곳에서, PiCK",
     imgSrc: require("@/assets/boards/b1.png"),
   },
   {
-    text: "편리한 학교 생활을편리한 학교 생활을ㅍ편리한 학교 생활을",
+    text: "학교 생활을 한 곳에서, PiCK",
     imgSrc: require("@/assets/boards/b2.png"),
   },
   {
-    text: "편리한 학교 생활을편리한 학교 생활을ㅍ편리한 학교 생활을",
+    text: "학교 생활을 한 곳에서, PiCK",
     imgSrc: require("@/assets/boards/b3.png"),
   },
 ];
@@ -22,16 +22,17 @@ export const Onboard = ({ navigation }) => {
     <Layout noHorizontalPadding>
       <View style={styles.inputContainer}>
         <View style={{ paddingHorizontal: 25 }}>
-          <Text type={["heading", 3]} color={["primary", 300]}>
-            PiCK
-          </Text>
+          <Image
+            source={require("@/assets/Logo.png")}
+            style={{ width: 150, height: 50 }}
+          />
         </View>
 
         <Carousel height="auto">
           {boards.map((item, index) => {
             return (
               <View key={index} style={styles.carouselContainer}>
-                <View style={styles.carouselContainer}>
+                <View style={styles.carouselTextContainer}>
                   <Text type={["body", 2]}>{item.text}</Text>
                 </View>
 
@@ -60,7 +61,6 @@ export const Onboard = ({ navigation }) => {
 const styles = StyleSheet.create({
   inputContainer: {
     flex: 5,
-    gap: 15,
     justifyContent: "center",
   },
   buttonContainer: {
@@ -74,6 +74,6 @@ const styles = StyleSheet.create({
   },
   carouselTextContainer: {
     alignSelf: "flex-start",
-    width: "70%",
+    width: "100%",
   },
 });

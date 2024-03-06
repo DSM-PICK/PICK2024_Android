@@ -1,10 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
 import { FlatList } from "react-native-gesture-handler";
 import { View, StyleSheet } from "react-native";
-import { useCallback } from "react";
 import NoticeBox from "@/screens/Notice/components/NoticeBox";
-import { getColors } from "@/utils/colors";
 import { noticeData } from "@/tmpData";
+import { getColors } from "@/utils";
 import { Text } from "@commonents";
 import { Box } from "@layouts";
 
@@ -12,10 +11,7 @@ export default function Notice() {
   const navigation = useNavigation();
   const nagivating = () => navigation.navigate("공지" as never);
 
-  const Separator = useCallback(
-    () => <View style={styles.separatorElement} />,
-    []
-  );
+  const Separator = () => <View style={styles.separatorElement} />;
 
   const Renderor = ({ item, index }) => (
     <NoticeBox title={item.title} date={item.date} index={index} />

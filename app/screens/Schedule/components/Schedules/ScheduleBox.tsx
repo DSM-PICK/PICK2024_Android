@@ -1,8 +1,8 @@
 import { StyleSheet, View } from "react-native";
 import { getColors } from "@/utils/colors";
 import { days } from "@/utils/getToday";
-import Text from "../../../../components/common/Text";
-import Box from "../../../../components/layouts/Box";
+import { Text } from "@commonents";
+import { Box } from "@layouts";
 
 type ItemType = {
   date: number;

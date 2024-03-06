@@ -1,9 +1,8 @@
-import Layout from "@/components/layouts/Layout";
-import { ToggleButton } from "@/components/common";
-import Schedules from "@/screens/Schedule/components/Schedules";
-import { TimeTables } from "@/screens/Schedule/components/TimeTables";
-import { useState } from "react";
 import { StyleSheet, View } from "react-native";
+import { useState } from "react";
+import { TimeTables, Schedules } from "./components";
+import { ToggleButton } from "@commonents";
+import { Layout } from "@layouts";
 
 export const Schedule = () => {
   const [page, setPage] = useState("시간표");
