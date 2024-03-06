@@ -1,7 +1,6 @@
 import { instance } from "./instance";
-
-const path = "/self-study";
+import { path } from "./path";
 
 export const today = async () => {
-  return await instance.get(`${path}/today`);
+  return await instance.get(`${path.selfStudy}/today`);
 };
