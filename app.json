@@ -12,18 +12,12 @@
       "backgroundColor": "#ffffff"
     },
     "assetBundlePatterns": ["**/*"],
-    "ios": {
-      "supportsTablet": true
-    },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./app/assets/adaptive-icon.png",
+        "foregroundImage": "./app/assets/icon.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.sevenstandard.PICK"
-    },
-    "web": {
-      "favicon": "./app/assets/favicon.png"
     },
     "packagerOpts": {
       "config": "metro.config.js",
