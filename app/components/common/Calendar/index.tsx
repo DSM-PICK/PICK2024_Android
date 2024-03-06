@@ -1,16 +1,16 @@
 import { View, StyleSheet } from "react-native";
-import { useState } from "react";
-import { getToday } from "@/utils/getToday";
-import { Text } from "@commonents";
-import { Box } from "@/components/layouts";
+import { useEffect, useState } from "react";
 import { Arrow } from "@/assets/icons";
 import { hitSlop } from "@/constants";
+import { getToday } from "@/utils";
+import { Text } from "@commonents";
+import { Box } from "@layouts";
 import Weeks from "./Weeks";
 
 interface PropType {
   picks?: number[];
-  onMove?: ({}) => void;
-  onSelect?: ({}) => void;
+  onMove?: ({}: any) => void;
+  onSelect?: ({}: any) => void;
 }
 
 const { year, month, date: _date } = getToday();
@@ -20,6 +20,10 @@ export default function Calendar({ picks, onMove, onSelect }: PropType) {
   const [selected, setSelected] = useState(undefined);
   const [calYear, calMonth] = date;
 
+  useEffect(() => {
+    !!onMove && onMove({ year: calYear, month: calMonth });
+  }, [date]); // move함수 사용할 떄 prop에 date 값이 수정 전으로 들어가서 임시로 이렇게 해 둠
+
   const handleMove = (to: boolean) => {
     if (to) {
       const isOver = calMonth + 1 > 12;
@@ -28,7 +32,6 @@ export default function Calendar({ picks, onMove, onSelect }: PropType) {
       const isUnder = calMonth - 1 < 1;
       setDate((prev) => (isUnder ? [prev[0] - 1, 12] : [prev[0], prev[1] - 1]));
     }
-    !!onMove && onMove({ year: calYear, month: calMonth });
   };
 
   return (
