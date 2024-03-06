@@ -24,6 +24,7 @@ module.exports = function (api) {
             "@types": "./app/types",
             "@commonents": "./app/components/common",
             "@layouts": "./app/components/layouts",
+            "@api": "./app/components/api",
           },
         },
       ],
