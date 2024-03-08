@@ -1,5 +1,5 @@
-import { Text } from "@/components/common";
-import { Box } from "@/components/layouts";
+import { Text } from "@commonents";
+import { Box } from "@layouts";
 
 interface PropType {
   setVisible: () => void;

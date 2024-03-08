@@ -2,10 +2,9 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { View } from "react-native";
 import { useState } from "react";
 import { Label, TimePicker, PickerBox } from "./components";
-import { Text, Input, Modal } from "@/components/common";
-import { applyReturn } from "@/api/apply";
-import { Layout, HiddenView } from "@/components/layouts";
-import { applyOut } from "@/api/apply";
+import { Text, Input, Modal } from "@commonents";
+import { Layout, HiddenView } from "@layouts";
+import { applyOut, applyReturn } from "@/api";
 import { queryKeys } from "@/constants";
 
 const types = {

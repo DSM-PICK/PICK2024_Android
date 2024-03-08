@@ -1,5 +1,5 @@
+import { View, StyleSheet, Image } from "react-native";
 import { useQuery } from "@tanstack/react-query";
-import { View, StyleSheet } from "react-native";
 import { HomeButton, TimeTable, Notice, Meal, Pass } from "./components";
 import { Apply, Schedule, Meals, My, Bell, Teacher } from "@icons";
 import { hitSlop, queryKeys } from "@/constants";
@@ -33,9 +33,10 @@ export const Home = ({ navigation }) => {
       <View style={{ gap: 20 }}>
         <View style={styles.topContainer}>
           <View style={styles.multiContainer}>
-            <Text type={["heading", 6, "B"]} color={["primary", 300]}>
-              PiCK
-            </Text>
+            <Image
+              source={require("@/assets/Logo.png")}
+              style={{ width: 60, height: 20 }}
+            />
             <View style={styles.headerIconContainer}>
               <My {...headerIconOptions} onPress={() => navigate("My")} />
               <Bell {...headerIconOptions} onPress={() => navigate("개발")} />

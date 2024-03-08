@@ -3,12 +3,11 @@ import { StyleSheet, View } from "react-native";
 import { useEffect, useState } from "react";
 import { weekendMeal, weekendMealMy } from "@/api";
 import MealButton from "./components/MealButton";
-import Move from "@/assets/applicons/move.svg";
-import Out from "@/assets/applicons/out.svg";
 import ApplyBox from "./components/ApplyBox";
 import { Modal, Text } from "@commonents";
 import { queryKeys } from "@/constants";
 import { Layout, Box } from "@layouts";
+import { Move, Out } from "@/assets";
 import { getToday } from "@/utils";
 
 const { month } = getToday();
@@ -21,7 +20,7 @@ export const Apply = () => {
   const { data: weekendMealData } = useQuery({
     queryKey: queryKeys.weekendMeal,
     queryFn: weekendMealMy,
-    select: (res) => res?.data,
+    select: (res) => res?.data.status,
   });
 
   const { mutate: weekendMealMutate } = useMutation({

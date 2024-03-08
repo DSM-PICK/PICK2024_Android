@@ -1,6 +1,8 @@
 export { queryKeys } from "./queryKeys";
 
-export const hitSlop = { top: 10, left: 10, right: 10, bottom: 10 };
+const size = 20;
+
+export const hitSlop = { top: size, left: size, right: size, bottom: size };
 
 export const defaultData = {
   name: "박수현",

@@ -1,9 +1,9 @@
 import { FlatList } from "react-native-gesture-handler";
 import { StyleSheet, View } from "react-native";
 import NoticeBox from "@/screens/Notice/components/NoticeBox";
-import Layout from "@/components/layouts/Layout";
-import { getColors } from "@/utils/colors";
 import { noticeData } from "@/tmpData";
+import { getColors } from "@/utils";
+import { Layout } from "@layouts";
 
 export const Notice = () => {
   return (

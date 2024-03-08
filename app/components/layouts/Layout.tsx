@@ -1,6 +1,6 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
-import { StyleSheet, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 import { HiddenView } from "@layouts";
 import { hitSlop } from "@/constants";
 import { getColors } from "@/utils";
@@ -44,11 +44,14 @@ export default function Layout({
     <SafeAreaView style={styleInline.container}>
       <HiddenView data={name}>
         <View style={styles.headerContainer}>
-          <Back
+          <Pressable
             style={styles.backElement}
             onPress={() => navigation.goBack()}
             hitSlop={hitSlop}
-          />
+          >
+            <Back />
+          </Pressable>
+
           <Text type={fontType}>{name}</Text>
           <HiddenView data={onDone}>
             <View style={styles.doneElement}>

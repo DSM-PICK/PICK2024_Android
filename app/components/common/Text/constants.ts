@@ -70,7 +70,7 @@ export const textStyle: TextStyleType = {
   subTitle: {
     "1": {
       size: 20,
-      lineHeight: 24,
+      lineHeight: 26,
       letterSpacing: defaultSpace,
       weight: {
         M: textWeight.M,
@@ -79,7 +79,7 @@ export const textStyle: TextStyleType = {
     },
     "2": {
       size: 18,
-      lineHeight: 22,
+      lineHeight: 24,
       letterSpacing: defaultSpace,
       weight: {
         M: textWeight.M,
@@ -89,7 +89,7 @@ export const textStyle: TextStyleType = {
     },
     "3": {
       size: 16,
-      lineHeight: 20,
+      lineHeight: 22,
       letterSpacing: defaultSpace,
       weight: {
         M: textWeight.M,
@@ -98,7 +98,7 @@ export const textStyle: TextStyleType = {
     },
     "4": {
       size: 14,
-      lineHeight: 18,
+      lineHeight: 20,
       letterSpacing: defaultSpace,
       weight: textWeight.M,
     },

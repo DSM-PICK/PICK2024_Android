@@ -1,8 +1,6 @@
 import { View } from "react-native";
-import Modal from "../../../components/common/Modal";
-import ScrollPicker from "../../../components/common/ScrollPicker";
-import Text from "../../../components/common/Text";
 import { useState } from "react";
+import { Modal, ScrollPicker, Text } from "@commonents";
 
 interface PropType {
   visible: [boolean, string];

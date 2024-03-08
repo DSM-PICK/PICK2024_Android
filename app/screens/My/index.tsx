@@ -1,14 +1,11 @@
-import { View, StyleSheet } from "react-native";
-import Layout from "@/components/layouts/Layout";
-import InfoBox from "@/screens/My/components/InfoBox";
-import Text from "@/components/common/Text";
-import { getColors } from "@/utils/colors";
-import Box from "@/components/layouts/Box";
-import Modal from "@/components/common/Modal";
-import { useState } from "react";
-import { removeToken } from "@/utils/token";
 import { useQuery } from "@tanstack/react-query";
+import { View, StyleSheet } from "react-native";
+import { useState } from "react";
+import InfoBox from "@/screens/My/components/InfoBox";
+import { removeToken, getColors } from "@/utils";
+import { Text, Modal } from "@commonents";
 import { queryKeys } from "@/constants";
+import { Layout, Box } from "@layouts";
 import { details } from "@/api";
 
 const dateType = ["년", "월", "일"];

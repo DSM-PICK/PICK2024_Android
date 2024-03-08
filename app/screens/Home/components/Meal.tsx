@@ -1,6 +1,6 @@
 import { FlatList } from "react-native-gesture-handler";
 import { View, StyleSheet } from "react-native";
-import Menu from "../../Meal/components/Menu";
+import Menu from "@/screens/Meal/components/Menu";
 import { mealData } from "@/tmpData";
 import { getToday } from "@/utils";
 import { Text } from "@commonents";

@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { View } from "react-native";
-import { Button, Text } from "@/components/common";
+import { Button, Text } from "@commonents";
 
 interface PropType {
   name: string;

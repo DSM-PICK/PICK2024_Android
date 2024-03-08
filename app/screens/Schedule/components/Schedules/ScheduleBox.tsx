@@ -1,6 +1,5 @@
 import { StyleSheet, View } from "react-native";
-import { getColors } from "@/utils/colors";
-import { days } from "@/utils/getToday";
+import { getColors, days } from "@/utils";
 import { Text } from "@commonents";
 import { Box } from "@layouts";
 

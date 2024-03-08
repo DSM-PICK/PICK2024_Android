@@ -1,10 +1,10 @@
 import { View, StyleSheet } from "react-native";
 import { useEffect, useState } from "react";
-import { Arrow } from "@/assets/icons";
 import { hitSlop } from "@/constants";
 import { getToday } from "@/utils";
 import { Text } from "@commonents";
 import { Box } from "@layouts";
+import { Arrow } from "@icons";
 import Weeks from "./Weeks";
 
 interface PropType {

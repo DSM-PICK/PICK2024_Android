@@ -1,5 +1,5 @@
 import { StyleSheet, View } from "react-native";
-import { Box } from "@/components/layouts";
+import { Box, HiddenView } from "@layouts";
 import Move from "./Move";
 import Home from "./Home";
 import Out from "./Out";
@@ -23,16 +23,15 @@ export default function Pass({ visible, type, data }: PropType) {
   end_time = end_time?.split(":").splice(0, 2).join(":");
   start_time = start_time?.split(":").splice(0, 2).join(":");
 
-  if (visible) {
-    return (
+  return (
+    <HiddenView data={visible}>
       <Box>
         <View style={styles.container}>
           {Types[type]({ username, end_time, start_time, classroom })}
         </View>
       </Box>
-    );
-  }
-  return <></>;
+    </HiddenView>
+  );
 }
 
 const styles = StyleSheet.create({

@@ -3,6 +3,7 @@ import {
   View,
   StyleSheet,
   TouchableWithoutFeedback,
+  Platform,
 } from "react-native";
 import {
   NotoSans_400Regular,
@@ -11,10 +12,10 @@ import {
   useFonts,
 } from "@expo-google-fonts/noto-sans";
 import { useState } from "react";
-import { colors } from "@/utils/colors/contant";
 import { textStyle } from "./Text/constants";
 import { EyeOff, EyeOn } from "@icons";
 import { HiddenView } from "@layouts";
+import { colors } from "@/utils";
 
 type ChangeEventType = {
   text: string;
@@ -64,10 +65,10 @@ export default function Input({
     return (
       <View
         style={[
-          active && styles.active,
           disabled && styles.disabled,
           error && styles.error,
           styles.container,
+          active && styles.active,
         ]}
       >
         <TextInput
@@ -85,9 +86,13 @@ export default function Input({
           numberOfLines={multiLine || 1}
         />
         <HiddenView data={password}>
-          <TouchableWithoutFeedback onPress={() => setVisible(!visible)}>
-            {visible ? <EyeOn {...sizes} /> : <EyeOff {...sizes} />}
-          </TouchableWithoutFeedback>
+          {/* <TouchableWithoutFeedback onPress={() => setVisible(!visible)}> */}
+          {visible ? (
+            <EyeOn {...sizes} onPress={() => setVisible(!visible)} />
+          ) : (
+            <EyeOff {...sizes} onPress={() => setVisible(!visible)} />
+          )}
+          {/* </TouchableWithoutFeedback> */}
         </HiddenView>
       </View>
     );
@@ -100,7 +105,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: 16,
-    paddingVertical: 5,
+    paddingVertical: Platform.OS === "ios" ? 10 : 5,
     borderRadius: 4,
     borderWidth: 1,
     width: "100%",

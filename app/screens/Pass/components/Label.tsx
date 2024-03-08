@@ -1,6 +1,6 @@
 import { View } from "react-native";
-import Text from "@/components/common/Text";
-import Box from "@/components/layouts/Box";
+import { Text } from "@commonents";
+import { Box } from "@layouts";
 
 interface PropType {
   title: string;

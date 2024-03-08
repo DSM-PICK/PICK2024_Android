@@ -1,10 +1,10 @@
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { StyleSheet, View } from "react-native";
-import { New, NoticeIcon } from "@/assets/icons";
-import { getDiff } from "@/utils/getDiff";
-import Text from "../../../components/common/Text";
-import Box from "../../../components/layouts/Box";
+import { New, NoticeIcon } from "@icons";
+import { Text } from "@commonents";
+import { getDiff } from "@/utils";
+import { Box } from "@layouts";
 
 interface PropType {
   title: string;

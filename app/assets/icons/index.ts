@@ -1,29 +1,13 @@
-import Apply from "./apply.svg";
-import Bell from "./bell.svg";
-import EyeOff from "./eyeOff.svg";
-import EyeOn from "./eyeOn.svg";
-import Meals from "./meal.svg";
-import My from "./my.svg";
-import Schedule from "./schedule.svg";
-import NoticeIcon from "./notice.svg";
-import New from "./new.svg";
-import Back from "./back.svg";
-import Photo from "./photo.svg";
-import Arrow from "./arrow.svg";
-import Teacher from "./teacher.svg";
-
-export {
-  Apply,
-  Bell,
-  EyeOff,
-  EyeOn,
-  Meals,
-  My,
-  Schedule,
-  NoticeIcon,
-  New,
-  Back,
-  Photo,
-  Arrow,
-  Teacher,
-};
+export { default as Schedule } from "./schedule.svg";
+export { default as NoticeIcon } from "./notice.svg";
+export { default as Teacher } from "./teacher.svg";
+export { default as EyeOff } from "./eyeOff.svg";
+export { default as Arrow } from "./arrow.svg";
+export { default as Photo } from "./photo.svg";
+export { default as EyeOn } from "./eyeOn.svg";
+export { default as Apply } from "./apply.svg";
+export { default as Meals } from "./meal.svg";
+export { default as Bell } from "./bell.svg";
+export { default as Back } from "./back.svg";
+export { default as New } from "./new.svg";
+export { default as My } from "./my.svg";

@@ -1,5 +1,5 @@
 import { StyleSheet, View } from "react-native";
-import Text from "../../../components/common/Text";
+import { Text } from "@commonents";
 
 interface PropType {
   type: "name" | "birth" | "num" | "id";

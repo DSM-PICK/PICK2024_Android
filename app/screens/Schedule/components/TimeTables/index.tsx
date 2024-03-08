@@ -1,9 +1,9 @@
 import { FlatList } from "react-native-gesture-handler";
 import { View } from "react-native";
 import { useState } from "react";
-import { getToday, days } from "@/utils/getToday";
-import { Carousel } from "@/components/layouts";
 import { moreTimeTableData } from "@/tmpData";
+import { getToday, days } from "@/utils";
+import { Carousel } from "@layouts";
 import { Text } from "@commonents";
 import Subject from "./Subject";
 

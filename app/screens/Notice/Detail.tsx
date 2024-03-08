@@ -1,8 +1,8 @@
-import Layout from "@/components/layouts/Layout";
-import Text from "@/components/common/Text";
-import { noticeData } from "@/tmpData";
-import { getColors } from "@/utils/colors";
 import { StyleSheet, View } from "react-native";
+import { noticeData } from "@/tmpData";
+import { getColors } from "@/utils";
+import { Text } from "@commonents";
+import { Layout } from "@layouts";
 
 export const DetailNotice = ({ route }) => {
   const { id } = route.params;
