@@ -19,7 +19,7 @@ export const checkApply = async () => {
     .get(`${path.earlyReturn}/my`)
     .then((res) => res.data)
     .catch(() => undefined);
-  if (move || out?.data || earlyReturn) {
+  if (move || out || earlyReturn) {
     return (
       (move && ["move", move]) ||
       (out && ["out", out]) ||
