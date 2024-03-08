@@ -1,9 +1,10 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { enableScreens } from "react-native-screens";
 import { useEffect, useRef, useState } from "react";
-import { Animated, Image } from "react-native";
 import Navigation from "@/navigation/Navigation";
-import { getToken } from "@/utils/token";
+import { Animated, Image } from "react-native";
+import { ToastManager } from "@commonents";
+import { getToken } from "@/utils";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -61,6 +62,7 @@ export default function App() {
     return (
       <QueryClientProvider client={queryClient}>
         <Navigation auth={!!token} />
+        <ToastManager />
         <Loading />
       </QueryClientProvider>
     );
