@@ -1,7 +1,9 @@
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useFocusEffect } from "@react-navigation/native";
 import { View, StyleSheet, Image } from "react-native";
-import { useQuery } from "@tanstack/react-query";
+import { useCallback } from "react";
 import { HomeButton, TimeTable, Notice, Meal, Pass } from "./components";
-import { Apply, Schedule, Meals, My, Bell, Teacher } from "@icons";
+import { Apply, Schedule, Meals, My, Teacher } from "@icons";
 import { hitSlop, queryKeys } from "@/constants";
 import { Carousel, Layout } from "@layouts";
 import { checkApply, simple } from "@/api";
@@ -12,9 +14,20 @@ const buttonIconSize = { width: 30, height: 30 };
 const texts = ["학년 ", "반 ", "번 ", ""];
 
 export const Home = ({ navigation }) => {
+  const queryClient = useQueryClient();
+
+  useFocusEffect(
+    useCallback(() => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.anyApply });
+    }, [])
+  );
+
   const { data: applyData } = useQuery({
     queryKey: queryKeys.anyApply,
     queryFn: checkApply,
+    select: (res) => {
+      return res;
+    },
   });
 
   const { data: simpleData } = useQuery({
@@ -37,10 +50,7 @@ export const Home = ({ navigation }) => {
               source={require("@/assets/Logo.png")}
               style={{ width: 60, height: 20 }}
             />
-            <View style={styles.headerIconContainer}>
-              <My {...headerIconOptions} onPress={() => navigate("My")} />
-              <Bell {...headerIconOptions} onPress={() => navigate("개발")} />
-            </View>
+            <My {...headerIconOptions} onPress={() => navigate("My")} />
           </View>
           <Text type={["subTitle", 2, "B"]}>
             {simpleData?.map((item, index) => item + texts[index])}
@@ -58,7 +68,6 @@ export const Home = ({ navigation }) => {
             <Pass
               visible={!!applyData}
               type={applyData[0]}
-              name={applyData[1]?.username}
               data={applyData && applyData[1]}
             />
           )}

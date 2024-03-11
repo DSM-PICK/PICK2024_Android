@@ -7,7 +7,6 @@ import Out from "./Out";
 interface PropType {
   visible: boolean;
   type: string;
-  name: string;
   data: any;
 }
 
