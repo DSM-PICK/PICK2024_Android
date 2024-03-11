@@ -6,7 +6,7 @@ import MealButton from "./components/MealButton";
 import ApplyBox from "./components/ApplyBox";
 import { Modal, Text } from "@commonents";
 import { queryKeys } from "@/constants";
-import { Layout, Box } from "@layouts";
+import { Layout, Box, HiddenView } from "@layouts";
 import { Move, Out } from "@/assets";
 import { getToday } from "@/utils";
 
@@ -65,21 +65,23 @@ export const Apply = () => {
             </View>
           </Box>
         </View>
-        <View style={styles.gapContainer}>
-          <ApplyBox
-            date="오늘"
-            title="교실 이동"
-            to="교실이동"
-            icon={<Move />}
-          />
-          <ApplyBox date="오늘" title="외출" to="외출" icon={<Out />} />
-          <ApplyBox
-            date="오늘"
-            title="조기 귀가"
-            to="조기귀가"
-            icon={<Out />}
-          />
-        </View>
+        <HiddenView data={!queryClient.getQueryData(queryKeys.anyApply)}>
+          <View style={styles.gapContainer}>
+            <ApplyBox
+              date="오늘"
+              title="교실 이동"
+              to="교실이동"
+              icon={<Move />}
+            />
+            <ApplyBox date="오늘" title="외출" to="외출" icon={<Out />} />
+            <ApplyBox
+              date="오늘"
+              title="조기 귀가"
+              to="조기귀가"
+              icon={<Out />}
+            />
+          </View>
+        </HiddenView>
       </View>
 
       <Modal
