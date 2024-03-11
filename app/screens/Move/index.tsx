@@ -1,18 +1,18 @@
+import { useMutation } from "@tanstack/react-query";
 import { FlatList } from "react-native-gesture-handler";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { StyleSheet, View } from "react-native";
 import { useState } from "react";
 import { ClassButton, FloorButton } from "./components";
 import { Modal, Text } from "@commonents";
-import { queryKeys } from "@/constants";
-import { floorData } from "@/tmpData";
+import { floorData } from "./floorData";
+import { useToast } from "@/utils";
 import { Layout } from "@layouts";
 import { moveClass } from "@/api";
 
 const floors = Array.from(new Array(5).keys()).map((i) => i + 1);
 
 export const Move = ({ navigation }) => {
-  const queryClient = useQueryClient();
+  const toast = useToast();
   const [width, setWidth] = useState(0);
   const [visible, setVisible] = useState(false);
   const [selected, setSelected] = useState({
@@ -25,9 +25,9 @@ export const Move = ({ navigation }) => {
   const { mutate: moveMutate } = useMutation({
     mutationFn: () => moveClass(selected),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.anyApply });
       setVisible(true);
     },
+    onError: () => toast.error("오류가 발생했습니다"),
   });
 
   const Renderor = ({ item }) => (
@@ -56,9 +56,11 @@ export const Move = ({ navigation }) => {
           <FlatList
             onLayout={(event) => setWidth(event.nativeEvent.layout.width)}
             contentContainerStyle={styles.classButtonContainer}
+            columnWrapperStyle={styles.classButtonContainer}
             data={floorData[selected.floor - 1]}
             keyExtractor={(_, index) => index.toString()}
             renderItem={Renderor}
+            numColumns={3}
           />
         </View>
       </View>
@@ -87,8 +89,6 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   classButtonContainer: {
-    flexDirection: "row",
     gap: 10,
-    flexWrap: "wrap",
   },
 });
