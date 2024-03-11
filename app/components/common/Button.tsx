@@ -52,7 +52,7 @@ export default function Button({
   const style = {
     width: size !== "custom" ? sizes[size][0] : customSize,
     backgroundColor: getColors(disabled ? ["neutral", 600] : color),
-    minWidth: children.length * 15,
+    minWidth: children.length * 10,
   } as any;
 
   return (
@@ -72,8 +72,8 @@ export default function Button({
 const styles = StyleSheet.create({
   container: {
     padding: 10,
-    paddingHorizontal: 15,
-    borderRadius: 8,
+    paddingHorizontal: 14,
+    borderRadius: 3,
     alignItems: "center",
   },
 });
