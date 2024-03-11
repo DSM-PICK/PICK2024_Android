@@ -6,4 +6,5 @@ export const path = {
   out: "/application",
   user: "/user",
   notice: "/notice",
+  schedule: "/schedule",
 };
