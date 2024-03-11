@@ -5,4 +5,5 @@ export const queryKeys = {
   teacher: ["teacher"],
   anyApply: ["anyApply"],
   weekendMeal: ["weekendMeal"],
+  schedule: ["schedule"],
 };

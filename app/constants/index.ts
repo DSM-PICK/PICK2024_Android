@@ -1,6 +1,6 @@
 export { queryKeys } from "./queryKeys";
 
-const size = 20;
+const size = 10;
 
 export const hitSlop = { top: size, left: size, right: size, bottom: size };
 
@@ -12,3 +12,18 @@ export const defaultData = {
   num: 8,
   account_id: "soohyeon",
 };
+
+export const months = [
+  "JANUARY",
+  "FEBRUARY",
+  "MARCH",
+  "APRIL",
+  "MAY",
+  "JUNE",
+  "JULY",
+  "AUGUST",
+  "SEPTEMBER",
+  "OCTOBER",
+  "NOVEMBER",
+  "DECEMBER",
+];
