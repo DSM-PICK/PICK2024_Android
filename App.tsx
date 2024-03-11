@@ -3,6 +3,7 @@ import { enableScreens } from "react-native-screens";
 import { useEffect, useRef, useState } from "react";
 import Navigation from "@/navigation/Navigation";
 import { Animated, Image } from "react-native";
+import { StatusBar } from "expo-status-bar";
 import { ToastManager } from "@commonents";
 import { getToken } from "@/utils";
 
@@ -64,6 +65,7 @@ export default function App() {
         <Navigation auth={!!token} />
         <ToastManager />
         <Loading />
+        <StatusBar style="dark" />
       </QueryClientProvider>
     );
   }
