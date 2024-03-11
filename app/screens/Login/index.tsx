@@ -27,9 +27,11 @@ export const Login = () => {
   const { mutate: loginFn } = useMutation({
     mutationFn: () => login(data),
     onError: (err: any) => {
-      console.log(err);
-      if (err.response.data.status === 404) {
+      const { status } = err?.response.data;
+      if (status === 404) {
         setError({ ...error, account_id: true });
+      } else if (status === 401) {
+        setError({ ...error, password: true });
       }
     },
     onSuccess: async (res: AxiosResponse) => {
