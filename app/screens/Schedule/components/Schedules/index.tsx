@@ -1,12 +1,12 @@
 import { FlatList } from "react-native-gesture-handler";
 import { StyleSheet, View } from "react-native";
 import { useState } from "react";
-import { ScheduleBox } from "./ScheduleBox";
-import { Calendar, Text } from "@commonents";
-import { getToday } from "@/utils";
 import { useQuery } from "@tanstack/react-query";
+import { Calendar, Text } from "@commonents";
+import { ScheduleBox } from "./ScheduleBox";
 import { queryKeys } from "@/constants";
 import { getSchedule } from "@/api";
+import { getToday } from "@/utils";
 
 const { year, month } = getToday();
 
@@ -17,12 +17,13 @@ export default function Schedules() {
     queryKey: [queryKeys.schedule, date],
     queryFn: () => getSchedule(date[0], date[1]),
     select: (res) => res?.data,
+    placeholderData: (prev) => prev,
   });
 
   return (
     <View style={styles.container}>
       <Calendar
-        picks={scheData?.map((i: any) => parseInt(i.date.split("-")[2]))}
+        picks={scheData?.map((i) => i.day)}
         onMove={({ year, month }) => setDate([year, month])}
       />
       {isLoading ? (

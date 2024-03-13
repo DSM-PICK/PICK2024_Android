@@ -4,7 +4,7 @@ import { Text } from "@commonents";
 import { Box } from "@layouts";
 
 type ItemType = {
-  date: string;
+  day: string;
   event_name: string;
   id: string;
 };
@@ -15,8 +15,7 @@ interface PropType {
 }
 
 export const ScheduleBox = ({ item, date }: PropType) => {
-  const dateToNum = item.date?.split("-")[2];
-  const _date = new Date(`${date[0]}-${date[1]}-${dateToNum}`);
+  const _date = new Date(`${date[0]}-${date[1]}-${item.day}`);
 
   return (
     <View style={{ width: "100%" }}>
@@ -24,7 +23,7 @@ export const ScheduleBox = ({ item, date }: PropType) => {
         <View style={styles.container}>
           <View style={styles.dateContainer}>
             <View style={styles.lineElement} />
-            <Text type={["subTitle", 2, "M"]}>{dateToNum}</Text>
+            <Text type={["subTitle", 2, "M"]}>{item.day}</Text>
             <Text type={["body", 3]}>{days[_date.getDay()]}요일</Text>
           </View>
           <Text type={["subTitle", 2, "M"]}>{item.event_name}</Text>
