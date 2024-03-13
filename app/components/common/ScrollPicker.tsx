@@ -18,11 +18,10 @@ interface PropType {
 }
 
 export default function ScrollPicker({ items, onScroll, id }: PropType) {
-  const [height, setHeight] = useState(undefined);
   const [before, setBefore] = useState(0);
 
   const handleScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
-    const index = Math.ceil(e.nativeEvent.contentOffset.y / height);
+    const index = Math.ceil(e.nativeEvent.contentOffset.y / 40);
     if (index !== before) {
       setBefore(index);
       Haptics.selectionAsync();
@@ -36,7 +35,7 @@ export default function ScrollPicker({ items, onScroll, id }: PropType) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.listContainer} pointerEvents="none" />
+      <View style={[styles.listContainer]} pointerEvents="none" />
       <FlatList
         onScroll={handleScroll}
         data={items}
@@ -46,25 +45,20 @@ export default function ScrollPicker({ items, onScroll, id }: PropType) {
         }}
         overScrollMode="never"
         hitSlop={hitSlop}
-        renderItem={({ item, index }) => (
+        renderItem={({ item }) => (
           <View
-            onLayout={(e) => {
-              const { height: _height } = e.nativeEvent.layout;
-              if (index === 0) {
-                height !== _height && setHeight(_height);
-              }
+            style={{
+              height: 40,
+              justifyContent: "center",
+              alignItems: "center",
             }}
+            onStartShouldSetResponder={(): boolean => true}
           >
-            <View
-              style={{ marginVertical: 10, alignItems: "center" }}
-              onStartShouldSetResponder={(): boolean => true}
-            >
-              <Text type={["subTitle", 3, "M"]}>{item}</Text>
-            </View>
+            <Text type={["subTitle", 3, "M"]}>{item}</Text>
           </View>
         )}
         removeClippedSubviews
-        snapToInterval={height || 0}
+        snapToInterval={40}
         showsVerticalScrollIndicator={false}
       />
     </View>
