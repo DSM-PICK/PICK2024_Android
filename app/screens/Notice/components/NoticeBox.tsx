@@ -9,12 +9,13 @@ import { Box } from "@layouts";
 interface PropType {
   title: string;
   date: string;
-  index: number;
+  id: string;
 }
 
-export default function NoticeBox({ title, date, index }: PropType) {
+export default function NoticeBox({ title, date, id }: PropType) {
   const navigation = useNavigation();
-  const path = ["상세공지", { id: index }];
+  const path = ["상세공지", { id: id }];
+  const _date = getDiff(date);
 
   return (
     <Box rounded="none">
@@ -26,10 +27,10 @@ export default function NoticeBox({ title, date, index }: PropType) {
         <View style={{ gap: 5 }}>
           <View style={styles.titleContainer}>
             <Text type={["body", 2]}>{title}</Text>
-            {!!!index && <New />}
+            {_date === "오늘" && <New />}
           </View>
           <Text type={["body", 2]} color={["neutral", 200]}>
-            {getDiff(date)}
+            {_date}
           </Text>
         </View>
       </TouchableOpacity>

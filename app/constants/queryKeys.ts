@@ -6,4 +6,6 @@ export const queryKeys = {
   anyApply: ["anyApply"],
   weekendMeal: ["weekendMeal"],
   schedule: ["schedule"],
+  meal: ["meal"],
+  notice: ["notice"],
 };

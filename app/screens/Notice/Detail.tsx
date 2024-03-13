@@ -3,29 +3,42 @@ import { noticeData } from "@/tmpData";
 import { getColors } from "@/utils";
 import { Text } from "@commonents";
 import { Layout } from "@layouts";
+import { useQuery } from "@tanstack/react-query";
+import { queryKeys } from "@/constants";
+import { detail } from "@/api";
 
 export const DetailNotice = ({ route }) => {
   const { id } = route.params;
-  const data = noticeData[id];
+
+  const { data: detailData } = useQuery({
+    queryKey: [queryKeys.notice, id],
+    queryFn: () => detail(id),
+    select: (res) => {
+      console.log(res);
+      return res?.data;
+    },
+  });
 
   return (
     <Layout
       name={
-        data.title.length > 11 ? data.title.slice(0, 11) + "..." : data.title
+        detailData?.title.length > 11
+          ? detailData?.title.slice(0, 11) + "..."
+          : detailData?.title
       }
     >
       <View style={styles.container}>
         <View style={{ gap: 5 }}>
           <Text type={["subTitle", 2, "M"]} color={["neutral", 50]}>
-            {data.title}
+            {detailData?.title}
           </Text>
           <Text type={["caption", 2]} color={["neutral", 400]}>
-            {data.date}
+            {detailData?.create_at}
           </Text>
         </View>
         <View style={styles.lineElement} />
-        <Text type={["caption", 3]} color={["neutral", 50]}>
-          {data.content}
+        <Text type={["caption", 2]} color={["neutral", 50]}>
+          {detailData?.content}
         </Text>
       </View>
     </Layout>

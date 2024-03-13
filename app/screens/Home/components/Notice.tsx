@@ -2,19 +2,29 @@ import { useNavigation } from "@react-navigation/native";
 import { FlatList } from "react-native-gesture-handler";
 import { View, StyleSheet } from "react-native";
 import NoticeBox from "@/screens/Notice/components/NoticeBox";
-import { noticeData } from "@/tmpData";
 import { getColors } from "@/utils";
 import { Text } from "@commonents";
 import { Box } from "@layouts";
+import { queryKeys } from "@/constants";
+import { notice } from "@/api";
+import { useQuery } from "@tanstack/react-query";
 
 export default function Notice() {
   const navigation = useNavigation();
   const nagivating = () => navigation.navigate("공지" as never);
 
+  const { data: noticeData } = useQuery({
+    queryKey: queryKeys.notice,
+    queryFn: notice,
+    select: (res) => {
+      return res?.data;
+    },
+  });
+
   const Separator = () => <View style={styles.separatorElement} />;
 
-  const Renderor = ({ item, index }) => (
-    <NoticeBox title={item.title} date={item.date} index={index} />
+  const Renderor = ({ item }) => (
+    <NoticeBox title={item.title} date={item.create_at} id={item.id} />
   );
 
   return (
