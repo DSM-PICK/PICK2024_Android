@@ -8,9 +8,11 @@ export const instance = axios.create({
 
 instance.interceptors.request.use(
   async (res) => {
-    const { accessToken } = await getToken();
-    if (accessToken) {
+    const { accessToken, refreshToken } = await getToken();
+    if (accessToken && res.url !== "/user/refresh") {
       res.headers["Authorization"] = "Bearer " + accessToken;
+    } else if (res.url === "/user/refresh") {
+      res.headers["X-Refresh-Token"] = "Bearer" + refreshToken;
     }
     return res;
   },
@@ -24,6 +26,6 @@ instance.interceptors.response.use(
     return res;
   },
   (err) => {
-    throw err;
+    if (err.response.status) throw err;
   }
 );

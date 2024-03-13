@@ -18,3 +18,9 @@ export interface loginPropType {
   account_id: string;
   password: string;
 }
+
+export interface DatePropType {
+  year: number;
+  month: number;
+  date: number;
+}
