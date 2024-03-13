@@ -7,4 +7,5 @@ export const path = {
   user: "/user",
   notice: "/notice",
   schedule: "/schedule",
+  meal: "/meal",
 };

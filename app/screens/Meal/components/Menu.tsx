@@ -3,17 +3,15 @@ import { Text } from "@commonents";
 import { Box } from "@layouts";
 
 interface PropType {
-  time: string;
   menu: any[];
 }
 
-const timeSet = {
-  breakFast: "조식",
-  lunch: "중식",
-  dinner: "석식",
-};
+const timeSet = { breakfast: "조식", lunch: "중식", dinner: "석식" };
 
-export default function Menu({ time, menu }: PropType) {
+export default function Menu({ menu }: PropType) {
+  let [time, _menu] = menu;
+  _menu = _menu.filter((item: string) => item !== "");
+
   return (
     <Box color={["primary", 1000]}>
       <View style={styles.container}>
@@ -23,11 +21,17 @@ export default function Menu({ time, menu }: PropType) {
           </Text>
         </View>
         <View style={styles.menuContainer}>
-          {menu.map((item, index) => (
-            <Text key={index} type={["body", 1]}>
-              {item}
-            </Text>
-          ))}
+          {_menu.length !== 0 ? (
+            _menu
+              .filter((item: string) => item !== "")
+              .map((item: string, index: number) => (
+                <Text key={index} type={["body", 1]}>
+                  {item}
+                </Text>
+              ))
+          ) : (
+            <Text type={["body", 1]}>급식이 없습니다</Text>
+          )}
         </View>
       </View>
     </Box>
@@ -42,10 +46,10 @@ const styles = StyleSheet.create({
   dateContainer: {
     flexDirection: "row",
     justifyContent: "center",
-    width: "50%",
+    width: "45%",
   },
   menuContainer: {
-    width: "50%",
+    width: "55%",
     gap: 10,
   },
 });

@@ -3,3 +3,4 @@ export * from "./apply";
 export * from "./user";
 export * from "./notice";
 export * from "./schedule";
+export * from "./meal";

@@ -1,16 +1,29 @@
 import { FlatList } from "react-native-gesture-handler";
+import { useQuery } from "@tanstack/react-query";
 import { View, StyleSheet } from "react-native";
 import Menu from "@/screens/Meal/components/Menu";
-import { mealData } from "@/tmpData";
+import { queryKeys } from "@/constants";
 import { getToday } from "@/utils";
 import { Text } from "@commonents";
+import { mealAtDate } from "@/api";
 import { Box } from "@layouts";
 
-const { month, date, day } = getToday();
+const { year, month, date, day } = getToday();
 const today = `${month}월 ${date}일 (${day})`;
 
 export default function Meal() {
-  const Renderor = ({ item }) => <Menu time={item.time} menu={item.menu} />;
+  const Renderor = ({ item }) => (
+    <Menu menu={item.filter((i: string) => i !== "")} />
+  );
+
+  const { data: mealData } = useQuery({
+    queryKey: queryKeys.meal,
+    queryFn: () => mealAtDate({ year, month, date }),
+    select: (res) => {
+      const meals = res?.data.meals;
+      return Object.entries(meals);
+    },
+  });
 
   return (
     <Box height="100%">
