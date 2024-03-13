@@ -1,10 +1,4 @@
-import {
-  TextInput,
-  View,
-  StyleSheet,
-  TouchableWithoutFeedback,
-  Platform,
-} from "react-native";
+import { TextInput, View, StyleSheet, Platform } from "react-native";
 import {
   NotoSans_400Regular,
   NotoSans_500Medium,
@@ -65,10 +59,10 @@ export default function Input({
     return (
       <View
         style={[
-          disabled && styles.disabled,
-          error && styles.error,
           styles.container,
           active && styles.active,
+          error && styles.error,
+          disabled && styles.disabled,
         ]}
       >
         <TextInput
@@ -86,13 +80,11 @@ export default function Input({
           numberOfLines={multiLine || 1}
         />
         <HiddenView data={password}>
-          {/* <TouchableWithoutFeedback onPress={() => setVisible(!visible)}> */}
           {visible ? (
             <EyeOn {...sizes} onPress={() => setVisible(!visible)} />
           ) : (
             <EyeOff {...sizes} onPress={() => setVisible(!visible)} />
           )}
-          {/* </TouchableWithoutFeedback> */}
         </HiddenView>
       </View>
     );
