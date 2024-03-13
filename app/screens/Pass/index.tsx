@@ -30,7 +30,7 @@ export const Pass = ({ route }) => {
 
   return (
     <Layout name="외출증">
-      <View style={{ gap: 20 }}>
+      <View style={{ gap: 10 }}>
         <View style={styles.titleContainer}>
           <Text type={["subTitle", 1, "M"]}>{user}</Text>
           <Text type={["subTitle", 1, "M"]} color={types[type].color}>
@@ -38,7 +38,14 @@ export const Pass = ({ route }) => {
           </Text>
         </View>
         <Box color={["primary", 1200]}>
-          <Image style={styles.qrElement} source={require("@/assets/QR.png")} />
+          <Image
+            style={{
+              width: "100%",
+              aspectRatio: 1,
+              resizeMode: "contain",
+            }}
+            source={{ uri: `data:image/jpeg;base64,${data?.image}` }}
+          />
         </Box>
         <Label title="외출 시간">{time}</Label>
         <Label title="사유">{data.reason}</Label>
