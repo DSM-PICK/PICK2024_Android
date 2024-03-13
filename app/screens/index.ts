@@ -10,5 +10,4 @@ export { Meal } from "./Meal";
 export { Move } from "./Move";
 export { Pass } from "./Pass";
 export { Out } from "./Out";
-export { Dev } from "./Dev";
 export { My } from "./My";
