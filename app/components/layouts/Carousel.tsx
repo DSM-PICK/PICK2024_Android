@@ -15,7 +15,7 @@ const offset = 16;
 interface PropType {
   children: React.ReactElement[];
   height: string;
-  onScroll?: (item: boolean) => void;
+  onScroll?: (item: number) => void;
 }
 
 export default function Carousel({ children, height, onScroll }: PropType) {
@@ -25,7 +25,7 @@ export default function Carousel({ children, height, onScroll }: PropType) {
   const handleScroll = (e: any) => {
     const newPage = Math.ceil(e.nativeEvent.contentOffset.x / (width + gap));
     if (newPage !== page && onScroll) {
-      onScroll(newPage > page);
+      onScroll(newPage);
     }
     setPage(newPage);
   };
@@ -57,7 +57,7 @@ export default function Carousel({ children, height, onScroll }: PropType) {
         renderItem={Renderor}
       />
       <View style={styles.indicatorContainer}>
-        {Array.from(Array(children.length).keys()).map((item) => (
+        {Array.from(Array(children?.length).keys()).map((item) => (
           <View
             key={item}
             style={[

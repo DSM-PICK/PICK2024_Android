@@ -1,15 +1,25 @@
 import { FlatList } from "react-native-gesture-handler";
 import { View, StyleSheet } from "react-native";
-import { timeTableData } from "@/tmpData";
-import { getToday } from "@/utils";
+import { getColors, getToday } from "@/utils";
 import { Text } from "@commonents";
 import Subject from "./Subject";
 import { Box } from "@layouts";
+import { useQuery } from "@tanstack/react-query";
+import { queryKeys } from "@/constants";
+import { todayTimeTable } from "@/api/timetable";
 
 const { month, date, day } = getToday();
 const today = `${month}월 ${date}일 (${day})`;
 
 export default function TimeTable() {
+  const { data: tableData } = useQuery({
+    queryKey: queryKeys.timeTable,
+    queryFn: todayTimeTable,
+    select: (res) => {
+      return res?.data.timetables;
+    },
+  });
+
   return (
     <Box height="100%">
       <View style={styles.container}>
@@ -23,10 +33,22 @@ export default function TimeTable() {
           <FlatList
             overScrollMode="never"
             contentContainerStyle={{ gap: 10 }}
-            data={timeTableData}
-            keyExtractor={(item) => item.index.toString()}
-            renderItem={({ item }) => (
-              <Subject index={item.index} name={item.name} icon={item.icon} />
+            data={tableData}
+            keyExtractor={(_, index) => index.toString()}
+            renderItem={({ item, index }) => (
+              <Subject
+                index={index + 1}
+                name={item.subject_name}
+                icon={
+                  <View
+                    style={{
+                      width: 20,
+                      height: 20,
+                      backgroundColor: getColors(["neutral", 100]),
+                    }}
+                  />
+                }
+              />
             )}
           />
         </View>

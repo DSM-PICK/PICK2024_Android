@@ -8,4 +8,5 @@ export const path = {
   notice: "/notice",
   schedule: "/schedule",
   meal: "/meal",
+  timeTable: "/timetable",
 };

@@ -14,7 +14,6 @@ export const DetailNotice = ({ route }) => {
     queryKey: [queryKeys.notice, id],
     queryFn: () => detail(id),
     select: (res) => {
-      console.log(res);
       return res?.data;
     },
   });

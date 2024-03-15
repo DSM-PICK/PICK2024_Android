@@ -8,4 +8,5 @@ export const queryKeys = {
   schedule: ["schedule"],
   meal: ["meal"],
   notice: ["notice"],
+  timeTable: ["timeTable"],
 };

@@ -26,6 +26,6 @@ instance.interceptors.response.use(
     return res;
   },
   (err) => {
-    if (err.response.status) throw err;
+    throw err;
   }
 );
