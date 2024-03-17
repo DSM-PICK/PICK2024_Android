@@ -1,4 +1,24 @@
+import { days } from "@/constants";
+
 const _date = new Date();
+
+export const getToday = () => {
+  const year = _date.getFullYear();
+  const month = _date.getMonth() + 1;
+  const date = _date.getDate();
+  const day = days[_date.getDay()];
+
+  return { year, month, date, day };
+};
+
+export const getDates = (date: number[]) => {
+  const [year, month] = date;
+
+  const startDay = new Date(year, month - 1, 1).getDay();
+  const endDate = new Date(year, month, 0).getDate();
+
+  return { startDay, endDate };
+};
 
 export const getDiff = (date: string) => {
   const y = _date.getFullYear();

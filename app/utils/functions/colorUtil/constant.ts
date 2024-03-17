@@ -1,4 +1,8 @@
-import { ColorType } from "@/types/color";
+interface ColorType {
+  [key: string]: {
+    [key: string]: string;
+  };
+}
 
 export const colors: ColorType = {
   primary: {
