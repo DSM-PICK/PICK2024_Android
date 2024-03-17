@@ -6,10 +6,9 @@ import {
   useFonts,
 } from "@expo-google-fonts/noto-sans";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
-import { ColorPropType } from "@/types/color";
+import { ColorPropType, getColors, perfectSize } from "@/utils";
 import { textStyle } from "./constants";
 import { hitSlop } from "@/constants";
-import { getColors } from "@/utils";
 
 type WeightType = "B" | "M" | "R";
 type PropTypeType = (string | number)[] | [string, string | number, WeightType];
@@ -45,10 +44,10 @@ export default function Text({
 
   const style: StyleProp<TextStyle> = {
     fontFamily: _weight ? fontFamily[_weight] : fontFamily,
-    fontSize: textSize,
-    letterSpacing: letterSpacing,
+    fontSize: perfectSize(textSize),
+    letterSpacing: perfectSize(letterSpacing),
     color: color && getColors(color),
-    lineHeight: lineHeight,
+    lineHeight: perfectSize(lineHeight),
   };
 
   if (fontsLoaded && !hidden) {

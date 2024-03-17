@@ -1,7 +1,7 @@
 import { View, StyleSheet } from "react-native";
 import { useEffect, useState } from "react";
+import { getToday, perfectSize } from "@/utils";
 import { hitSlop } from "@/constants";
-import { getToday } from "@/utils";
 import { Text } from "@commonents";
 import { Box } from "@layouts";
 import { Arrow } from "@icons";
@@ -36,7 +36,7 @@ export default function Calendar({ picks, onMove, onSelect }: PropType) {
 
   return (
     <Box color={["primary", 1200]}>
-      <View style={{ gap: 10 }}>
+      <View style={{ gap: perfectSize(10) }}>
         <View style={styles.headerContainer}>
           <Arrow onPress={() => handleMove(false)} hitSlop={hitSlop} />
           <Text type={["subTitle", 3, "M"]}>
@@ -64,7 +64,7 @@ export default function Calendar({ picks, onMove, onSelect }: PropType) {
 
 const styles = StyleSheet.create({
   headerContainer: {
-    gap: 10,
+    gap: perfectSize(10),
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",

@@ -6,10 +6,10 @@ import {
   useFonts,
 } from "@expo-google-fonts/noto-sans";
 import { useState } from "react";
+import { colors, perfectSize } from "@/utils";
 import { textStyle } from "./Text/constants";
 import { EyeOff, EyeOn } from "@icons";
 import { HiddenView } from "@layouts";
-import { colors } from "@/utils";
 
 type ChangeEventType = {
   text: string;
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingHorizontal: 16,
+    paddingHorizontal: perfectSize(16),
     paddingVertical: Platform.OS === "ios" ? 10 : 5,
     borderRadius: 4,
     borderWidth: 1,
@@ -118,8 +118,8 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     color: neutral[50],
-    fontSize: size,
-    letterSpacing: letterSpacing,
+    fontSize: perfectSize(size),
+    letterSpacing: perfectSize(letterSpacing),
     fontFamily: weight as any,
   },
 });

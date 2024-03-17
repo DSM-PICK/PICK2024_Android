@@ -1,6 +1,7 @@
 import { Modal as ModalView, StyleSheet, View } from "react-native";
 import React from "react";
 import { Box, HiddenView } from "@layouts";
+import { perfectSize } from "@/utils";
 import { Button } from "@commonents";
 
 interface PropType {
@@ -85,12 +86,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     height: "100%",
-    padding: 20,
+    padding: perfectSize(20),
     backgroundColor: "rgba(0, 0, 0, 0.8)",
   },
   contentContainer: {
     alignItems: "center",
-    gap: 10,
+    gap: perfectSize(10),
   },
   buttonContainer: {
     flexDirection: "row",

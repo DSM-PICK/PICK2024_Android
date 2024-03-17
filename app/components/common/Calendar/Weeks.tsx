@@ -1,8 +1,8 @@
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { StyleSheet, View } from "react-native";
-import { getColors, getDates, getToday, days } from "@/utils";
+import { getColors, getDates, getToday, perfectSize } from "@/utils";
+import { days } from "@/constants";
 import { Text } from "@commonents";
-
 interface PropType {
   date: number[];
   setSelected: ([]) => void;
@@ -76,14 +76,14 @@ export default function Weeks({
 
 const styles = StyleSheet.create({
   dayContainer: {
-    width: 45,
-    height: 45,
+    width: perfectSize(40),
+    height: perfectSize(40),
     justifyContent: "center",
     alignItems: "center",
   },
   weekLineContainer: {
     flexDirection: "row",
-    gap: 2,
+    gap: perfectSize(2),
   },
   pickContainer: {
     borderRadius: 100,

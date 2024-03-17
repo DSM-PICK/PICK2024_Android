@@ -1,9 +1,9 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import { Pressable, StyleSheet, View } from "react-native";
+import { getColors, perfectSize } from "@/utils";
 import { HiddenView } from "@layouts";
 import { hitSlop } from "@/constants";
-import { getColors } from "@/utils";
 import { Text } from "@commonents";
 import { Back } from "@icons";
 
@@ -20,8 +20,8 @@ const fontType = ["subTitle", 3, "M"];
 
 export default function Layout({
   children,
-  home,
   name,
+  home,
   isDone,
   onDone,
   noHorizontalPadding,
@@ -32,11 +32,11 @@ export default function Layout({
     container: {
       flex: 1,
       backgroundColor: !!home ? getColors(["primary", 1000]) : "white",
-      paddingVertical: !!!name && 25,
+      paddingVertical: !!!name && perfectSize(25),
     },
     childrenElement: {
       flex: 1,
-      paddingHorizontal: !noHorizontalPadding && 25,
+      paddingHorizontal: !noHorizontalPadding && perfectSize(25),
     },
   };
 
@@ -73,9 +73,9 @@ export default function Layout({
 
 const styles = StyleSheet.create({
   headerContainer: {
-    paddingHorizontal: 25,
-    paddingVertical: 10,
-    marginVertical: 10,
+    paddingHorizontal: perfectSize(25),
+    paddingVertical: perfectSize(10),
+    marginVertical: perfectSize(10),
     width: "100%",
     flexDirection: "row",
     justifyContent: "center",
@@ -83,10 +83,10 @@ const styles = StyleSheet.create({
   },
   backElement: {
     position: "absolute",
-    left: 25,
+    left: perfectSize(25),
   },
   doneElement: {
     position: "absolute",
-    right: 25,
+    right: perfectSize(25),
   },
 });
