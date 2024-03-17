@@ -6,6 +6,7 @@ import { Calendar, Text } from "@commonents";
 import { queryKeys } from "@/constants";
 import { getToday } from "@/utils";
 import { today } from "@/api";
+import { TeacherBox } from "./components";
 
 const { year, month, date: _date } = getToday();
 
@@ -37,18 +38,9 @@ export const Teacher = () => {
             <Text type={["body", 1]}>자습감독이 없습니다.</Text>
           </HiddenView>
           <View style={{ gap: 30 }}>
-            {teacherData?.map(
-              (item: any) =>
-                item !== "" && (
-                  <View
-                    key={item.floor}
-                    style={{ flexDirection: "row", gap: 20 }}
-                  >
-                    <Text type={["label", 1]}>{item.floor}층</Text>
-                    <Text type={["label", 1]}>{item.teacher_name} 선생님</Text>
-                  </View>
-                )
-            )}
+            {teacherData?.map((item: any) => (
+              <TeacherBox item={item} />
+            ))}
           </View>
         </Box>
       </View>
