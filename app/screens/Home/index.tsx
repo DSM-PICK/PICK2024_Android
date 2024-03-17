@@ -4,7 +4,7 @@ import { View, StyleSheet, Image } from "react-native";
 import { useCallback } from "react";
 import { HomeButton, TimeTable, Notice, Meal, Pass } from "./components";
 import { Apply, Schedule, Meals, My, Teacher } from "@icons";
-import { hitSlop, queryKeys } from "@/constants";
+import { defaultData, hitSlop, queryKeys } from "@/constants";
 import { Carousel, Layout } from "@layouts";
 import { checkApply, simple } from "@/api";
 import { Text } from "@commonents";
@@ -12,6 +12,7 @@ import { Text } from "@commonents";
 const headerIconOptions = { hitSlop: hitSlop, width: 20 };
 const buttonIconSize = { width: 30, height: 30 };
 const texts = ["학년 ", "반 ", "번 ", ""];
+const { grade, class_num, num, name } = defaultData;
 
 export const Home = ({ navigation }) => {
   const queryClient = useQueryClient();
@@ -37,6 +38,7 @@ export const Home = ({ navigation }) => {
       const { class_num, grade, name, num } = res?.data;
       return [grade, class_num, num, name];
     },
+    placeholderData: () => [grade, class_num, num, name] as any,
   });
 
   const navigate = (to: string) => navigation.navigate(to);

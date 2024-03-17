@@ -6,7 +6,7 @@ import Subject from "./Subject";
 import { Box } from "@layouts";
 import { useQuery } from "@tanstack/react-query";
 import { queryKeys } from "@/constants";
-import { todayTimeTable } from "@/api/timetable";
+import { todayTimeTable } from "@/api/schedule/timetable";
 
 const { month, date, day } = getToday();
 const today = `${month}월 ${date}일 (${day})`;
@@ -34,6 +34,9 @@ export default function TimeTable() {
             overScrollMode="never"
             contentContainerStyle={{ gap: 10 }}
             data={tableData}
+            ListEmptyComponent={() => (
+              <Text type={["body", 2]}>시간표가 없습니다</Text>
+            )}
             keyExtractor={(_, index) => index.toString()}
             renderItem={({ item, index }) => (
               <Subject
