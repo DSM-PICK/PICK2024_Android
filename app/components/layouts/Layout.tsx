@@ -2,19 +2,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import { Pressable, StyleSheet, View } from "react-native";
 import { getColors, perfectSize } from "@/utils";
+import { PropType } from "LayoutType";
 import { HiddenView } from "@layouts";
 import { hitSlop } from "@/constants";
 import { Text } from "@commonents";
 import { Back } from "@icons";
-
-interface PropTypes {
-  children: React.ReactNode;
-  name?: string;
-  home?: boolean;
-  isDone?: boolean;
-  onDone?: () => void;
-  noHorizontalPadding?: boolean;
-}
 
 const fontType = ["subTitle", 3, "M"];
 
@@ -25,7 +17,7 @@ export default function Layout({
   isDone,
   onDone,
   noHorizontalPadding,
-}: PropTypes) {
+}: PropType) {
   const navigation = useNavigation();
 
   const styleInline = {

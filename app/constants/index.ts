@@ -1,4 +1,5 @@
 export { queryKeys } from "./queryKeys";
+export * from "./components";
 
 const size = 10;
 

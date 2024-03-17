@@ -7,16 +7,11 @@ import {
 } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { useState } from "react";
+import { PropType } from "CarouselType";
 import { getColors } from "@/utils";
 
 const gap = 16;
 const offset = 16;
-
-interface PropType {
-  children: React.ReactElement[];
-  height: string;
-  onScroll?: (item: number) => void;
-}
 
 export default function Carousel({ children, height, onScroll }: PropType) {
   const [width, setWidth] = useState(0);
@@ -30,16 +25,16 @@ export default function Carousel({ children, height, onScroll }: PropType) {
     setPage(newPage);
   };
 
-  const style: StyleProp<ViewStyle> = {
+  const styleInLine = {
     height: height as DimensionValue,
     width: width - 50,
     marginHorizontal: gap / 2,
-  };
+  } as StyleProp<ViewStyle>;
 
-  const Renderor = ({ item }) => <View style={style}>{item}</View>;
+  const Renderor = ({ item }) => <View style={styleInLine}>{item}</View>;
 
   return (
-    <View style={{ alignItems: "center", gap: 10 }}>
+    <View style={styles.container}>
       <FlatList
         horizontal
         removeClippedSubviews
@@ -77,6 +72,10 @@ export default function Carousel({ children, height, onScroll }: PropType) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    alignItems: "center",
+    gap: 10,
+  },
   indicatorContainer: {
     flexDirection: "row",
     gap: 5,

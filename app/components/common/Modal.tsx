@@ -1,23 +1,11 @@
 import { Modal as ModalView, StyleSheet, View } from "react-native";
-import React from "react";
 import { Box, HiddenView } from "@layouts";
 import { perfectSize } from "@/utils";
 import { Button } from "@commonents";
+import { common } from "@/constants";
+import { PropType } from "ModalType";
 
-interface PropType {
-  type: number;
-  visible: boolean;
-  onAccept: () => void;
-  children: React.ReactElement;
-  setVisible: (visible: any) => void;
-}
-
-const textSet = [
-  { cancel: "취소", accept: "확인" },
-  { cancel: "취소", accept: "신청" },
-  { cancel: "아니요", accept: "예" },
-  { cancel: undefined, accept: "확인" },
-];
+const { textSet } = common.modal;
 
 export default function Modal({
   type,

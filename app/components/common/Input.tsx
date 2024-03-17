@@ -1,4 +1,11 @@
-import { TextInput, View, StyleSheet, Platform } from "react-native";
+import {
+  TextInput,
+  View,
+  StyleSheet,
+  Platform,
+  StyleProp,
+  TextStyle,
+} from "react-native";
 import {
   NotoSans_400Regular,
   NotoSans_500Medium,
@@ -10,22 +17,7 @@ import { colors, perfectSize } from "@/utils";
 import { textStyle } from "./Text/constants";
 import { EyeOff, EyeOn } from "@icons";
 import { HiddenView } from "@layouts";
-
-type ChangeEventType = {
-  text: string;
-  name: string;
-};
-
-interface PropType {
-  value: string;
-  placeholder: string;
-  onChange: ({ text, name }: ChangeEventType) => void;
-  name?: string;
-  error?: boolean;
-  disabled?: boolean;
-  password?: boolean;
-  multiLine?: number;
-}
+import { PropType } from "InputType";
 
 const { size, letterSpacing, weight } = textStyle.caption[2];
 const { primary, neutral, secondary, error: errorColor } = colors;
@@ -49,11 +41,11 @@ export default function Input({
   const [active, setActive] = useState(false);
   const [visible, setVisible] = useState(false);
 
-  const style = {
+  const styleInLine = {
     width: password ? "92%" : "100%",
     textAlignVertical: !!multiLine ? "top" : "auto",
     paddingVertical: !!multiLine ? 11 : 0,
-  } as any;
+  } as StyleProp<TextStyle>;
 
   if (fontsLoaded) {
     return (
@@ -75,7 +67,7 @@ export default function Input({
           onChangeText={(text) => onChange({ text, name })}
           selectionColor={error ? errorColor[500] : primary[500]}
           placeholderTextColor={error ? errorColor[700] : neutral[500]}
-          style={style}
+          style={styleInLine}
           multiline={!!multiLine}
           numberOfLines={multiLine || 1}
         />

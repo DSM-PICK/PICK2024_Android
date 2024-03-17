@@ -6,18 +6,14 @@ import {
   useFonts,
 } from "@expo-google-fonts/noto-sans";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { ReactNode } from "react";
 import { ColorPropType, getColors, perfectSize } from "@/utils";
 import { textStyle } from "./constants";
+import { propType } from "TextType";
 import { hitSlop } from "@/constants";
 
-type WeightType = "B" | "M" | "R";
-type PropTypeType = (string | number)[] | [string, string | number, WeightType];
-
-interface PropType {
-  type: PropTypeType;
-  children: React.ReactNode;
-  hidden?: boolean;
-  onPress?: () => void;
+interface PropType extends propType {
+  children: ReactNode;
   color?: ColorPropType;
 }
 

@@ -1,12 +1,8 @@
 import { Animated, Pressable, StyleSheet, View } from "react-native";
 import { useEffect, useRef, useState } from "react";
+import { PropType } from "ToggleType";
 import { getColors } from "@/utils";
 import { Text } from "@commonents";
-
-interface PropType {
-  items: string[];
-  onPress: (item: string) => void;
-}
 
 export default function ToggleButton({ items, onPress }: PropType) {
   const [selected, setSelected] = useState(0);

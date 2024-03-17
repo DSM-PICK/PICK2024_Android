@@ -8,14 +8,9 @@ import {
 import * as Haptics from "expo-haptics";
 import { useState } from "react";
 import { debounce, getColors } from "@/utils";
-import { Text } from "@commonents";
+import { PropType } from "ScrollPickerType";
 import { hitSlop } from "@/constants";
-
-interface PropType {
-  items: (string | number)[];
-  onScroll: (selected: string | number, id: string | number) => void;
-  id?: string | number;
-}
+import { Text } from "@commonents";
 
 export default function ScrollPicker({ items, onScroll, id }: PropType) {
   const [before, setBefore] = useState(0);

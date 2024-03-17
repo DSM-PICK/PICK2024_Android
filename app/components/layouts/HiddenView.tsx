@@ -1,11 +1,6 @@
-import React from "react";
+import { PropType } from "HiddenType";
 
-interface PropTypes {
-  data: any;
-  children: React.ReactElement[] | React.ReactElement;
-}
-
-export default function HiddenView({ data, children }: PropTypes) {
+export default function HiddenView({ data, children }: PropType) {
   if (!!data) {
     return <>{children}</>;
   } else {

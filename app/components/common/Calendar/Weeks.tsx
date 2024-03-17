@@ -1,15 +1,9 @@
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { StyleSheet, View } from "react-native";
 import { getColors, getDates, getToday, perfectSize } from "@/utils";
+import { weekPropType } from "CalanderType";
 import { days } from "@/constants";
 import { Text } from "@commonents";
-interface PropType {
-  date: number[];
-  setSelected: ([]) => void;
-  picks: number[] | undefined;
-  selected: number[] | undefined;
-  onSelect: (({}) => void) | undefined;
-}
 
 const { year, month, date: _date } = getToday();
 
@@ -19,9 +13,9 @@ export default function Weeks({
   picks,
   selected,
   onSelect,
-}: PropType) {
-  const [calYear, calMonth] = date;
+}: weekPropType) {
   const [selYear, selMonth, selDate] = selected || [0, 0, 0];
+  const [calYear, calMonth] = date;
 
   const { startDay, endDate } = getDates(date); // 첫 날의 요일과 마지막 날의 날짜 가져오기
   const isToday = calYear === year && calMonth === month;

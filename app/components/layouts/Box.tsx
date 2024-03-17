@@ -6,24 +6,14 @@ import {
   ViewStyle,
 } from "react-native";
 import { ColorPropType, getColors, perfectSize } from "@/utils";
+import { propType } from "BoxType";
+import { layout } from "@/constants";
 
-type roundType = "none" | "sm" | "lg" | "full";
-
-interface PropType {
-  children: React.ReactNode;
-  rounded?: roundType;
-  onPress?: () => void;
+interface PropType extends propType {
   color?: ColorPropType;
-  width?: string | number;
-  height?: string | number;
 }
 
-const roundedSet = {
-  none: 0,
-  sm: 4,
-  lg: 8,
-  full: "100%",
-};
+const { roundedSet } = layout.box;
 
 export default function Box({
   color = ["neutral", 1100],

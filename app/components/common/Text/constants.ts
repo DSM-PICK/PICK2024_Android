@@ -1,31 +1,15 @@
-type WeightType =
-  | string
-  | {
-      M?: string;
-      B?: string;
-      R?: string;
-    };
+import { constants as T } from "TextType";
+import { stringObj } from "CommonType";
 
-interface TextStyleType {
-  [key: string]: {
-    [key: string]: {
-      size: number;
-      letterSpacing: number;
-      weight: WeightType;
-      lineHeight: number;
-    };
-  };
-}
+const defaultSpace = 0.15;
 
-const textWeight: { M: string; B: string; R: string } = {
+const textWeight: stringObj = {
   M: "NotoSans_500Medium",
   B: "NotoSans_700Bold",
   R: "NotoSans_400Regular",
 };
 
-const defaultSpace: number = 0.15;
-
-export const textStyle: TextStyleType = {
+export const textStyle: T.textStyleType = {
   heading: {
     "1": {
       size: 64,

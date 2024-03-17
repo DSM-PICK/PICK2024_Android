@@ -1,23 +1,18 @@
 import { View, StyleSheet } from "react-native";
 import { useEffect, useState } from "react";
 import { getToday, perfectSize } from "@/utils";
+import { calPropType } from "CalanderType";
 import { hitSlop } from "@/constants";
 import { Text } from "@commonents";
 import { Box } from "@layouts";
 import { Arrow } from "@icons";
 import Weeks from "./Weeks";
 
-interface PropType {
-  picks?: number[];
-  onMove?: ({}: any) => void;
-  onSelect?: ({}: any) => void;
-}
-
 const { year, month, date: _date } = getToday();
 
-export default function Calendar({ picks, onMove, onSelect }: PropType) {
-  const [date, setDate] = useState([year, month]);
+export default function Calendar({ picks, onMove, onSelect }: calPropType) {
   const [selected, setSelected] = useState(undefined);
+  const [date, setDate] = useState([year, month]);
   const [calYear, calMonth] = date;
 
   useEffect(() => {

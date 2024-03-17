@@ -2,40 +2,22 @@ import {
   TouchableOpacity,
   StyleSheet,
   GestureResponderEvent,
+  StyleProp,
+  ViewStyle,
 } from "react-native";
 import React from "react";
 import { ColorPropType, getColors, perfectSize } from "@/utils";
+import { propType } from "ButtonType";
+import { common } from "@/constants";
 import { Text } from "@commonents";
 
-type sizeType =
-  | "custom"
-  | "full"
-  | "extraLarge"
-  | "large"
-  | "medium"
-  | "small"
-  | "auto";
-
-interface PropType {
-  size: sizeType;
-  children: string;
+interface PropType extends propType {
   color: ColorPropType;
   onPress: (e?: GestureResponderEvent, id?: string) => void;
-  id?: string;
-  disabled?: boolean;
   fontColor?: ColorPropType;
-  customSize?: string | number;
-  fontType?: [string, number | string];
 }
 
-const sizes: { [key: string]: string[] } = {
-  full: ["100%", "S"],
-  extraLarge: ["80%", "S"],
-  large: ["60%", "L"],
-  medium: ["40%", "M"],
-  small: ["20%", "S"],
-  auto: ["auto", "M"],
-};
+const { sizes } = common.button;
 
 export default function Button({
   size,
@@ -52,7 +34,7 @@ export default function Button({
     width: size !== "custom" ? sizes[size][0] : customSize,
     backgroundColor: getColors(disabled ? ["neutral", 600] : color),
     minWidth: perfectSize(children.length * 10),
-  } as any;
+  } as StyleProp<ViewStyle>;
 
   return (
     <TouchableOpacity
