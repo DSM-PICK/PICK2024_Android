@@ -1,12 +1,12 @@
 import { FlatList } from "react-native-gesture-handler";
+import { useQuery } from "@tanstack/react-query";
 import { View, StyleSheet } from "react-native";
 import { getColors, getToday } from "@/utils";
+import { queryKeys } from "@/constants";
+import { todayTimeTable } from "@/api";
 import { Text } from "@commonents";
 import Subject from "./Subject";
 import { Box } from "@layouts";
-import { useQuery } from "@tanstack/react-query";
-import { queryKeys } from "@/constants";
-import { todayTimeTable } from "@/api/schedule/timetable";
 
 const { month, date, day } = getToday();
 const today = `${month}월 ${date}일 (${day})`;
@@ -25,7 +25,7 @@ export default function TimeTable() {
       <View style={styles.container}>
         <View style={styles.headerContainer}>
           <Text type={["label", 1]}>시간표</Text>
-          <Text type={["body", 2]} color={["neutral", 300]}>
+          <Text type={["body", 3]} color={["neutral", 300]}>
             {today}
           </Text>
         </View>

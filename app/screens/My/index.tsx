@@ -2,9 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import { View, StyleSheet } from "react-native";
 import { useState } from "react";
 import InfoBox from "@/screens/My/components/InfoBox";
-import { queryKeys, defaultData } from "@/constants";
 import { removeToken, getColors } from "@/utils";
 import { Text, Modal } from "@commonents";
+import { queryKeys } from "@/constants";
 import { Layout, Box } from "@layouts";
 import { details } from "@/api";
 
@@ -21,7 +21,6 @@ export const My = ({ navigation }) => {
       data = { ...data, birth_day: data.birth_day.split("-") };
       return data;
     },
-    placeholderData: () => defaultData as any,
   });
 
   const handleLogout = async () => {
@@ -32,7 +31,7 @@ export const My = ({ navigation }) => {
   return (
     <Layout name="My">
       <View style={styles.container}>
-        <InfoBox type="name" data={detailData?.name || defaultData.name} />
+        <InfoBox type="name" data={detailData?.name || name} />
         <InfoBox
           type="birth"
           data={detailData?.birth_day

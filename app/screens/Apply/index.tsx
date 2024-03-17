@@ -1,12 +1,12 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { StyleSheet, View } from "react-native";
 import { useEffect, useState } from "react";
+import { Layout, Box, HiddenView } from "@layouts";
 import { weekendMeal, weekendMealMy } from "@/api";
 import MealButton from "./components/MealButton";
 import ApplyBox from "./components/ApplyBox";
 import { Modal, Text } from "@commonents";
 import { queryKeys } from "@/constants";
-import { Layout, Box, HiddenView } from "@layouts";
 import { Move, Out } from "@/assets";
 import { getToday } from "@/utils";
 
@@ -27,9 +27,6 @@ export const Apply = () => {
     mutationFn: (id: string) => weekendMeal(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.weekendMeal });
-    },
-    onError: (err) => {
-      console.log(err);
     },
   });
 
