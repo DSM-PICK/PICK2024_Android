@@ -1,5 +1,5 @@
 import { FlatList } from "react-native-gesture-handler";
-import { View } from "react-native";
+import { Image, View } from "react-native";
 import { useEffect, useRef, useState } from "react";
 import { getColors } from "@/utils";
 import { Carousel } from "@layouts";
@@ -7,7 +7,8 @@ import { Text } from "@commonents";
 import Subject from "./Subject";
 import { useQuery } from "@tanstack/react-query";
 import { queryKeys } from "@/constants";
-import { weekTimeTable } from "@/api/timetable";
+import { weekTimeTable } from "@/api/schedule/timetable";
+import * as I from "@/assets/tableIcons";
 
 const days = ["월", "화", "수", "목", "금"];
 const times = [
@@ -68,13 +69,7 @@ export default function TimeTables() {
                   name={item.subject_name}
                   duration={times[index]}
                   icon={
-                    <View
-                      style={{
-                        width: 32,
-                        height: 32,
-                        backgroundColor: getColors(["neutral", 100]),
-                      }}
-                    />
+                    <Image source={I[item.subject_name.replaceAll(" ", "")]} />
                   }
                 />
               )}
