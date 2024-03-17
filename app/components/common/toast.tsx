@@ -1,11 +1,9 @@
 import { Animated, StyleSheet } from "react-native";
 import { useEffect, useRef } from "react";
-import { getColors, useToast } from "@/utils";
+import { debounce, getColors, useToast } from "@/utils";
 import * as _ from "@/assets/toastIcons";
 import { HiddenView } from "@layouts";
 import { Text } from "@commonents";
-
-let timer = undefined;
 
 export default function ToastManager() {
   const { type, message, show, stop } = useToast();
@@ -19,9 +17,8 @@ export default function ToastManager() {
       duration: 100,
       useNativeDriver: true,
     }).start(() => {
-      clearTimeout(timer);
       if (type !== "waiting") {
-        timer = setTimeout(stop, 1000);
+        debounce(stop, 1000);
       }
     });
   };
