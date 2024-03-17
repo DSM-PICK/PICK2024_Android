@@ -1,2 +1,2 @@
 export * from "./schedule";
-// export * from "./timetable";
+export * from "./timetable";
