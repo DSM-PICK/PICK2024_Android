@@ -1,6 +1,6 @@
 import { Modal as ModalView, StyleSheet, View } from "react-native";
 import { Box, HiddenView } from "@layouts";
-import { perfectSize } from "@/utils";
+import { perfectSize as p } from "@/utils";
 import { Button } from "@commonents";
 import { common } from "@/constants";
 import { PropType } from "ModalType";
@@ -36,7 +36,7 @@ export default function Modal({
       <View style={styles.container}>
         <Box rounded="lg">
           <View style={styles.contentContainer}>
-            <View style={{ paddingVertical: 10 }}>{children}</View>
+            <View style={{ paddingVertical: p(10) }}>{children}</View>
             <View style={styles.buttonContainer}>
               <HiddenView data={cancel}>
                 <View style={styles.buttonElement}>
@@ -74,12 +74,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     height: "100%",
-    padding: perfectSize(20),
+    padding: p(20),
     backgroundColor: "rgba(0, 0, 0, 0.8)",
   },
   contentContainer: {
     alignItems: "center",
-    gap: perfectSize(10),
+    gap: p(10),
   },
   buttonContainer: {
     flexDirection: "row",

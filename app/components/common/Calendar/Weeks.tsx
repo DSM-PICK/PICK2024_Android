@@ -1,6 +1,6 @@
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { StyleSheet, View } from "react-native";
-import { getColors, getDates, getToday, perfectSize } from "@/utils";
+import { getColors, getDates, getToday, perfectSize as p } from "@/utils";
 import { weekPropType } from "CalanderType";
 import { days } from "@/constants";
 import { Text } from "@commonents";
@@ -65,27 +65,27 @@ export default function Weeks({
     }
   });
 
-  return <View style={{ gap: 2 }}>{_weeks.map((item) => item)}</View>;
+  return <View style={{ gap: p(2) }}>{_weeks.map((item) => item)}</View>;
 }
 
 const styles = StyleSheet.create({
   dayContainer: {
-    width: perfectSize(40),
-    height: perfectSize(40),
+    width: p(40),
+    height: p(40),
     justifyContent: "center",
     alignItems: "center",
   },
   weekLineContainer: {
     flexDirection: "row",
-    gap: perfectSize(2),
+    gap: p(2),
   },
   pickContainer: {
-    borderRadius: 100,
-    borderWidth: 1,
+    borderRadius: p(100),
+    borderWidth: p(1),
     borderColor: getColors(["secondary", 400]),
   },
   todayContainer: {
-    borderRadius: 100,
+    borderRadius: p(100),
     backgroundColor: getColors(["primary", 500]),
   },
 });

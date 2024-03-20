@@ -6,7 +6,7 @@ import {
   ViewStyle,
 } from "react-native";
 import React from "react";
-import { ColorPropType, getColors, perfectSize } from "@/utils";
+import { ColorPropType, getColors, perfectSize as p } from "@/utils";
 import { propType } from "ButtonType";
 import { common } from "@/constants";
 import { Text } from "@commonents";
@@ -33,7 +33,7 @@ export default function Button({
   const style = {
     width: size !== "custom" ? sizes[size][0] : customSize,
     backgroundColor: getColors(disabled ? ["neutral", 600] : color),
-    minWidth: perfectSize(children.length * 10),
+    minWidth: p(children.length * 10),
   } as StyleProp<ViewStyle>;
 
   return (
@@ -52,9 +52,9 @@ export default function Button({
 
 const styles = StyleSheet.create({
   container: {
-    padding: perfectSize(10),
-    paddingHorizontal: perfectSize(13),
-    borderRadius: 3,
+    padding: p(10),
+    paddingHorizontal: p(13),
+    borderRadius: p(3),
     alignItems: "center",
   },
 });

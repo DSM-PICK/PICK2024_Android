@@ -1,6 +1,6 @@
 import { Animated, StyleSheet } from "react-native";
 import { useEffect, useRef } from "react";
-import { debounce, getColors, useToast } from "@/utils";
+import { debounce, getColors, useToast, perfectSize as p } from "@/utils";
 import * as _ from "@/assets/toastIcons";
 import { HiddenView } from "@layouts";
 import { Text } from "@commonents";
@@ -62,13 +62,13 @@ export default function ToastManager() {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    gap: 5,
+    gap: p(5),
     alignItems: "center",
     backgroundColor: getColors(["neutral", 1100]),
-    padding: 10,
-    borderRadius: 50,
+    padding: p(10),
+    borderRadius: p(50),
     position: "absolute",
     alignSelf: "center",
-    elevation: 3,
+    elevation: p(3),
   },
 });

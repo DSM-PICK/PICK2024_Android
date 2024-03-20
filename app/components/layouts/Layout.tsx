@@ -1,7 +1,8 @@
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
-import { Pressable, StyleSheet, View } from "react-native";
-import { getColors, perfectSize } from "@/utils";
+import { Keyboard, Pressable, StyleSheet, View } from "react-native";
+import { getColors, perfectSize as p } from "@/utils";
 import { PropType } from "LayoutType";
 import { HiddenView } from "@layouts";
 import { hitSlop } from "@/constants";
@@ -24,50 +25,55 @@ export default function Layout({
     container: {
       flex: 1,
       backgroundColor: !!home ? getColors(["primary", 1000]) : "white",
-      paddingVertical: !!!name && perfectSize(25),
+      paddingVertical: !!!name && p(25),
     },
     childrenElement: {
       flex: 1,
-      paddingHorizontal: !noHorizontalPadding && perfectSize(25),
+      paddingHorizontal: !noHorizontalPadding && p(20),
     },
   };
 
   return (
     <SafeAreaView style={styleInline.container}>
-      <HiddenView data={name}>
-        <View style={styles.headerContainer}>
-          <Pressable
-            style={styles.backElement}
-            onPress={() => navigation.goBack()}
-            hitSlop={hitSlop}
-          >
-            <Back />
-          </Pressable>
+      <TouchableWithoutFeedback
+        style={{ width: "100%", height: "100%" }}
+        onPress={Keyboard.dismiss}
+      >
+        <HiddenView data={name}>
+          <View style={styles.headerContainer}>
+            <Pressable
+              style={styles.backElement}
+              onPress={() => navigation.goBack()}
+              hitSlop={hitSlop}
+            >
+              <Back />
+            </Pressable>
 
-          <Text type={fontType}>{name}</Text>
-          <HiddenView data={onDone}>
-            <View style={styles.doneElement}>
-              <Text
-                type={fontType}
-                color={isDone ? ["neutral", 50] : ["neutral", 500]}
-                onPress={isDone && onDone}
-              >
-                확인
-              </Text>
-            </View>
-          </HiddenView>
-        </View>
-      </HiddenView>
-      <View style={styleInline.childrenElement}>{children}</View>
+            <Text type={fontType}>{name}</Text>
+            <HiddenView data={onDone}>
+              <View style={styles.doneElement}>
+                <Text
+                  type={fontType}
+                  color={isDone ? ["neutral", 50] : ["neutral", 500]}
+                  onPress={isDone && onDone}
+                >
+                  확인
+                </Text>
+              </View>
+            </HiddenView>
+          </View>
+        </HiddenView>
+        <View style={styleInline.childrenElement}>{children}</View>
+      </TouchableWithoutFeedback>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   headerContainer: {
-    paddingHorizontal: perfectSize(25),
-    paddingVertical: perfectSize(10),
-    marginVertical: perfectSize(10),
+    paddingHorizontal: p(25),
+    paddingVertical: p(10),
+    marginVertical: p(10),
     width: "100%",
     flexDirection: "row",
     justifyContent: "center",
@@ -75,10 +81,10 @@ const styles = StyleSheet.create({
   },
   backElement: {
     position: "absolute",
-    left: perfectSize(25),
+    left: p(25),
   },
   doneElement: {
     position: "absolute",
-    right: perfectSize(25),
+    right: p(25),
   },
 });

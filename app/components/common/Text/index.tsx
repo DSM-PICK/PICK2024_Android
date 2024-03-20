@@ -7,7 +7,7 @@ import {
 } from "@expo-google-fonts/noto-sans";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { ReactNode } from "react";
-import { ColorPropType, getColors, perfectSize } from "@/utils";
+import { ColorPropType, getColors, perfectSize as p } from "@/utils";
 import { textStyle } from "./constants";
 import { propType } from "TextType";
 import { hitSlop } from "@/constants";
@@ -40,10 +40,10 @@ export default function Text({
 
   const style: StyleProp<TextStyle> = {
     fontFamily: _weight ? fontFamily[_weight] : fontFamily,
-    fontSize: perfectSize(textSize),
-    letterSpacing: perfectSize(letterSpacing),
+    fontSize: p(textSize),
+    letterSpacing: p(letterSpacing),
     color: color && getColors(color),
-    lineHeight: perfectSize(lineHeight),
+    lineHeight: p(lineHeight),
   };
 
   if (fontsLoaded && !hidden) {

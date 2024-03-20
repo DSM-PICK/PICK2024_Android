@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   ViewStyle,
 } from "react-native";
-import { ColorPropType, getColors, perfectSize } from "@/utils";
+import { ColorPropType, getColors, perfectSize as p } from "@/utils";
 import { propType } from "BoxType";
 import { layout } from "@/constants";
 
@@ -27,7 +27,7 @@ export default function Box({
     width: width as DimensionValue,
     height: height as DimensionValue,
     backgroundColor: getColors(color),
-    padding: perfectSize(16),
+    padding: p(16),
     borderRadius: roundedSet[rounded] as AnimatableNumericValue,
   };
 

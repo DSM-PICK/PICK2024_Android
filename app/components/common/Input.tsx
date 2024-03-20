@@ -13,7 +13,7 @@ import {
   useFonts,
 } from "@expo-google-fonts/noto-sans";
 import { useState } from "react";
-import { colors, perfectSize } from "@/utils";
+import { colors, perfectSize as p } from "@/utils";
 import { textStyle } from "./Text/constants";
 import { EyeOff, EyeOn } from "@icons";
 import { HiddenView } from "@layouts";
@@ -21,7 +21,7 @@ import { PropType } from "InputType";
 
 const { size, letterSpacing, weight } = textStyle.caption[2];
 const { primary, neutral, secondary, error: errorColor } = colors;
-const sizes = { width: 18 };
+const sizes = { width: p(18) };
 
 export default function Input({
   value,
@@ -44,7 +44,7 @@ export default function Input({
   const styleInLine = {
     width: password ? "92%" : "100%",
     textAlignVertical: !!multiLine ? "top" : "auto",
-    paddingVertical: !!multiLine ? 11 : 0,
+    paddingVertical: !!multiLine ? p(11) : 0,
   } as StyleProp<TextStyle>;
 
   if (fontsLoaded) {
@@ -88,10 +88,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingHorizontal: perfectSize(16),
-    paddingVertical: Platform.OS === "ios" ? 10 : 5,
-    borderRadius: 4,
-    borderWidth: 1,
+    paddingHorizontal: p(16),
+    paddingVertical: p(Platform.OS === "ios" ? 10 : 5),
+    borderRadius: p(4),
+    borderWidth: p(1),
     width: "100%",
     backgroundColor: neutral[900],
     borderColor: neutral[900],
@@ -110,8 +110,8 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     color: neutral[50],
-    fontSize: perfectSize(size),
-    letterSpacing: perfectSize(letterSpacing),
+    fontSize: p(size),
+    letterSpacing: p(letterSpacing),
     fontFamily: weight as any,
   },
 });

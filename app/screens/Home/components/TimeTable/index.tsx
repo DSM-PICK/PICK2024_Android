@@ -1,10 +1,11 @@
 import { FlatList } from "react-native-gesture-handler";
 import { useQuery } from "@tanstack/react-query";
 import { View, StyleSheet } from "react-native";
-import { getColors, getToday } from "@/utils";
+import * as I from "@/assets/tableIcons";
 import { queryKeys } from "@/constants";
 import { todayTimeTable } from "@/api";
 import { Text } from "@commonents";
+import { getToday } from "@/utils";
 import Subject from "./Subject";
 import { Box } from "@layouts";
 
@@ -43,13 +44,7 @@ export default function TimeTable() {
                 index={index + 1}
                 name={item.subject_name}
                 icon={
-                  <View
-                    style={{
-                      width: 20,
-                      height: 20,
-                      backgroundColor: getColors(["neutral", 100]),
-                    }}
-                  />
+                  I[item.subject_name.replaceAll(" ", "")] || I["웹프로그래밍"]
                 }
               />
             )}

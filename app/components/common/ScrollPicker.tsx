@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import * as Haptics from "expo-haptics";
 import { useState } from "react";
-import { debounce, getColors } from "@/utils";
+import { debounce, getColors, perfectSize as p } from "@/utils";
 import { PropType } from "ScrollPickerType";
 import { hitSlop } from "@/constants";
 import { Text } from "@commonents";
@@ -16,7 +16,7 @@ export default function ScrollPicker({ items, onScroll, id }: PropType) {
   const [before, setBefore] = useState(0);
 
   const handleScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
-    const index = Math.ceil(e.nativeEvent.contentOffset.y / 40);
+    const index = Math.ceil(e.nativeEvent.contentOffset.y / p(40));
     if (index !== before) {
       setBefore(index);
       Haptics.selectionAsync();
@@ -34,16 +34,16 @@ export default function ScrollPicker({ items, onScroll, id }: PropType) {
       <FlatList
         onScroll={handleScroll}
         data={items}
-        style={{ width: "100%", height: "100%" }}
+        style={styles.flatListElement}
         contentContainerStyle={{
-          paddingVertical: 30,
+          paddingVertical: p(30),
         }}
         overScrollMode="never"
         hitSlop={hitSlop}
         renderItem={({ item }) => (
           <View
             style={{
-              height: 40,
+              height: p(40),
               justifyContent: "center",
               alignItems: "center",
             }}
@@ -53,7 +53,7 @@ export default function ScrollPicker({ items, onScroll, id }: PropType) {
           </View>
         )}
         removeClippedSubviews
-        snapToInterval={40}
+        snapToInterval={p(40)}
         showsVerticalScrollIndicator={false}
       />
     </View>
@@ -63,19 +63,23 @@ export default function ScrollPicker({ items, onScroll, id }: PropType) {
 const styles = StyleSheet.create({
   container: {
     width: "30%",
-    height: 101,
+    height: p(101),
     justifyContent: "center",
     alignItems: "center",
     position: "relative",
   },
   listContainer: {
     zIndex: 1,
-    height: 40,
+    height: p(40),
     position: "absolute",
     borderTopColor: getColors(["primary", 500]),
     borderBottomColor: getColors(["primary", 500]),
-    borderTopWidth: 2,
-    borderBottomWidth: 2,
+    borderTopWidth: p(2),
+    borderBottomWidth: p(2),
     width: "100%",
+  },
+  flatListElement: {
+    width: "100%",
+    height: "100%",
   },
 });

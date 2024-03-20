@@ -1,7 +1,7 @@
 import { Animated, Pressable, StyleSheet, View } from "react-native";
 import { useEffect, useRef, useState } from "react";
+import { getColors, perfectSize as p } from "@/utils";
 import { PropType } from "ToggleType";
-import { getColors } from "@/utils";
 import { Text } from "@commonents";
 
 export default function ToggleButton({ items, onPress }: PropType) {
@@ -59,18 +59,18 @@ export default function ToggleButton({ items, onPress }: PropType) {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    padding: 7,
-    height: 46,
-    borderRadius: 200,
+    padding: p(7),
+    height: p(46),
+    borderRadius: p(200),
     backgroundColor: getColors(["primary", 1000]),
   },
   barElement: {
     height: "100%",
-    borderRadius: 100,
+    borderRadius: p(100),
     backgroundColor: "white",
   },
   buttonContainer: {
-    margin: 7,
+    margin: p(7),
     width: "100%",
     height: "100%",
     position: "absolute",

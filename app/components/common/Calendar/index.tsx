@@ -1,6 +1,6 @@
 import { View, StyleSheet } from "react-native";
 import { useEffect, useState } from "react";
-import { getToday, perfectSize } from "@/utils";
+import { getToday, perfectSize as p } from "@/utils";
 import { calPropType } from "CalanderType";
 import { hitSlop } from "@/constants";
 import { Text } from "@commonents";
@@ -31,7 +31,7 @@ export default function Calendar({ picks, onMove, onSelect }: calPropType) {
 
   return (
     <Box color={["primary", 1200]}>
-      <View style={{ gap: perfectSize(10) }}>
+      <View style={{ gap: p(10) }}>
         <View style={styles.headerContainer}>
           <Arrow onPress={() => handleMove(false)} hitSlop={hitSlop} />
           <Text type={["subTitle", 3, "M"]}>
@@ -59,7 +59,7 @@ export default function Calendar({ picks, onMove, onSelect }: calPropType) {
 
 const styles = StyleSheet.create({
   headerContainer: {
-    gap: perfectSize(10),
+    gap: p(10),
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
