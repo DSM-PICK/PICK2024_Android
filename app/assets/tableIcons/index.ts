@@ -26,7 +26,6 @@ export { default as 스포츠생활 } from "./health.png";
 export { default as 한국사 } from "./kostory.png";
 export { default as 데이터베이스 } from "./database.png";
 export { default as DB프로그래밍 } from "./database.png";
-export { default as 서버프로그래밍 } from "./web.png";
 export { default as 리눅스시스템프로그래밍 } from "./linux.png";
 export { default as 임베디드리눅스프로그래밍 } from "./linux.png";
 export { default as 실용경제 } from "./money.png";
