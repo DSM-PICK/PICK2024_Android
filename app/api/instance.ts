@@ -1,5 +1,6 @@
-import { getToken } from "@/utils";
+import { getToken, setToken } from "@/utils";
 import axios from "axios";
+import { refresh } from "./user";
 
 export const instance = axios.create({
   baseURL: process.env.EXPO_PUBLIC_BASE_URL,
@@ -8,11 +9,9 @@ export const instance = axios.create({
 
 instance.interceptors.request.use(
   async (res) => {
-    const { accessToken, refreshToken } = await getToken();
+    const { accessToken } = await getToken();
     if (accessToken && res.url !== "/user/refresh") {
       res.headers["Authorization"] = "Bearer " + accessToken;
-    } else if (res.url === "/user/refresh") {
-      res.headers["X-Refresh-Token"] = "Bearer" + refreshToken;
     }
     return res;
   },
@@ -25,7 +24,14 @@ instance.interceptors.response.use(
   (res) => {
     return res;
   },
-  (err) => {
+  async (err) => {
+    if (err?.response.status === 401) {
+      refresh().then((res) => {
+        const { access_token, refresh_token } = res?.data;
+        setToken(access_token, refresh_token);
+      });
+    }
+    console.log(err?.request.responseURL);
     throw err;
   }
 );
