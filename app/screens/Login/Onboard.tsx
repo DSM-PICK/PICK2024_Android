@@ -24,7 +24,7 @@ export const Onboard = ({ navigation }) => {
         <View style={{ paddingHorizontal: 25 }}>
           <Image
             source={require("@/assets/Logo.png")}
-            style={{ width: 150, height: 50 }}
+            style={styles.logoElement}
           />
         </View>
 
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
-    paddingHorizontal: 25,
+    paddingHorizontal: 20,
     justifyContent: "center",
   },
   carouselContainer: {
@@ -75,5 +75,9 @@ const styles = StyleSheet.create({
   carouselTextContainer: {
     alignSelf: "flex-start",
     width: "100%",
+  },
+  logoElement: {
+    width: 150,
+    height: 50,
   },
 });

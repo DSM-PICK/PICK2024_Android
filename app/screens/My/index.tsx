@@ -31,7 +31,7 @@ export const My = ({ navigation }) => {
   return (
     <Layout name="My">
       <View style={styles.container}>
-        <InfoBox type="name" data={detailData?.name || name} />
+        <InfoBox type="name" data={detailData?.name} />
         <InfoBox
           type="birth"
           data={detailData?.birth_day

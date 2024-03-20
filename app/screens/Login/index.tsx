@@ -46,7 +46,7 @@ export const Login = () => {
       <View style={styles.inputContainer}>
         <Image
           source={require("@/assets/Logo.png")}
-          style={{ width: 120, height: 40 }}
+          style={styles.logoElement}
         />
         <Text type={["body", 2]} color={["neutral", 400]}>
           스퀘어 계정으로 로그인해주세요.
@@ -112,5 +112,9 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flex: 1,
     justifyContent: "center",
+  },
+  logoElement: {
+    width: 120,
+    height: 40,
   },
 });
