@@ -38,8 +38,8 @@ export const Teacher = () => {
             <Text type={["body", 1]}>자습감독이 없습니다.</Text>
           </HiddenView>
           <View style={{ gap: 30 }}>
-            {teacherData?.map((item: any) => (
-              <TeacherBox item={item} />
+            {teacherData?.map((item: any, index: number) => (
+              <TeacherBox item={item} key={index} />
             ))}
           </View>
         </Box>
