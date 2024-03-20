@@ -69,7 +69,12 @@ export default function TimeTables() {
                   name={item.subject_name}
                   duration={times[index]}
                   icon={
-                    <Image source={I[item.subject_name.replaceAll(" ", "")]} />
+                    <Image
+                      source={
+                        I[item.subject_name.replaceAll(" ", "")] ||
+                        I["웹프로그래밍"]
+                      }
+                    />
                   }
                 />
               )}
