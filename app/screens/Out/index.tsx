@@ -6,6 +6,8 @@ import { Text, Input, Modal } from "@commonents";
 import { Layout, HiddenView } from "@layouts";
 import { applyOut, applyReturn } from "@/api";
 import { queryKeys } from "@/constants";
+import { AxiosError } from "axios";
+import { useToast } from "@/utils";
 
 const types = {
   외출: {
@@ -33,6 +35,7 @@ export const Out = ({ navigation, route }) => {
   ]);
   const { start_time: start, end_time: end } = out;
   const { title, label } = types[type];
+  const toast = useToast();
 
   const isOut = (value: any[]) => (title === "외출" ? value[0] : value[1]);
 
@@ -44,7 +47,13 @@ export const Out = ({ navigation, route }) => {
       queryClient.invalidateQueries({ queryKey: queryKeys.anyApply });
       setSucVisible(true);
     },
-    onError: (err) => console.log(err),
+    onError: (err: AxiosError) => {
+      if (err.response?.status === 409) {
+        toast.error("이미 신청되었습니다");
+      } else {
+        toast.error("오류가 발생했습니다.");
+      }
+    },
   });
 
   const handleChange = (item: any, type: string) => {
