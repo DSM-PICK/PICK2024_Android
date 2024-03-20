@@ -31,7 +31,7 @@ export default function ClassButton({
         });
       }}
       fontColor={className === item ? ["neutral", 1100] : ["neutral", 50]}
-      fontType={["body", 2]}
+      fontType={item.length < 6 ? ["body", 2] : ["body", 3]}
       color={className === item ? ["primary", 500] : ["primary", 1200]}
     >
       {item}
