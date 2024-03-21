@@ -1,6 +1,6 @@
 import { days } from "@/constants";
 
-const _date = new Date();
+const _date = new Date(Date.now() + 1000 * 60 * 60 * 9);
 
 export const getToday = () => {
   const year = _date.getFullYear();
