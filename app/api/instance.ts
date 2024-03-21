@@ -31,7 +31,6 @@ instance.interceptors.response.use(
         setToken(access_token, refresh_token);
       });
     }
-    console.log(err?.request.responseURL);
     throw err;
   }
 );
