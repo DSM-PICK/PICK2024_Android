@@ -1,4 +1,4 @@
-import { Animated, StyleSheet } from "react-native";
+import { Animated, StyleSheet, StatusBar } from "react-native";
 import { useEffect, useRef } from "react";
 import { debounce, getColors, useToast, perfectSize as p } from "@/utils";
 import * as _ from "@/assets/toastIcons";
@@ -13,8 +13,8 @@ export default function ToastManager() {
 
   const showT = () => {
     Animated.timing(pos, {
-      toValue: 15,
-      duration: 100,
+      toValue: StatusBar.currentHeight + 10,
+      duration: 150,
       useNativeDriver: true,
     }).start(() => {
       if (type !== "waiting") {
@@ -26,7 +26,7 @@ export default function ToastManager() {
   const hideT = () => {
     Animated.timing(pos, {
       toValue: -45,
-      duration: 200,
+      duration: 150,
       useNativeDriver: true,
     }).start();
   };
@@ -68,6 +68,7 @@ const styles = StyleSheet.create({
     padding: p(10),
     borderRadius: p(50),
     position: "absolute",
+    top: 1,
     alignSelf: "center",
     elevation: p(3),
   },
