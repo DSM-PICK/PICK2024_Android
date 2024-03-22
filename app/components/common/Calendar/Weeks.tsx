@@ -4,6 +4,7 @@ import { getColors, getDates, getToday, perfectSize as p } from "@/utils";
 import { weekPropType } from "CalanderType";
 import { days } from "@/constants";
 import { Text } from "@commonents";
+import { HiddenView } from "@/components/layouts";
 
 const { year, month, date: _date } = getToday();
 
@@ -37,14 +38,19 @@ export default function Weeks({
         key={index}
         style={[
           styles.dayContainer,
-          picks?.includes(item + 1) && styles.pickContainer,
           isToday && _date === item + 1 && styles.todayContainer,
-          isSelected && item + 1 === selDate && styles.pickContainer,
         ]}
         onPress={() => {
           !!onSelect && item !== "" && handleSelect(item + 1, _days.length);
         }}
       >
+        <HiddenView
+          data={
+            (isSelected && item + 1 === selDate) || picks?.includes(item + 1)
+          }
+        >
+          <View style={styles.dotElement} />
+        </HiddenView>
         <Text
           type={["button", "S"]}
           color={
@@ -79,10 +85,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     gap: p(2),
   },
-  pickContainer: {
-    borderRadius: p(100),
-    borderWidth: p(1),
-    borderColor: getColors(["secondary", 400]),
+  dotElement: {
+    width: 5,
+    height: 5,
+    borderRadius: 100,
+    backgroundColor: getColors(["primary", 500]),
+    position: "absolute",
+    top: 0,
   },
   todayContainer: {
     borderRadius: p(100),
