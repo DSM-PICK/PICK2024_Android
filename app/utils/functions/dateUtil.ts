@@ -1,6 +1,9 @@
 import { days } from "@/constants";
 
-const _date = new Date(Date.now() + 1000 * 60 * 60 * 9);
+const curr = new Date();
+const utc = curr.getTime() + curr.getTimezoneOffset() * 60 * 1000;
+const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
+const _date = new Date(utc + KR_TIME_DIFF);
 
 export const getToday = () => {
   const year = _date.getFullYear();
