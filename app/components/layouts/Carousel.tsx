@@ -6,14 +6,20 @@ import {
   ViewStyle,
 } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { PropType } from "CarouselType";
 import { getColors } from "@/utils";
 
 const gap = 16;
 const offset = 16;
 
-export default function Carousel({ children, height, onScroll }: PropType) {
+export default function Carousel({
+  children,
+  height,
+  onScroll,
+  first,
+}: PropType) {
+  const testRef: React.Ref<FlatList<any>> = useRef(null);
   const [width, setWidth] = useState(0);
   const [page, setPage] = useState(0);
 
@@ -36,20 +42,42 @@ export default function Carousel({ children, height, onScroll }: PropType) {
   return (
     <View style={styles.container}>
       <FlatList
+        ref={testRef}
         horizontal
         removeClippedSubviews
         disableIntervalMomentum
         data={children}
         overScrollMode="never"
-        initialNumToRender={2}
         onScroll={handleScroll}
         decelerationRate={0.875}
         showsHorizontalScrollIndicator={false}
         snapToInterval={width - gap / 2 - 26.5}
         contentContainerStyle={{ paddingHorizontal: offset }}
         keyExtractor={(_, index) => index.toString()}
-        onLayout={(event) => setWidth(event.nativeEvent.layout.width)}
         renderItem={Renderor}
+        onLayout={(event) => {
+          setWidth(event.nativeEvent.layout.width);
+          // 자동 스크롤 버그로 임시 비활성화
+          // if (first) {
+          //   setTimeout(() => {
+          //     testRef.current.scrollToIndex({
+          //       animated: false,
+          //       index: first,
+          //       viewPosition: 0.5,
+          //     });
+          //   }, 100);
+          // }
+        }}
+        // onScrollToIndexFailed={(error) => {
+        //   console.log(error);
+        //   setTimeout(() => {
+        //     testRef.current.scrollToIndex({
+        //       animated: false,
+        //       index: first,
+        //       viewPosition: 0.5,
+        //     });
+        //   }, 100);
+        // }}
       />
       <View style={styles.indicatorContainer}>
         {Array.from(Array(children?.length).keys()).map((item) => (

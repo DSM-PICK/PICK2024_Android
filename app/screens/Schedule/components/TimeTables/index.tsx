@@ -1,7 +1,7 @@
 import { FlatList } from "react-native-gesture-handler";
 import { Image, View } from "react-native";
 import { useEffect, useRef, useState } from "react";
-import { getColors } from "@/utils";
+import { getToday } from "@/utils";
 import { Carousel } from "@layouts";
 import { Text } from "@commonents";
 import Subject from "./Subject";
@@ -20,6 +20,7 @@ const times = [
   "14:30 ~ 15:20",
   "15:30 ~ 16:20",
 ];
+const { day } = getToday();
 
 export default function TimeTables() {
   const [_date, _setDate] = useState([0, 0, 0]);
@@ -54,7 +55,7 @@ export default function TimeTables() {
         </Text>
       </View>
 
-      <Carousel height="100%" onScroll={handleScroll}>
+      <Carousel height="100%" onScroll={handleScroll} first={days.indexOf(day)}>
         {tableData?.map((item, index) => {
           return (
             <FlatList

@@ -73,7 +73,7 @@ export const Home = ({ navigation }) => {
           )}
         </View>
         <View style={{ height: !!applyData ? "58%" : "71%" }}>
-          <Carousel height="100%">
+          <Carousel height="100%" first={1}>
             <TimeTable />
             <Meal />
             <Notice />

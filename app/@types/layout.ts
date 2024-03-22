@@ -14,6 +14,7 @@ declare module "CarouselType" {
     children: React.ReactElement[];
     height: string;
     onScroll?: (item: number) => void;
+    first?: number | undefined;
   }
 }
 
