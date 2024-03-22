@@ -4,8 +4,8 @@ import { Dimensions } from "react-native";
 const { width, height } = Dimensions.get("window");
 
 const size = {
-  width: width - (390 - width),
-  height: height - (844 - height),
+  width: 390,
+  height: 844,
 };
 
 export const perfectSize = create(size);
