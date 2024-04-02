@@ -27,7 +27,7 @@ export default function Box({
     width: width as DimensionValue,
     height: height as DimensionValue,
     backgroundColor: getColors(color),
-    padding: p(16),
+    padding: 16,
     borderRadius: roundedSet[rounded] as AnimatableNumericValue,
   };
 

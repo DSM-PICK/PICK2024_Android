@@ -40,21 +40,27 @@ export default function Text({
 
   const style: StyleProp<TextStyle> = {
     fontFamily: _weight ? fontFamily[_weight] : fontFamily,
-    fontSize: p(textSize),
-    letterSpacing: p(letterSpacing),
+    fontSize: textSize,
+    letterSpacing: letterSpacing,
     color: color && getColors(color),
-    lineHeight: p(lineHeight),
+    lineHeight: lineHeight,
   };
 
   if (fontsLoaded && !hidden) {
     if (onPress) {
       return (
         <TouchableWithoutFeedback onPress={onPress} hitSlop={hitSlop}>
-          <NativeText style={style}>{children}</NativeText>
+          <NativeText adjustsFontSizeToFit style={style}>
+            {children}
+          </NativeText>
         </TouchableWithoutFeedback>
       );
     } else {
-      return <NativeText style={style}>{children}</NativeText>;
+      return (
+        <NativeText adjustsFontSizeToFit style={style}>
+          {children}
+        </NativeText>
+      );
     }
   }
 }

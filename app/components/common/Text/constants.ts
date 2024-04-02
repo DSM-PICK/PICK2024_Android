@@ -39,12 +39,12 @@ export const textStyle: T.textStyleType = {
       size: 32,
       letterSpacing: 0,
       weight: textWeight.M,
-      lineHeight: 34,
+      lineHeight: 30,
     },
     "6": {
       size: 24,
       letterSpacing: defaultSpace,
-      lineHeight: 26,
+      lineHeight: 28,
       weight: {
         M: textWeight.M,
         B: textWeight.B,
@@ -54,7 +54,7 @@ export const textStyle: T.textStyleType = {
   subTitle: {
     "1": {
       size: 20,
-      lineHeight: 26,
+      lineHeight: 24,
       letterSpacing: defaultSpace,
       weight: {
         M: textWeight.M,

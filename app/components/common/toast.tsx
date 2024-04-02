@@ -7,7 +7,7 @@ import { Text } from "@commonents";
 
 export default function ToastManager() {
   const { type, message, show, stop } = useToast();
-  const pos = useRef(new Animated.Value(50)).current;
+  const pos = useRef(new Animated.Value(-100)).current;
 
   const Component = _[type];
 
@@ -25,7 +25,7 @@ export default function ToastManager() {
 
   const hideT = () => {
     Animated.timing(pos, {
-      toValue: -45,
+      toValue: -100,
       duration: 150,
       useNativeDriver: true,
     }).start();

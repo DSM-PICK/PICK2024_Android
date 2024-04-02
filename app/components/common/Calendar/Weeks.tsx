@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     backgroundColor: getColors(["primary", 500]),
     position: "absolute",
-    top: 0,
+    top: 2.5,
   },
   todayContainer: {
     borderRadius: p(100),
