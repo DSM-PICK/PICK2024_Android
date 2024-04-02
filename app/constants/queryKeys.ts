@@ -9,4 +9,5 @@ export const queryKeys = {
   meal: ["meal"],
   notice: ["notice"],
   timeTable: ["timeTable"],
+  apply: ["apply"],
 };

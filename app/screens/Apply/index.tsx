@@ -62,7 +62,9 @@ export const Apply = () => {
             </View>
           </Box>
         </View>
-        <HiddenView data={!queryClient.getQueryData(queryKeys.anyApply)}>
+        <HiddenView
+          data={!(queryClient.getQueryData(queryKeys.anyApply) === "")}
+        >
           <View style={styles.gapContainer}>
             <ApplyBox
               date="오늘"

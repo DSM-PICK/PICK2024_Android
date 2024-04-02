@@ -41,7 +41,11 @@ export const Out = ({ navigation, route }) => {
 
   const { mutate: outMutate } = useMutation({
     mutationFn: () => {
-      return isOut([applyOut(out), applyReturn(out)]);
+      if (title === "외출") {
+        return applyOut(out);
+      } else {
+        return applyReturn(out);
+      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.anyApply });

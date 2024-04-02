@@ -25,7 +25,7 @@ export default function Menu({ menu }: PropType) {
             _menu
               .filter((item: string) => item !== "")
               .map((item: string, index: number) => (
-                <Text key={index} type={["body", 1]}>
+                <Text key={index} type={["body", 2]}>
                   {item}
                 </Text>
               ))
