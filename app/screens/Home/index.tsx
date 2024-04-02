@@ -26,7 +26,7 @@ export const Home = ({ navigation }) => {
     queryKey: queryKeys.anyApply,
     queryFn: checkApply,
     select: (res) => {
-      return res;
+      return res?.data;
     },
   });
 
@@ -67,8 +67,8 @@ export const Home = ({ navigation }) => {
           {applyData && (
             <Pass
               visible={!!applyData}
-              type={applyData[0]}
-              data={applyData && applyData[1]}
+              type={applyData.type}
+              data={applyData && applyData}
             />
           )}
         </View>

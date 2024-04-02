@@ -11,9 +11,11 @@ interface PropType {
 }
 
 const Types = {
-  home: ({ username, end_time }) => Home({ name: username, data: end_time }),
-  move: ({ username, classroom }) => Move({ name: username, data: classroom }),
-  out: ({ username, end_time, start_time }) =>
+  EARLYRETURN: ({ username, start_time }) =>
+    Home({ name: username, data: start_time }),
+  CLASSROOM: ({ username, classroom }) =>
+    Move({ name: username, data: classroom }),
+  APPLICATION: ({ username, end_time, start_time }) =>
     Out({ name: username, data: [start_time, end_time] }),
 };
 
