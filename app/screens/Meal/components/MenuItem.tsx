@@ -1,14 +1,14 @@
 import { StyleSheet, View } from "react-native";
+import { Box, HiddenView } from "@layouts";
 import { Text } from "@commonents";
-import { Box } from "@layouts";
 
 interface PropType {
-  menu: any[];
+  menu: [string, string[]];
 }
 
 const timeSet = { breakfast: "조식", lunch: "중식", dinner: "석식" };
 
-export default function Menu({ menu }: PropType) {
+export default function MenuItem({ menu }: PropType) {
   let [time, _menu] = menu;
   _menu = _menu.filter((item: string) => item !== "");
 
@@ -21,17 +21,16 @@ export default function Menu({ menu }: PropType) {
           </Text>
         </View>
         <View style={styles.menuContainer}>
-          {_menu.length !== 0 ? (
-            _menu
-              .filter((item: string) => item !== "")
-              .map((item: string, index: number) => (
-                <Text key={index} type={["body", 2]}>
-                  {item}
-                </Text>
-              ))
-          ) : (
+          <HiddenView data={_menu.length !== 0}>
+            {_menu.map((item: string, index: number) => (
+              <Text key={index} type={["body", 2]}>
+                {item}
+              </Text>
+            ))}
+          </HiddenView>
+          <HiddenView data={_menu.length === 0}>
             <Text type={["body", 1]}>급식이 없습니다</Text>
-          )}
+          </HiddenView>
         </View>
       </View>
     </Box>
@@ -46,10 +45,10 @@ const styles = StyleSheet.create({
   dateContainer: {
     flexDirection: "row",
     justifyContent: "center",
-    width: "45%",
+    width: "50%",
   },
   menuContainer: {
-    width: "55%",
+    width: "50%",
     gap: 10,
   },
 });

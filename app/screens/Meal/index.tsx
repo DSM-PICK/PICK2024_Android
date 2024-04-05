@@ -2,11 +2,10 @@ import { FlatList } from "react-native-gesture-handler";
 import { useQuery } from "@tanstack/react-query";
 import { StyleSheet, View } from "react-native";
 import { useState } from "react";
+import { calcDate, get, getToday } from "@/utils";
+import { path, queryKeys } from "@/constants";
 import { Calendar, Text } from "@commonents";
-import Menu from "../Meal/components/Menu";
-import { queryKeys } from "@/constants";
-import { mealAtDate } from "@/api";
-import { getToday } from "@/utils";
+import { MenuItem } from "./components";
 import { Layout } from "@layouts";
 
 const { year, month, date: _date } = getToday();
@@ -14,27 +13,22 @@ const { year, month, date: _date } = getToday();
 export const Meal = () => {
   const [date, setDate] = useState({ year, month, date: _date });
 
-  const dateFn = ({ year, month, date }) => {
-    setDate({ year, month, date });
-  };
-
   const { data: mealData } = useQuery({
     queryKey: [queryKeys.meal, date],
-    queryFn: () => mealAtDate(date),
-    select: (res) => {
-      const meals = res?.data.meals;
-      return Object.entries(meals);
-    },
+    queryFn: () => get(`${path.meal}/date?date=${calcDate(date)}`),
+    select: (res) => Object.entries(res?.data?.meals),
     placeholderData: (prev) => prev,
   });
-
-  const selected = `${date.month}월 ${date.date}일 급식`;
 
   return (
     <Layout name="급식">
       <View style={styles.container}>
-        <Calendar onSelect={dateFn} />
-        <Text type={["subTitle", 3, "M"]}>{selected}</Text>
+        <Calendar
+          onSelect={({ year, month, date }) => setDate({ year, month, date })}
+        />
+        <Text type={["subTitle", 3, "M"]}>
+          {date.month}월 {date.date}일 급식
+        </Text>
         <FlatList
           overScrollMode="never"
           contentContainerStyle={{
@@ -42,7 +36,9 @@ export const Meal = () => {
           }}
           data={mealData}
           keyExtractor={(_, index) => index.toString()}
-          renderItem={({ item }) => <Menu menu={item} />}
+          renderItem={({ item }) => (
+            <MenuItem menu={item as [string, string[]]} />
+          )}
         />
       </View>
     </Layout>
