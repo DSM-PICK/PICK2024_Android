@@ -5,13 +5,27 @@ const utc = curr.getTime() + curr.getTimezoneOffset() * 60 * 1000;
 const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
 const _date = new Date(utc + KR_TIME_DIFF);
 
+type dateType = {
+  year: number;
+  month: number;
+  date: number;
+};
+
+export const calcDate = (date: dateType) => {
+  return Object.values(date)
+    .map((i) => i.toString().padStart(2, "0"))
+    .join("-");
+};
 export const getToday = () => {
   const year = _date.getFullYear();
   const month = _date.getMonth() + 1;
   const date = _date.getDate();
   const day = days[_date.getDay()];
-
-  return { year, month, date, day };
+  const fullDay = `${year}-${month.toString().padStart(2, "0")}-${date
+    .toString()
+    .padStart(2, "0")}`;
+  const fullDayShort = `${month}월 ${date}일 (${day})`;
+  return { year, month, date, day, fullDay, fullDayShort };
 };
 
 export const getDates = (date: number[]) => {
@@ -24,11 +38,9 @@ export const getDates = (date: number[]) => {
 };
 
 export const getDiff = (date: string) => {
-  const y = _date.getFullYear();
-  const m = (_date.getMonth() + 1).toString().padStart(2, "0");
-  const d = _date.getDate().toString().padStart(2, "0");
+  const { fullDay } = getToday();
 
-  const date1 = new Date(`${y}-${m}-${d}`);
+  const date1 = new Date(fullDay);
   const date2 = new Date(date);
   let diff = date1.getTime() - date2.getTime();
   diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
