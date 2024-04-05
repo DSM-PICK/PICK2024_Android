@@ -20,7 +20,7 @@ export const Teacher = () => {
   });
 
   return (
-    <Layout name="선생님 조회">
+    <Layout name="자습감독 조회">
       <View style={styles.container}>
         <Calendar
           onSelect={({ year, month, date }) => setDate({ year, month, date })}
@@ -45,8 +45,8 @@ export const Teacher = () => {
 
 const styles = StyleSheet.create({
   container: {
+    paddingBottom: "6%",
     height: "100%",
     gap: 10,
-    paddingBottom: "6%",
   },
 });
