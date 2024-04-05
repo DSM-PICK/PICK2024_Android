@@ -16,10 +16,10 @@ const queryClient = new QueryClient({
 });
 
 export default function App() {
-  enableScreens(false);
   const fadeAnim = useRef(new Animated.Value(1)).current;
   const [token, setToken] = useState(undefined);
   const [loaded, setLoaded] = useState(false);
+  enableScreens(false);
 
   useEffect(() => {
     const tokenFn = async () => {
@@ -36,7 +36,7 @@ export default function App() {
     }, 1400);
   }, []);
 
-  const Loading = () => {
+  const Splash = () => {
     if (!loaded) {
       return (
         <Animated.View
@@ -64,7 +64,7 @@ export default function App() {
       <QueryClientProvider client={queryClient}>
         <Navigation auth={!!token} />
         <ToastManager />
-        <Loading />
+        <Splash />
         <StatusBar style="dark" />
       </QueryClientProvider>
     );
