@@ -15,18 +15,16 @@ export const Teacher = () => {
   const { data: teacherData, isError } = useQuery({
     queryKey: [queryKeys.teacher, date],
     queryFn: () => get(`${path.selfStudy}/today?date=${calcDate(date)}`),
-    select: (res) => res?.data,
     placeholderData: (prev) => prev,
+    select: (res) => res?.data,
   });
-
-  const dateFn = ({ year, month, date }) => {
-    setDate({ year, month, date });
-  };
 
   return (
     <Layout name="선생님 조회">
       <View style={styles.container}>
-        <Calendar onSelect={dateFn} />
+        <Calendar
+          onSelect={({ year, month, date }) => setDate({ year, month, date })}
+        />
         <Text type={["subTitle", 3, "M"]}>
           {date.month}월 {date.date}일 자습감독 선생님
         </Text>
