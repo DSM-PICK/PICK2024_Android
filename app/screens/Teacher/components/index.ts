@@ -1,1 +1,1 @@
-export * from "./TeacherBox";
+export * from "./TeacherItem";

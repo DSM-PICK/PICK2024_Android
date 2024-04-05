@@ -9,7 +9,7 @@ interface PropType {
   };
 }
 
-export const TeacherBox = ({ item }: PropType) => {
+export const TeacherItem = ({ item }: PropType) => {
   return (
     <HiddenView data={item !== undefined}>
       <View key={item.floor} style={styles.container}>
