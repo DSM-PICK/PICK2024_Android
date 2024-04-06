@@ -4,9 +4,9 @@ import { useMutation } from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
 import { useState } from "react";
 import { Text, Input, Button } from "@commonents";
-import { setToken } from "@/utils";
+import { post, setToken } from "@/utils";
+import { path } from "@/constants";
 import { Layout } from "@layouts";
-import { login } from "@/api";
 
 export const Login = () => {
   const [data, setData] = useState({
@@ -17,7 +17,7 @@ export const Login = () => {
     account_id: false,
     password: false,
   });
-  const disabled = data.account_id === "" || data.password === "";
+  const disabled = !!!data.account_id || !!!data.password;
   const navigation = useNavigation();
 
   const handleChange = ({ text, name }) => {
@@ -25,15 +25,12 @@ export const Login = () => {
   };
 
   const { mutate: loginFn } = useMutation({
-    mutationFn: () => login(data),
-    onError: (err: any) => {
-      const { status } = err?.response.data;
-      if (status === 404) {
-        setError({ ...error, account_id: true });
-      } else if (status === 401) {
-        setError({ ...error, password: true });
-      }
-    },
+    mutationFn: () => post(`${path.user}/login`, data),
+    onError: ({ status }: any) =>
+      setError({
+        ...error,
+        [status === 500 ? "account_id" : "password"]: true,
+      }),
     onSuccess: async (res: AxiosResponse) => {
       const { access_token, refresh_token } = res?.data;
       await setToken(access_token, refresh_token);
@@ -51,7 +48,7 @@ export const Login = () => {
         <Text type={["body", 2]} color={["neutral", 400]}>
           스퀘어 계정으로 로그인해주세요.
         </Text>
-        <View style={styles.innerInputContainer}>
+        <View style={{ gap: 5 }}>
           <Input
             value={data.account_id}
             onChange={handleChange}
@@ -68,7 +65,7 @@ export const Login = () => {
           </Text>
         </View>
 
-        <View style={styles.innerInputContainer}>
+        <View style={{ gap: 5 }}>
           <Input
             value={data.password}
             onChange={handleChange}
@@ -105,9 +102,6 @@ const styles = StyleSheet.create({
     flex: 5,
     gap: 15,
     justifyContent: "center",
-  },
-  innerInputContainer: {
-    gap: 5,
   },
   buttonContainer: {
     flex: 1,
