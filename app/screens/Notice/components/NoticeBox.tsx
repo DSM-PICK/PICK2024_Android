@@ -14,19 +14,21 @@ interface PropType {
 
 export default function NoticeBox({ title, date, id }: PropType) {
   const navigation = useNavigation();
-  const path = ["상세공지", { id: id }];
+  const path = ["상세공지", { id }] as never;
   const _date = getDiff(date);
 
   return (
     <Box rounded="none">
       <TouchableOpacity
-        onPress={() => navigation.navigate(...(path as never))}
+        onPress={() => navigation.navigate(...path)}
         style={styles.container}
       >
         <NoticeIcon />
         <View style={{ gap: 5 }}>
           <View style={styles.titleContainer}>
-            <Text type={["body", 2]}>{title}</Text>
+            <Text type={["body", 2]}>
+              {title.length > 21 ? title.slice(0, 21) + ".." : title}
+            </Text>
             {_date === "오늘" && <New />}
           </View>
           <Text type={["body", 2]} color={["neutral", 200]}>

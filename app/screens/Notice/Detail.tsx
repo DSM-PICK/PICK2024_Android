@@ -1,34 +1,30 @@
+import { useQuery } from "@tanstack/react-query";
 import { StyleSheet, View } from "react-native";
-import { noticeData } from "@/tmpData";
-import { getColors } from "@/utils";
+import { path, queryKeys } from "@/constants";
+import { get, getColors } from "@/utils";
 import { Text } from "@commonents";
 import { Layout } from "@layouts";
-import { useQuery } from "@tanstack/react-query";
-import { queryKeys } from "@/constants";
-import { detail } from "@/api";
 
 export const DetailNotice = ({ route }) => {
   const { id } = route.params;
 
   const { data: detailData } = useQuery({
     queryKey: [queryKeys.notice, id],
-    queryFn: () => detail(id),
-    select: (res) => {
-      return res?.data;
-    },
+    queryFn: () => get(`${path.notice}/${id}`),
+    select: (res) => res?.data,
   });
 
   return (
     <Layout
       name={
         detailData?.title.length > 11
-          ? detailData?.title.slice(0, 11) + "..."
+          ? detailData?.title.slice(0, 11) + ".."
           : detailData?.title
       }
     >
       <View style={styles.container}>
         <View style={{ gap: 5 }}>
-          <Text type={["subTitle", 2, "M"]} color={["neutral", 50]}>
+          <Text type={["subTitle", 3, "M"]} color={["neutral", 50]}>
             {detailData?.title}
           </Text>
           <Text type={["caption", 2]} color={["neutral", 400]}>
