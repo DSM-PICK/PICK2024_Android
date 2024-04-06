@@ -1,14 +1,13 @@
 import { FlatList } from "react-native-gesture-handler";
-import { Image, View } from "react-native";
 import { useEffect, useRef, useState } from "react";
-import { getToday } from "@/utils";
+import { useQuery } from "@tanstack/react-query";
+import { View } from "react-native";
+import { path, queryKeys } from "@/constants";
+import * as I from "@/assets/tableIcons";
 import { Carousel } from "@layouts";
 import { Text } from "@commonents";
 import Subject from "./Subject";
-import { useQuery } from "@tanstack/react-query";
-import { queryKeys } from "@/constants";
-import { weekTimeTable } from "@/api/schedule/timetable";
-import * as I from "@/assets/tableIcons";
+import { get } from "@/utils";
 
 const days = ["월", "화", "수", "목", "금"];
 const times = [
@@ -20,18 +19,16 @@ const times = [
   "14:30 ~ 15:20",
   "15:30 ~ 16:20",
 ];
-const { day } = getToday();
 
 export default function TimeTables() {
   const [_date, _setDate] = useState([0, 0, 0]);
+  const [month, date, day] = _date;
   const isFirst = useRef(true);
 
   const { data: tableData } = useQuery({
     queryKey: [queryKeys.timeTable, "schedule"],
-    queryFn: weekTimeTable,
-    select: (res) => {
-      return res?.data;
-    },
+    queryFn: () => get(`${path.timeTable}/week`),
+    select: (res) => res?.data,
   });
 
   useEffect(() => {
@@ -51,37 +48,29 @@ export default function TimeTables() {
     <View style={{ height: "80%" }}>
       <View style={{ paddingHorizontal: 25 }}>
         <Text type={["subTitle", 3, "M"]}>
-          {_date[0]}월 {_date[1]}일 ({days[_date[2]]})
+          {month}월 {date}일 ({days[day]})
         </Text>
       </View>
-
-      <Carousel height="100%" onScroll={handleScroll} first={days.indexOf(day)}>
-        {tableData?.map((item, index) => {
-          return (
-            <FlatList
-              initialNumToRender={1}
-              key={index}
-              style={{ height: "100%" }}
-              data={item?.timetables}
-              keyExtractor={(_, index) => index.toString()}
-              renderItem={({ item, index }) => (
-                <Subject
-                  index={index + 1}
-                  name={item.subject_name}
-                  duration={times[index]}
-                  icon={
-                    <Image
-                      source={
-                        I[item.subject_name.replaceAll(" ", "")] ||
-                        I["웹프로그래밍"]
-                      }
-                    />
-                  }
-                />
-              )}
-            />
-          );
-        })}
+      <Carousel height="100%" onScroll={handleScroll}>
+        {tableData?.map((item: any, index: number) => (
+          <FlatList
+            initialNumToRender={1}
+            key={index}
+            style={{ height: "100%" }}
+            data={item?.timetables}
+            keyExtractor={(_, index) => index.toString()}
+            renderItem={({ item, index }) => (
+              <Subject
+                index={index + 1}
+                name={item.subject_name}
+                duration={times[index]}
+                icon={
+                  I[item.subject_name.replaceAll(" ", "")] || I["웹프로그래밍"]
+                }
+              />
+            )}
+          />
+        ))}
       </Carousel>
     </View>
   );
