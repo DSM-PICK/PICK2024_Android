@@ -30,7 +30,7 @@ export default function Navigation({ auth }) {
         <Stack.Screen name="외출" component={_.Out} />
         <Stack.Screen name="조기귀가" component={_.Out} />
         <Stack.Screen name="외출증" component={_.Pass} />
-        <Stack.Screen name="선생님 조회" component={_.Teacher} />
+        <Stack.Screen name="감독 조회" component={_.Teacher} />
       </Stack.Navigator>
     </NavigationContainer>
   );
