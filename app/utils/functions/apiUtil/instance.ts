@@ -25,12 +25,13 @@ instance.interceptors.response.use(
     return res;
   },
   async (err) => {
-    if (err?.response.status === 401) {
+    const { status, error } = err?.response;
+    if (status === 401) {
       refresh().then((res) => {
         const { access_token, refresh_token } = res?.data;
         setToken(access_token, refresh_token);
       });
     }
-    throw err;
+    throw { status, error };
   }
 );
