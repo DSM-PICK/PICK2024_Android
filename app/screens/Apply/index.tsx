@@ -1,33 +1,31 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { StyleSheet, View } from "react-native";
 import { useEffect, useState } from "react";
+import { MealButton, ApplyBox } from "./components";
 import { Layout, Box, HiddenView } from "@layouts";
-import { weekendMeal, weekendMealMy } from "@/api";
-import MealButton from "./components/MealButton";
-import ApplyBox from "./components/ApplyBox";
+import { get, getToday, patch } from "@/utils";
+import { path, queryKeys } from "@/constants";
 import { Modal, Text } from "@commonents";
-import { queryKeys } from "@/constants";
 import { Move, Out } from "@/assets";
-import { getToday } from "@/utils";
 
 const { month } = getToday();
 
 export const Apply = () => {
-  const [visible, setVisible] = useState([false, ""]);
+  const [visible, setVisible] = useState<[boolean, string]>([false, ""]);
   const [meal, setMeal] = useState(undefined);
   const queryClient = useQueryClient();
 
   const { data: weekendMealData } = useQuery({
     queryKey: queryKeys.weekendMeal,
-    queryFn: weekendMealMy,
+    queryFn: () => get(`${path.weekendMeal}/my`),
     select: (res) => res?.data.status,
   });
 
   const { mutate: weekendMealMutate } = useMutation({
-    mutationFn: (id: string) => weekendMeal(id),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.weekendMeal });
-    },
+    mutationFn: (id: string) =>
+      patch(`${path.weekendMeal}/my-status?status=${id}`),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: queryKeys.weekendMeal }),
   });
 
   useEffect(() => {
@@ -62,9 +60,7 @@ export const Apply = () => {
             </View>
           </Box>
         </View>
-        <HiddenView
-          data={!(queryClient.getQueryData(queryKeys.anyApply) === "")}
-        >
+        <HiddenView data={!!queryClient.getQueryData(queryKeys.anyApply)}>
           <View style={styles.gapContainer}>
             <ApplyBox
               date="오늘"
@@ -84,11 +80,11 @@ export const Apply = () => {
       </View>
 
       <Modal
-        visible={visible[0] as boolean}
+        visible={visible[0]}
         setVisible={(data) => setVisible([data, visible[1]])}
         type={0}
         onAccept={() => {
-          weekendMealMutate(visible[1] as string);
+          weekendMealMutate(visible[1]);
         }}
       >
         <Text type={["subTitle", 3, "M"]} color={["neutral", 50]}>
