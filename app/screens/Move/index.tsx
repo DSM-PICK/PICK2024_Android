@@ -1,13 +1,12 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { FlatList } from "react-native-gesture-handler";
 import { StyleSheet, View } from "react-native";
 import { useState } from "react";
-import { ClassButton, FloorButton } from "./components";
-import { Modal, Text } from "@commonents";
+import { ClassButton, ClassPicker, FloorButton } from "./components";
 import { floorData } from "./floorData";
-import { useToast } from "@/utils";
+import { post, useToast } from "@/utils";
 import { Layout } from "@layouts";
-import { moveClass } from "@/api";
+import { path, queryKeys } from "@/constants";
 
 const floors = Array.from(new Array(5).keys()).map((i) => i + 1);
 
@@ -19,15 +18,21 @@ export const Move = ({ navigation }) => {
     floor: 1,
     classroom_name: undefined,
   });
+  const queryClient = useQueryClient();
 
   const { classroom_name: className } = selected;
 
   const { mutate: moveMutate } = useMutation({
-    mutationFn: () => moveClass(selected),
-    onSuccess: () => {
-      setVisible(true);
+    mutationFn: (item: any) => post(`${path.classRoom}/move`, item),
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: queryKeys.anyApply });
+      await navigation.reset({ routes: [{ name: "홈" as never }] });
+      toast.success(`${className} 이동이 신청됬습니다`);
     },
-    onError: () => toast.error("오류가 발생했습니다"),
+    onError: ({ status }: any) =>
+      toast.error(
+        status === 409 ? "이미 신청되었습니다" : "오류가 발생했습니다"
+      ),
   });
 
   const Renderor = ({ item }) => (
@@ -40,8 +45,12 @@ export const Move = ({ navigation }) => {
   );
 
   return (
-    <Layout name="교실 이동" onDone={moveMutate} isDone={!!className}>
-      <View style={{ gap: 10 }}>
+    <Layout
+      name="교실 이동"
+      onDone={() => setVisible(true)}
+      isDone={!!className}
+    >
+      <View style={{ gap: 20 }}>
         <View style={styles.floorButtonContainer}>
           {floors.map((item) => (
             <FloorButton
@@ -64,21 +73,11 @@ export const Move = ({ navigation }) => {
           />
         </View>
       </View>
-      <Modal
-        type={3}
+      <ClassPicker
         visible={visible}
         setVisible={setVisible}
-        onAccept={() => {
-          navigation.reset({ routes: [{ name: "홈" as never }] });
-        }}
-      >
-        <Text type={["subTitle", 3, "M"]}>
-          <Text type={["subTitle", 3, "M"]} color={["primary", 400]}>
-            {className || ""}
-          </Text>{" "}
-          이동 신청이 완료되었습니다
-        </Text>
-      </Modal>
+        onDone={(item: any) => moveMutate({ ...selected, ...item })}
+      />
     </Layout>
   );
 };

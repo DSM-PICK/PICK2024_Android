@@ -3,6 +3,8 @@ import { Button } from "@commonents";
 type SelectedType = {
   floor: number;
   classroom_name: string;
+  start_period: number;
+  end_period: number;
 };
 
 interface PropType {

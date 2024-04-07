@@ -5,11 +5,11 @@ import { Button, Text } from "@commonents";
 import { deleet } from "@/utils";
 
 interface PropType {
-  name: string;
-  data: string;
+  locate: string;
+  data: [string, string];
 }
 
-export default function Move({ name, data }: PropType) {
+export default function Move({ locate, data }: PropType) {
   const queryClient = useQueryClient();
 
   const { mutate: returnFn } = useMutation({
@@ -22,13 +22,16 @@ export default function Move({ name, data }: PropType) {
     <>
       <View>
         <Text type={["caption", 2]} color={["neutral", 400]}>
-          {name}님은 현재
+          <Text type={["caption", 2]} color={["primary", 400]}>
+            {data[0]}교시 ~ {data[1]}교시
+          </Text>{" "}
+          동안
         </Text>
         <Text type={["caption", 1]}>
           <Text type={["subTitle", 3, "M"]} color={["primary", 400]}>
-            {data}
+            {locate}
           </Text>
-          에 있습니다
+          에 있습니다.
         </Text>
       </View>
 
