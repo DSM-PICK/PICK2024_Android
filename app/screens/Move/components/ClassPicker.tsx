@@ -21,8 +21,7 @@ export default function ClassPicker({ visible, setVisible, onDone }: PropType) {
   };
 
   const handleAccept = () => {
-    console.log(time.end_period - time.start_period);
-    if (time.end_period - time.start_period < 0) {
+    if (time.end_period < time.start_period) {
       toast.error("올바른 교시를 선택해주세요");
     } else {
       onDone(time);
