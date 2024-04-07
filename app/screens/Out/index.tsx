@@ -25,7 +25,7 @@ export const Out = ({ navigation, route }) => {
   const isOut = (item1: any, item2: any) => (type === "외출" ? item1 : item2);
 
   const { mutate: outMutate } = useMutation({
-    mutationFn: () => post(isOut("/out", "/early-return/create"), out),
+    mutationFn: () => post(isOut("/application", "/early-return/create"), out),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: queryKeys.anyApply });
       await navigation.reset({ routes: [{ name: "홈" as never }] });
