@@ -1,11 +1,11 @@
 import { StyleSheet, View } from "react-native";
 import { Box, HiddenView } from "@layouts";
+import { defaultData } from "@/constants";
 import Move from "./Move";
 import Home from "./Home";
 import Out from "./Out";
 
 interface PropType {
-  visible: boolean;
   type: string;
   data: any;
 }
@@ -19,16 +19,19 @@ const Types = {
     Out({ name: username, data: [start_time, end_time] }),
 };
 
-export default function Pass({ visible, type, data }: PropType) {
-  let { username, end_time, start_time, classroom } = data;
-  end_time = end_time?.split(":").splice(0, 2).join(":");
-  start_time = start_time?.split(":").splice(0, 2).join(":");
+export default function Pass({ type, data }: PropType) {
+  let { username, end_time, start_time, classroom } = data || defaultData;
 
   return (
-    <HiddenView data={visible}>
+    <HiddenView data={!!data}>
       <Box>
         <View style={styles.container}>
-          {Types[type]({ username, end_time, start_time, classroom })}
+          {Types[type || "CLASSROOM"]({
+            username,
+            end_time,
+            start_time,
+            classroom,
+          })}
         </View>
       </Box>
     </HiddenView>

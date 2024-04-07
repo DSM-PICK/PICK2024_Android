@@ -1,7 +1,7 @@
 import { FlatList } from "react-native-gesture-handler";
 import { useQuery } from "@tanstack/react-query";
 import { View, StyleSheet } from "react-native";
-import Menu from "@/screens/Meal/components/MenuItem";
+import { MenuItem } from "@/screens/Meal/components";
 import { path, queryKeys } from "@/constants";
 import { get, getToday } from "@/utils";
 import { Text } from "@commonents";
@@ -32,7 +32,7 @@ export default function Meal() {
             contentContainerStyle={{ gap: 10 }}
             keyExtractor={(_, index) => index.toString()}
             renderItem={({ item }) => (
-              <Menu menu={item as [string, string[]]} />
+              <MenuItem menu={item as [string, string[]]} />
             )}
           />
         </View>

@@ -39,9 +39,7 @@ export default function TimeTable() {
               <Subject
                 index={index + 1}
                 name={item.subject_name}
-                icon={
-                  I[item.subject_name.replaceAll(" ", "")] || I["웹프로그래밍"]
-                }
+                icon={I[item.subject_name.replaceAll(" ", "")]}
               />
             )}
           />

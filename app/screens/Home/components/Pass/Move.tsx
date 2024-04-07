@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { View } from "react-native";
+import { path, queryKeys } from "@/constants";
 import { Button, Text } from "@commonents";
-import { queryKeys } from "@/constants";
-import { returnClass } from "@/api";
+import { deleet } from "@/utils";
 
 interface PropType {
   name: string;
@@ -13,7 +13,7 @@ export default function Move({ name, data }: PropType) {
   const queryClient = useQueryClient();
 
   const { mutate: returnFn } = useMutation({
-    mutationFn: returnClass,
+    mutationFn: () => deleet(`${path.classRoom}/return`),
     onSuccess: () =>
       queryClient.invalidateQueries({ queryKey: queryKeys.anyApply }),
   });

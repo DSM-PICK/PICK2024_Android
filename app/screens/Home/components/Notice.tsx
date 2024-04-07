@@ -1,31 +1,21 @@
 import { useNavigation } from "@react-navigation/native";
 import { FlatList } from "react-native-gesture-handler";
+import { useQuery } from "@tanstack/react-query";
 import { View, StyleSheet } from "react-native";
-import NoticeBox from "@/screens/Notice/components/NoticeBox";
-import { getColors } from "@/utils";
+import { NoticeBox } from "@/screens/Notice/components";
+import { path, queryKeys } from "@/constants";
+import { getColors, get } from "@/utils";
 import { Text } from "@commonents";
 import { Box } from "@layouts";
-import { queryKeys } from "@/constants";
-import { notice } from "@/api";
-import { useQuery } from "@tanstack/react-query";
 
 export default function Notice() {
   const navigation = useNavigation();
-  const nagivating = () => navigation.navigate("공지" as never);
 
   const { data: noticeData } = useQuery({
     queryKey: queryKeys.notice,
-    queryFn: notice,
-    select: (res) => {
-      return res?.data;
-    },
+    queryFn: () => get(`${path.notice}/simple`),
+    select: (res) => res?.data,
   });
-
-  const Separator = () => <View style={styles.separatorElement} />;
-
-  const Renderor = ({ item }) => (
-    <NoticeBox title={item.title} date={item.create_at} id={item.id} />
-  );
 
   return (
     <Box height="100%">
@@ -35,7 +25,7 @@ export default function Notice() {
           <Text
             type={["body", 2]}
             color={["neutral", 300]}
-            onPress={nagivating}
+            onPress={() => navigation.navigate("공지" as never)}
           >
             더보기
           </Text>
@@ -43,8 +33,12 @@ export default function Notice() {
         <FlatList
           overScrollMode="never"
           data={noticeData}
-          ItemSeparatorComponent={Separator}
-          renderItem={Renderor}
+          ItemSeparatorComponent={() => (
+            <View style={styles.separatorElement} />
+          )}
+          renderItem={({ item }) => (
+            <NoticeBox title={item.title} date={item.create_at} id={item.id} />
+          )}
         />
       </View>
     </Box>

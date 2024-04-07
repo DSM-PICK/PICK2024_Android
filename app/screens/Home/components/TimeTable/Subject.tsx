@@ -1,4 +1,5 @@
 import { View, StyleSheet, Image, ImageSourcePropType } from "react-native";
+import * as I from "@/assets/tableIcons";
 import { Text } from "@commonents";
 import { Box } from "@layouts";
 
@@ -15,7 +16,7 @@ export default function Subject({ index, name, icon }: PropType) {
         <Text type={["subTitle", 3, "B"]} color={["primary", 100]}>
           {index}
         </Text>
-        <Image source={icon} style={styles.imageElement} />
+        <Image source={icon || I["웹프로그래밍"]} style={styles.imageElement} />
         <View style={[styles.flexContainer, { gap: 5 }]}>
           <Text type={["subTitle", 4, "M"]}>{name}</Text>
         </View>
