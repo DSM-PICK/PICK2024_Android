@@ -13,25 +13,20 @@ interface PropType {
 const Types = {
   EARLYRETURN: ({ username, start_time }) =>
     Home({ name: username, data: start_time }),
-  CLASSROOM: ({ username, classroom }) =>
-    Move({ name: username, data: classroom }),
+  CLASSROOM: ({ classroom, start_period, end_period }) =>
+    Move({ locate: classroom, data: [start_period, end_period] }),
   APPLICATION: ({ username, end_time, start_time }) =>
     Out({ name: username, data: [start_time, end_time] }),
 };
 
 export default function Pass({ type, data }: PropType) {
-  let { username, end_time, start_time, classroom } = data || defaultData;
-
   return (
     <HiddenView data={!!data}>
       <Box>
         <View style={styles.container}>
-          {Types[type || "CLASSROOM"]({
-            username,
-            end_time,
-            start_time,
-            classroom,
-          })}
+          {Types[type || "CLASSROOM"](
+            !!data ? { ...data } : { ...defaultData }
+          )}
         </View>
       </Box>
     </HiddenView>

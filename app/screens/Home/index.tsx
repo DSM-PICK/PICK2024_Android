@@ -59,7 +59,7 @@ export const Home = ({ navigation }) => {
             <HomeButton icon={<Meals {...buttonIconSize} />} name="급식" />
             <HomeButton
               icon={<Teacher {...buttonIconSize} />}
-              name="선생님 조회"
+              name="감독 조회"
             />
           </View>
           <Pass type={applyData?.type} data={applyData && applyData} />
