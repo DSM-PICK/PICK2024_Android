@@ -1,3 +1,4 @@
+export { default as TernaryView } from "./TernaryView";
 export { default as HiddenView } from "./HiddenView";
 export { default as Carousel } from "./Carousel";
 export { default as Layout } from "./Layout";

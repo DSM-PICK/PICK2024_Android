@@ -5,15 +5,19 @@ import {
   TouchableOpacity,
   ViewStyle,
 } from "react-native";
-import { ColorPropType, getColors, perfectSize as p } from "@/utils";
+import { ColorPropType, getColors } from "@/utils";
 import { propType } from "BoxType";
-import { layout } from "@/constants";
 
 interface PropType extends propType {
   color?: ColorPropType;
 }
 
-const { roundedSet } = layout.box;
+const roundedSet = {
+  none: 0,
+  sm: 4,
+  lg: 8,
+  full: "100%",
+};
 
 export default function Box({
   color = ["neutral", 1100],

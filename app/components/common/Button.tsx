@@ -8,7 +8,6 @@ import {
 import React from "react";
 import { ColorPropType, getColors, perfectSize as p } from "@/utils";
 import { propType } from "ButtonType";
-import { common } from "@/constants";
 import { Text } from "@commonents";
 
 interface PropType extends propType {
@@ -17,7 +16,14 @@ interface PropType extends propType {
   fontColor?: ColorPropType;
 }
 
-const { sizes } = common.button;
+const sizes = {
+  full: ["100%", "S"],
+  extraLarge: ["80%", "S"],
+  large: ["60%", "L"],
+  medium: ["40%", "M"],
+  small: ["20%", "S"],
+  auto: ["auto", "M"],
+};
 
 export default function Button({
   size,

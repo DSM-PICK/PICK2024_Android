@@ -53,6 +53,7 @@ export default function ScrollPicker({ items, onScroll, id }: PropType) {
           </View>
         )}
         removeClippedSubviews
+        decelerationRate="normal"
         snapToInterval={40}
         showsVerticalScrollIndicator={false}
       />

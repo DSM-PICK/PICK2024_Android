@@ -14,7 +14,7 @@ export default function ToastManager() {
   const showT = () => {
     Animated.timing(pos, {
       toValue: StatusBar.currentHeight + 10,
-      duration: 150,
+      duration: 200,
       useNativeDriver: true,
     }).start(() => {
       if (type !== "waiting") {
@@ -26,7 +26,7 @@ export default function ToastManager() {
   const hideT = () => {
     Animated.timing(pos, {
       toValue: -100,
-      duration: 150,
+      duration: 200,
       useNativeDriver: true,
     }).start();
   };

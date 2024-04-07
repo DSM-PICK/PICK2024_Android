@@ -25,6 +25,14 @@ declare module "HiddenType" {
   }
 }
 
+declare module "TernaryType" {
+  export interface PropType {
+    data: any;
+    onTrue: React.ReactElement[] | React.ReactElement;
+    onFalse: React.ReactElement[] | React.ReactElement;
+  }
+}
+
 declare module "LayoutType" {
   export interface PropType {
     children: React.ReactNode;
