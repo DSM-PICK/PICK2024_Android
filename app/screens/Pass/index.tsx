@@ -45,7 +45,7 @@ export const Pass = ({ route }) => {
       <View style={styles.container}>
         <View style={styles.detailContainer}>
           <Text type={["heading", 6, "M"]}>
-            {grade + class_num + num + username}
+            {`${grade}${class_num}${num}${username}`}
           </Text>
           <View style={{ gap: 20 }}>
             <Label title={`${names[type]} 시간`}>
