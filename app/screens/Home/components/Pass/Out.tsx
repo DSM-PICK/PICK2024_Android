@@ -27,16 +27,14 @@ export default function Out({ name, data }: PropType) {
         </Text>
       </View>
 
-      <View style={{ width: "30%" }}>
-        <Button
-          size="full"
-          fontType={["button", "ES"]}
-          onPress={() => navigation.navigate(...(path as never))}
-          color={["secondary", 500]}
-        >
-          외출증 보기
-        </Button>
-      </View>
+      <Button
+        size="auto"
+        fontType={["button", "ES"]}
+        onPress={() => navigation.navigate(...(path as never))}
+        color={["secondary", 500]}
+      >
+        외출증 보기
+      </Button>
     </>
   );
 }

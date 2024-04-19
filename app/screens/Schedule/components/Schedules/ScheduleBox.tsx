@@ -27,7 +27,9 @@ export const ScheduleBox = ({ item, date }: PropType) => {
             <Text type={["subTitle", 2, "M"]}>{item.day}</Text>
             <Text type={["body", 3]}>{days[_date.getDay()]}요일</Text>
           </View>
-          <Text type={["subTitle", 2, "M"]}>{item.event_name}</Text>
+          <Text type={["subTitle", item.event_name.length <= 10 ? 2 : 3, "M"]}>
+            {item.event_name}
+          </Text>
         </View>
       </Box>
     </View>
