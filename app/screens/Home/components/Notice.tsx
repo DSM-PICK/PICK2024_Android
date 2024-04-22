@@ -33,6 +33,9 @@ export default function Notice() {
         <FlatList
           overScrollMode="never"
           data={noticeData}
+          ListEmptyComponent={() => (
+            <Text type={["body", 2]}>공지사항이 없습니다</Text>
+          )}
           ItemSeparatorComponent={() => (
             <View style={styles.separatorElement} />
           )}
