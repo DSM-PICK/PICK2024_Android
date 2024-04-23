@@ -3,8 +3,8 @@ import { useFocusEffect } from "@react-navigation/native";
 import { View, StyleSheet, Image } from "react-native";
 import { useCallback } from "react";
 import { HomeButton, TimeTable, Notice, Meal, Pass } from "./components";
+import { hitSlop, path, queryKeys, placeholderData } from "@/constants";
 import { Apply, Schedule, Meals, My, Teacher } from "@icons";
-import { hitSlop, path, queryKeys } from "@/constants";
 import { Carousel, Layout } from "@layouts";
 import { Text } from "@commonents";
 import { get } from "@/utils";
@@ -35,6 +35,7 @@ export const Home = ({ navigation }) => {
       const { class_num, grade, name, num } = res?.data;
       return [grade, class_num, num, name];
     },
+    placeholderData,
   });
 
   const navigate = (to: string) => navigation.navigate(to);

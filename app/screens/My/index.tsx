@@ -1,20 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { View, StyleSheet } from "react-native";
 import { useState } from "react";
-import { queryKeys, defaultData, path } from "@/constants";
+import { queryKeys, placeholderData, path } from "@/constants";
 import { removeToken, getColors, get } from "@/utils";
 import { Text, Modal } from "@commonents";
 import { InfoBox } from "./components";
 import { Layout, Box } from "@layouts";
 
 const dateType = ["년", "월", "일"];
-const placeholderData = {
-  data: defaultData,
-  status: 200,
-  statusText: "",
-  headers: {},
-  config: {},
-};
 
 export const My = ({ navigation }) => {
   const [visible, setVisible] = useState(false);

@@ -1,19 +1,28 @@
+import { AxiosResponse } from "axios";
 export * from "./queryKeys";
 
 const size = 10;
 
 export const hitSlop = { top: size, left: size, right: size, bottom: size };
 
-export const defaultData = {
-  name: "박수현",
-  birth_day: "2024-02-24",
-  grade: 1,
-  class_num: 4,
-  num: 8,
-  account_id: "soohyeon",
-  classRoom: "2-1",
-  start_time: "08:30",
-  end_time: "16:20",
+export const placeholderData: AxiosResponse = {
+  data: {
+    name: "홍길동",
+    birth_day: "1944-12-21",
+    grade: 2,
+    class_num: 5,
+    num: 17,
+    account_id: "gildong",
+    classRoom: "undefined",
+    start_time: "00:00",
+    end_time: "00:00",
+    reason: "집 보내주세요",
+    teacher: "홍판서",
+  },
+  status: 200,
+  statusText: "",
+  headers: {},
+  config: {},
 };
 
 export const months = [
