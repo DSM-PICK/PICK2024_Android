@@ -9,9 +9,7 @@ export const placeholderData: AxiosResponse = {
   data: {
     name: "홍길동",
     birth_day: "1944-12-21",
-    grade: 2,
-    class_num: 5,
-    num: 17,
+    school_num: 1111,
     account_id: "gildong",
     classRoom: "undefined",
     start_time: "00:00",

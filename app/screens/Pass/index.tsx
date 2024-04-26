@@ -21,24 +21,14 @@ export const Pass = ({ route }) => {
     placeholderData,
   });
 
-  const {
-    grade,
-    class_num,
-    num,
-    username,
-    start_time,
-    end_time,
-    reason,
-    teacher_name,
-  } = data;
+  const { school_num, username, start_time, end_time, reason, teacher_name } =
+    data;
 
   return (
     <Layout name="외출증">
       <View style={styles.container}>
         <View style={styles.detailContainer}>
-          <Text type={["heading", 6, "M"]}>
-            {`${grade}${class_num}${num}${username}`}
-          </Text>
+          <Text type={["heading", 6, "M"]}>{`${school_num} ${username}`}</Text>
           <View style={{ gap: 20 }}>
             <Label title={`${names[type]} 시간`}>
               {end_time ? `${start_time}~${end_time}` : start_time}
