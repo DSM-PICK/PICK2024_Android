@@ -26,7 +26,7 @@ instance.interceptors.response.use(
   },
   async (err) => {
     const { status, error, data } = err?.response;
-    if (status === 401 && data.path === "/dsm-pick/application") {
+    if (status === 401 && data.path === "/dsm-pick/simple") {
       refresh().then((res) => {
         const { access_token, refresh_token } = res?.data;
         setToken(access_token, refresh_token);
