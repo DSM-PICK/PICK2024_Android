@@ -1,6 +1,6 @@
 import { Image, StyleSheet, View } from "react-native";
 import { useQuery } from "@tanstack/react-query";
-import { placeholderData, path, queryKeys } from "@/constants";
+import { path, queryKeys } from "@/constants";
 import { Label } from "./components";
 import { Text } from "@commonents";
 import { Layout } from "@layouts";
@@ -18,7 +18,6 @@ export const Pass = ({ route }) => {
     queryKey: queryKeys.apply,
     queryFn: () => get(`${path[type === "out" ? "out" : "earlyReturn"]}/my`),
     select: (res) => res?.data,
-    placeholderData,
   });
 
   const { school_num, username, start_time, end_time, reason, teacher_name } =
