@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { View, StyleSheet } from "react-native";
 import { useState } from "react";
-import { queryKeys, placeholderData, path } from "@/constants";
+import { queryKeys, path } from "@/constants";
 import { removeToken, getColors, get } from "@/utils";
 import { Text, Modal } from "@commonents";
 import { InfoBox } from "./components";
@@ -20,7 +20,6 @@ export const My = ({ navigation }) => {
       data = { ...data, birth_day: data.birth_day.split("-") };
       return data;
     },
-    placeholderData,
   });
 
   const handleLogout = async () => {
