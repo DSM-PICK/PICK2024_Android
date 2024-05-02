@@ -1,15 +1,18 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { setBackgroundColorAsync } from "expo-navigation-bar";
 import { enableScreens } from "react-native-screens";
 import { useEffect, useRef, useState } from "react";
 import Navigation from "@/navigation/Navigation";
 import { Animated, Image } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { ToastManager } from "@commonents";
-import { getToken } from "@/utils";
+import { getColors, getToken } from "@/utils";
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
+      retry: true,
+      retryDelay: 300,
       staleTime: 10000,
     },
   },
@@ -22,11 +25,16 @@ export default function App() {
   enableScreens(false);
 
   useEffect(() => {
+    const color = async () => {
+      await setBackgroundColorAsync(getColors(["primary", 1000]));
+    };
+
     const tokenFn = async () => {
       const { accessToken } = await getToken();
       setToken(accessToken);
     };
     tokenFn();
+    color();
     setTimeout(() => {
       Animated.timing(fadeAnim, {
         toValue: 0,
