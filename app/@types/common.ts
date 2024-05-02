@@ -101,6 +101,7 @@ declare module "ModalType" {
     type: number;
     visible: boolean;
     onAccept: () => void;
+    onCancel?: () => void;
     setVisible: (visible: any) => void;
   }
 }

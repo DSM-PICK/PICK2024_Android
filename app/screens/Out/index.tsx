@@ -45,7 +45,7 @@ export const Out = ({ navigation, route }) => {
     <Layout
       name={type + " 신청"}
       onDone={outMutate}
-      isDone={isOut(start && end, start) && out.reason !== ""}
+      isDone={isOut(!!start && !!end, !!start) && out.reason !== ""}
     >
       <View style={{ gap: 40 }}>
         <Label title={`희망하는 ${type} 시간을 적어주세요`}>

@@ -15,6 +15,7 @@ export default function Modal({
   type,
   visible,
   onAccept,
+  onCancel,
   children,
   setVisible,
 }: PropType) {
@@ -45,7 +46,10 @@ export default function Modal({
               <HiddenView data={cancel}>
                 <View style={styles.buttonElement}>
                   <Button
-                    onPress={() => setVisible(false)}
+                    onPress={() => {
+                      setVisible(false);
+                      !!onCancel && onCancel();
+                    }}
                     size="full"
                     color={["neutral", 700]}
                     fontColor={["neutral", 300]}
