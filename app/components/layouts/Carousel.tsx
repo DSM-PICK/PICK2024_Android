@@ -56,28 +56,18 @@ export default function Carousel({
         keyExtractor={(_, index) => index.toString()}
         renderItem={Renderor}
         onLayout={(event) => {
-          setWidth(event.nativeEvent.layout.width);
-          // 자동 스크롤 버그로 임시 비활성화
-          // if (first) {
-          //   setTimeout(() => {
-          //     testRef.current.scrollToIndex({
-          //       animated: false,
-          //       index: first,
-          //       viewPosition: 0.5,
-          //     });
-          //   }, 100);
-          // }
+          const { width: _width } = event.nativeEvent.layout;
+          setWidth(_width);
+          if (first) {
+            setTimeout(() => {
+              testRef.current.scrollToOffset({
+                animated: false,
+                offset: (_width - 50 + gap) * first, // (캐러샐 너비 - 양옆 패딩 + 갭) * 첫 위치
+              });
+            }, 5);
+          }
         }}
-        // onScrollToIndexFailed={(error) => {
-        //   console.log(error);
-        //   setTimeout(() => {
-        //     testRef.current.scrollToIndex({
-        //       animated: false,
-        //       index: first,
-        //       viewPosition: 0.5,
-        //     });
-        //   }, 100);
-        // }}
+        onScrollToIndexFailed={() => {}}
       />
       <View style={styles.indicatorContainer}>
         {Array.from(Array(children?.length).keys()).map((item) => (

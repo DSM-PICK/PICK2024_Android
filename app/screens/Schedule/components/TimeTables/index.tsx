@@ -7,7 +7,7 @@ import * as I from "@/assets/tableIcons";
 import { Carousel } from "@layouts";
 import { Text } from "@commonents";
 import Subject from "./Subject";
-import { get } from "@/utils";
+import { get, getToday } from "@/utils";
 
 const days = ["월", "화", "수", "목", "금"];
 const times = [
@@ -19,6 +19,8 @@ const times = [
   "14:30 ~ 15:20",
   "15:30 ~ 16:20",
 ];
+
+const { dayNum: today } = getToday();
 
 export default function TimeTables() {
   const [_date, _setDate] = useState([0, 0, 0]);
@@ -51,7 +53,11 @@ export default function TimeTables() {
           {month}월 {date}일 ({days[day]})
         </Text>
       </View>
-      <Carousel height="100%" onScroll={handleScroll}>
+      <Carousel
+        height="100%"
+        onScroll={handleScroll}
+        first={today < 6 && today > 0 ? today : 0}
+      >
         {tableData?.map((item: any, index: number) => (
           <FlatList
             initialNumToRender={1}

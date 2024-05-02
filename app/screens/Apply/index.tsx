@@ -2,13 +2,13 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { StyleSheet, View } from "react-native";
 import { useEffect, useState } from "react";
 import { MealButton, ApplyBox } from "./components";
-import { Layout, Box, HiddenView } from "@layouts";
+import { Layout, Box, HiddenView, TernaryView } from "@layouts";
 import { get, getToday, patch } from "@/utils";
 import { path, queryKeys } from "@/constants";
 import { Modal, Text } from "@commonents";
 import { Move, Out } from "@/assets";
 
-const { month } = getToday();
+const { month, date } = getToday();
 
 export const Apply = () => {
   const [visible, setVisible] = useState<[boolean, string]>([false, ""]);
@@ -42,21 +42,29 @@ export const Apply = () => {
           </Text>
           <Box color={["primary", 1200]}>
             <View style={styles.endMealBoxContainer}>
-              <Text type={["body", 2]}>{month}월 주말 급식 신청</Text>
-              <View style={styles.buttonContainer}>
-                <MealButton
-                  setVisible={setVisible}
-                  id="OK"
-                  value={meal}
-                  text=" 신청 "
-                />
-                <MealButton
-                  setVisible={setVisible}
-                  id="NO"
-                  value={meal}
-                  text="미신청"
-                />
-              </View>
+              <TernaryView
+                data={date <= 7}
+                onTrue={
+                  <>
+                    <Text type={["body", 2]}>{month}월 주말 급식 신청</Text>
+                    <View style={styles.buttonContainer}>
+                      <MealButton
+                        setVisible={setVisible}
+                        id="OK"
+                        value={meal}
+                        text=" 신청 "
+                      />
+                      <MealButton
+                        setVisible={setVisible}
+                        id="NO"
+                        value={meal}
+                        text="미신청"
+                      />
+                    </View>
+                  </>
+                }
+                onFalse={<Text type={["body", 2]}>신청 기간이 아닙니다.</Text>}
+              />
             </View>
           </Box>
         </View>

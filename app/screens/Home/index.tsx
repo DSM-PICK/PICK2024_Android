@@ -65,7 +65,7 @@ export const Home = ({ navigation }) => {
           <Pass type={applyData?.type} data={applyData && applyData} />
         </View>
         <View style={{ height: !!applyData ? "59%" : "71%" }}>
-          <Carousel height="100%">
+          <Carousel height="100%" first={1}>
             <TimeTable />
             <Meal />
             <Notice />
