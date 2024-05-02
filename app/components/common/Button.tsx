@@ -4,6 +4,7 @@ import {
   GestureResponderEvent,
   StyleProp,
   ViewStyle,
+  Pressable,
 } from "react-native";
 import React from "react";
 import { ColorPropType, getColors, perfectSize as p } from "@/utils";
@@ -43,24 +44,23 @@ export default function Button({
   } as StyleProp<ViewStyle>;
 
   return (
-    <TouchableOpacity
+    <Pressable
       style={[styles.container, style]}
       disabled={disabled}
-      activeOpacity={0.6}
       onPress={(e) => onPress(e, id)}
     >
       <Text type={fontType} color={fontColor}>
         {children}
       </Text>
-    </TouchableOpacity>
+    </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    padding: p(10),
-    paddingHorizontal: p(13),
-    borderRadius: p(3),
+    padding: 10,
+    paddingHorizontal: 13,
+    borderRadius: 6,
     alignItems: "center",
   },
 });
