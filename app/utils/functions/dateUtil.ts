@@ -20,12 +20,13 @@ export const getToday = () => {
   const year = _date.getFullYear();
   const month = _date.getMonth() + 1;
   const date = _date.getDate();
-  const day = days[_date.getDay()];
+  const dayStr = days[_date.getDay()];
+  const dayNum = _date.getDay();
   const fullDay = `${year}-${month.toString().padStart(2, "0")}-${date
     .toString()
     .padStart(2, "0")}`;
-  const fullDayShort = `${month}월 ${date}일 (${day})`;
-  return { year, month, date, day, fullDay, fullDayShort };
+  const fullDayShort = `${month}월 ${date}일 (${dayStr})`;
+  return { year, month, date, dayStr, dayNum, fullDay, fullDayShort };
 };
 
 export const getDates = (date: number[]) => {
