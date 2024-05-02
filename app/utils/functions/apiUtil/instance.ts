@@ -10,7 +10,7 @@ export const instance = axios.create({
 instance.interceptors.request.use(
   async (res) => {
     const { accessToken } = await getToken();
-    if (accessToken && res.url !== "/user/refresh") {
+    if (accessToken) {
       res.headers["Authorization"] = "Bearer " + accessToken;
     }
     return res;
