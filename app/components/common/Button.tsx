@@ -1,5 +1,4 @@
 import {
-  TouchableOpacity,
   StyleSheet,
   GestureResponderEvent,
   StyleProp,
