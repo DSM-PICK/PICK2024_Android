@@ -56,7 +56,7 @@ export default function TimeTables() {
       <Carousel
         height="100%"
         onScroll={handleScroll}
-        first={today < 6 && today > 0 ? today : 0}
+        first={today !== 6 && today !== 0 ? today - 1 : 0}
       >
         {tableData?.map((item: any, index: number) => (
           <FlatList
