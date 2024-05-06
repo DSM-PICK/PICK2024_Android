@@ -8,7 +8,7 @@ import { Text } from "@commonents";
 import Subject from "./Subject";
 import { Box } from "@layouts";
 
-const { month, date, day } = getToday();
+const { fullDayShort } = getToday();
 
 export default function TimeTable() {
   const { data: tableData } = useQuery({
@@ -23,7 +23,7 @@ export default function TimeTable() {
         <View style={styles.headerContainer}>
           <Text type={["label", 1]}>시간표</Text>
           <Text type={["body", 3]} color={["neutral", 300]}>
-            {month}월 {date}일 ({day})
+            {fullDayShort}
           </Text>
         </View>
         <View>
