@@ -4,8 +4,8 @@ import {
   NativeSyntheticEvent,
   StyleSheet,
   View,
+  Vibration,
 } from "react-native";
-import * as Haptics from "expo-haptics";
 import { useState } from "react";
 import { debounce, getColors } from "@/utils";
 import { PropType } from "ScrollPickerType";
@@ -19,7 +19,7 @@ export default function ScrollPicker({ items, onScroll, id }: PropType) {
     const index = Math.ceil(e.nativeEvent.contentOffset.y / 40);
     if (index !== before) {
       setBefore(index);
-      Haptics.selectionAsync();
+      Vibration.vibrate(1);
     }
     if (!!items[index]) {
       debounce(() => {
