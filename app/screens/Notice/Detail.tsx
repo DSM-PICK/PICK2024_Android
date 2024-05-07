@@ -32,7 +32,7 @@ export const DetailNotice = ({ route }) => {
           </Text>
         </View>
         <View style={styles.lineElement} />
-        <Text type={["caption", 2]} color={["neutral", 50]}>
+        <Text type={["body", 2]} color={["neutral", 50]}>
           {detailData?.content}
         </Text>
       </View>
