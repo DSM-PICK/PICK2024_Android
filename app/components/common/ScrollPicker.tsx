@@ -4,13 +4,13 @@ import {
   NativeSyntheticEvent,
   StyleSheet,
   View,
-  Vibration,
 } from "react-native";
 import { useState } from "react";
 import { debounce, getColors } from "@/utils";
 import { PropType } from "ScrollPickerType";
 import { hitSlop } from "@/constants";
 import { Text } from "@commonents";
+import { impactAsync, ImpactFeedbackStyle } from "expo-haptics";
 
 export default function ScrollPicker({ items, onScroll, id }: PropType) {
   const [before, setBefore] = useState(0);
@@ -19,7 +19,7 @@ export default function ScrollPicker({ items, onScroll, id }: PropType) {
     const index = Math.ceil(e.nativeEvent.contentOffset.y / 40);
     if (index !== before) {
       setBefore(index);
-      Vibration.vibrate(1);
+      impactAsync(ImpactFeedbackStyle.Medium);
     }
     if (!!items[index]) {
       debounce(() => {
