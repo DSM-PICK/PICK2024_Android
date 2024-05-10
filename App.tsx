@@ -4,9 +4,11 @@ import { enableScreens } from "react-native-screens";
 import { useEffect, useRef, useState } from "react";
 import Navigation from "@/navigation/Navigation";
 import { Animated, Image } from "react-native";
+import { getColors, getToken, post, setToken } from "@/utils";
 import { StatusBar } from "expo-status-bar";
 import { ToastManager } from "@commonents";
-import { getColors, getToken } from "@/utils";
+import * as Sentry from "@sentry/react-native";
+import { path } from "@/constants";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -18,9 +20,14 @@ const queryClient = new QueryClient({
   },
 });
 
-export default function App() {
+Sentry.init({
+  dsn: process.env.EXPO_PUBLIC_SENTRY_DSN,
+  debug: true,
+});
+
+function App() {
   const fadeAnim = useRef(new Animated.Value(1)).current;
-  const [token, setToken] = useState(undefined);
+  const [token, setTokens] = useState(undefined);
   const [loaded, setLoaded] = useState(false);
   enableScreens(false);
 
@@ -30,8 +37,15 @@ export default function App() {
     };
 
     const tokenFn = async () => {
-      const { accessToken } = await getToken();
-      setToken(accessToken);
+      const { account, accessToken } = await getToken();
+
+      if (account) {
+        const data = { account_id: account[0], password: account[1] };
+        post(`${path.user}/login`, data).then((res) => {
+          setToken(res?.data.access_token, account);
+        });
+      }
+      setTokens(accessToken);
     };
     tokenFn();
     color();
@@ -78,3 +92,5 @@ export default function App() {
     );
   }
 }
+
+export default Sentry.wrap(App);

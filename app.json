@@ -20,6 +20,15 @@
       },
       "package": "com.sevenstandard.PICK"
     },
+    "plugins": [
+      [
+        "@sentry/react-native/expo",
+        {
+          "organization": "daedeok-software-meister-hi-76",
+          "project": "pick-android"
+        }
+      ]
+    ],
     "packagerOpts": {
       "config": "metro.config.js",
       "sourceExts": [

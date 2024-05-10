@@ -1,9 +1,7 @@
-const {
-  getDefaultConfig: getDefaultExpoConfig,
-} = require("@expo/metro-config");
+const { getSentryExpoConfig } = require("@sentry/react-native/metro");
 
 metroConfig = (() => {
-  const config = getDefaultExpoConfig(__dirname);
+  const config = getSentryExpoConfig(__dirname);
 
   const { transformer, resolver } = config;
 
