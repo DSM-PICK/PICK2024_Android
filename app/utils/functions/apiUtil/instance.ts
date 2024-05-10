@@ -1,6 +1,6 @@
+import * as Sentry from "@sentry/react-native";
 import axios from "axios";
-import { getToken, setToken } from "@/utils";
-import { refresh } from "./refresh";
+import { getToken } from "@/utils";
 
 export const instance = axios.create({
   baseURL: process.env.EXPO_PUBLIC_BASE_URL,
@@ -16,6 +16,7 @@ instance.interceptors.request.use(
     return res;
   },
   (err) => {
+    Sentry.captureException(err);
     throw err;
   }
 );
@@ -26,12 +27,9 @@ instance.interceptors.response.use(
   },
   async (err) => {
     const { status, error, data } = err?.response;
-    if (status === 401 && data.path === "/dsm-pick/simple") {
-      refresh().then((res) => {
-        const { access_token, refresh_token } = res?.data;
-        setToken(access_token, refresh_token);
-      });
+    if (status !== 401) {
+      Sentry.captureException(err);
     }
-    throw { status, error };
+    throw { status, data, error };
   }
 );

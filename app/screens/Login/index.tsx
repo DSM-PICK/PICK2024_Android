@@ -32,8 +32,8 @@ export const Login = () => {
         [status === 500 ? "account_id" : "password"]: true,
       }),
     onSuccess: async (res: AxiosResponse) => {
-      const { access_token, refresh_token } = res?.data;
-      await setToken(access_token, refresh_token);
+      const { access_token } = res?.data;
+      await setToken(access_token, Object.values(data));
       navigation.reset({ routes: [{ name: "홈" as never }] });
     },
   });
