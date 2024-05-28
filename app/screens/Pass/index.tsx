@@ -20,20 +20,21 @@ export const Pass = ({ route }) => {
     select: (res) => res?.data,
   });
 
-  const { school_num, username, start_time, end_time, reason, teacher_name } =
-    data;
-
   return (
     <Layout name="외출증">
       <View style={styles.container}>
         <View style={styles.detailContainer}>
-          <Text type={["heading", 6, "M"]}>{`${school_num} ${username}`}</Text>
+          <Text
+            type={["heading", 6, "M"]}
+          >{`${data?.school_num} ${data?.username}`}</Text>
           <View style={{ gap: 20 }}>
             <Label title={`${names[type]} 시간`}>
-              {end_time ? `${start_time}~${end_time}` : start_time}
+              {data?.end_time
+                ? `${data?.start_time}~${data?.end_time}`
+                : data?.start_time}
             </Label>
-            <Label title="사유">{reason}</Label>
-            <Label title="확인 교사">{teacher_name + " 선생님"}</Label>
+            <Label title="사유">{data?.reason}</Label>
+            <Label title="확인 교사">{data?.teacher_name + " 선생님"}</Label>
             <Image
               source={require("@/assets/Out.png")}
               style={styles.imageElement}
