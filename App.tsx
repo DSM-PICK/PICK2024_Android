@@ -37,16 +37,22 @@ function App() {
     };
 
     const tokenFn = async () => {
-      const { account, accessToken } = await getToken();
-
+      const { account, accessToken, name } = await getToken();
       if (account) {
         const data = { account_id: account[0], password: account[1] };
+        Sentry.configureScope((scope: Sentry.Scope) => {
+          scope.setUser({
+            id: data.account_id,
+            username: name,
+          });
+        });
         post(`${path.user}/login`, data).then((res) => {
-          setToken(res?.data.access_token, account);
+          setToken(res?.data.access_token, account, name);
         });
       }
       setTokens(accessToken);
     };
+
     tokenFn();
     color();
     setTimeout(() => {
@@ -86,6 +92,7 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <Navigation auth={!!token} />
         <ToastManager />
+
         <Splash />
         <StatusBar style="dark" />
       </QueryClientProvider>

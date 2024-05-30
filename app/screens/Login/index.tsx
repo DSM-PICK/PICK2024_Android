@@ -4,9 +4,10 @@ import { useMutation } from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
 import { useState } from "react";
 import { Text, Input, Button } from "@commonents";
-import { post, setToken } from "@/utils";
+import { get, post, setToken } from "@/utils";
 import { path } from "@/constants";
 import { Layout } from "@layouts";
+import * as Sentry from "@sentry/react-native";
 
 export const Login = () => {
   const [data, setData] = useState({
@@ -33,7 +34,16 @@ export const Login = () => {
       }),
     onSuccess: async (res: AxiosResponse) => {
       const { access_token } = res?.data;
-      await setToken(access_token, Object.values(data));
+      await setToken(access_token, Object.values(data), "");
+      get("/user/simple").then(async (res) => {
+        await setToken(access_token, Object.values(data), res.data.name);
+        Sentry.configureScope((scope: Sentry.Scope) => {
+          scope.setUser({
+            id: data.account_id,
+            username: res.data.name,
+          });
+        });
+      });
       navigation.reset({ routes: [{ name: "홈" as never }] });
     },
   });
