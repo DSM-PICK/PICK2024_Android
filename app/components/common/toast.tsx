@@ -1,4 +1,4 @@
-import { Animated, StyleSheet, StatusBar } from "react-native";
+import { Animated, StyleSheet, StatusBar, View } from "react-native";
 import { useEffect, useRef } from "react";
 import { debounce, getColors, useToast, perfectSize as p } from "@/utils";
 import * as _ from "@/assets/toastIcons";
@@ -9,7 +9,7 @@ export default function ToastManager() {
   const { type, message, show, stop } = useToast();
   const pos = useRef(new Animated.Value(-100)).current;
 
-  const Component = _[type];
+  const Component = _[type] || "";
 
   const showT = () => {
     Animated.timing(pos, {
