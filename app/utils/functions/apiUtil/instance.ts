@@ -26,10 +26,6 @@ instance.interceptors.response.use(
     return res;
   },
   async (err) => {
-    const { status, error, data } = err?.response;
-    if (status !== 401) {
-      Sentry.captureException(err);
-    }
-    throw { status, data, error };
+    throw err.response;
   }
 );

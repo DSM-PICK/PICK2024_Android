@@ -25,10 +25,38 @@ Sentry.init({
   debug: true,
 });
 
+interface PropType {
+  option: boolean;
+  anim: Animated.Value;
+}
+
+const Splash = ({ option, anim }: PropType) => {
+  if (option) {
+    return (
+      <Animated.View
+        style={{
+          backgroundColor: "#fff",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "100%",
+          height: "100%",
+          position: "absolute",
+          opacity: anim,
+        }}
+      >
+        <Image
+          source={require("./app/assets/SPLogo.gif")}
+          style={{ width: 300, height: 100 }}
+        />
+      </Animated.View>
+    );
+  }
+};
+
 function App() {
   const fadeAnim = useRef(new Animated.Value(1)).current;
   const [token, setTokens] = useState(undefined);
-  const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState([false, false]);
   enableScreens(false);
 
   useEffect(() => {
@@ -48,7 +76,10 @@ function App() {
         });
         post(`${path.user}/login`, data).then((res) => {
           setToken(res?.data.access_token, account, name);
+          setLoaded((prev) => [true, prev[1]]);
         });
+      } else {
+        setLoaded((prev) => [true, prev[1]]);
       }
       setTokens(accessToken);
     };
@@ -60,40 +91,16 @@ function App() {
         toValue: 0,
         duration: 100,
         useNativeDriver: true,
-      }).start(() => setLoaded(true));
-    }, 1400);
+      }).start(() => setLoaded((prev) => [prev[0], true]));
+    }, 2000);
   }, []);
-
-  const Splash = () => {
-    if (!loaded) {
-      return (
-        <Animated.View
-          style={{
-            backgroundColor: "#fff",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "100%",
-            height: "100%",
-            position: "absolute",
-            opacity: fadeAnim,
-          }}
-        >
-          <Image
-            source={require("./app/assets/SPLogo.gif")}
-            style={{ width: 300, height: 100 }}
-          />
-        </Animated.View>
-      );
-    }
-  };
 
   if (token !== undefined) {
     return (
       <QueryClientProvider client={queryClient}>
-        <Navigation auth={!!token} />
+        {loaded[0] === true && <Navigation auth={!!token} />}
+        <Splash option={!loaded[1]} anim={fadeAnim} />
         <ToastManager />
-
-        <Splash />
         <StatusBar style="dark" />
       </QueryClientProvider>
     );
