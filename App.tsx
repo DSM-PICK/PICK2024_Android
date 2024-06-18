@@ -4,7 +4,7 @@ import { enableScreens } from "react-native-screens";
 import { useEffect, useRef, useState } from "react";
 import Navigation from "@/navigation/Navigation";
 import { Animated, Image } from "react-native";
-import { getColors, getToken, post, setToken } from "@/utils";
+import { getColors, getToken, loginInstance, post, setToken } from "@/utils";
 import { StatusBar } from "expo-status-bar";
 import { ToastManager } from "@commonents";
 import * as Sentry from "@sentry/react-native";
@@ -74,7 +74,7 @@ function App() {
             username: name,
           });
         });
-        post(`${path.user}/login`, data).then((res) => {
+        loginInstance.post(`${path.user}/login`, data).then((res) => {
           setToken(res?.data.access_token, account, name);
           setLoaded((prev) => [true, prev[1]]);
         });
@@ -92,7 +92,7 @@ function App() {
         duration: 100,
         useNativeDriver: true,
       }).start(() => setLoaded((prev) => [prev[0], true]));
-    }, 2000);
+    }, 1600);
   }, []);
 
   if (token !== undefined) {

@@ -4,7 +4,7 @@ import { useMutation } from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
 import { useState } from "react";
 import { Text, Input, Button } from "@commonents";
-import { get, post, setToken } from "@/utils";
+import { get, loginInstance, post, setToken } from "@/utils";
 import { path } from "@/constants";
 import { Layout } from "@layouts";
 import * as Sentry from "@sentry/react-native";
@@ -26,7 +26,7 @@ export const Login = () => {
   };
 
   const { mutate: loginFn } = useMutation({
-    mutationFn: () => post(`${path.user}/login`, data),
+    mutationFn: () => loginInstance.post(`${path.user}/login`, data),
     onError: ({ status }: any) =>
       setError({
         ...error,

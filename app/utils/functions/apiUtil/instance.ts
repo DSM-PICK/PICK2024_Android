@@ -7,6 +7,11 @@ export const instance = axios.create({
   timeout: 3000,
 });
 
+export const loginInstance = axios.create({
+  baseURL: process.env.EXPO_PUBLIC_BASE_URL,
+  timeout: 3000,
+});
+
 instance.interceptors.request.use(
   async (res) => {
     const { accessToken } = await getToken();
