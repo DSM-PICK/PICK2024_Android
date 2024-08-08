@@ -1,4 +1,4 @@
-import { View, StyleSheet, Image, ImageSourcePropType } from "react-native";
+import { View, StyleSheet, Image } from "react-native";
 import { Text } from "@commonents";
 import { Box } from "@layouts";
 
@@ -6,7 +6,7 @@ interface PropType {
   index: number;
   name: string;
   duration: string;
-  icon: ImageSourcePropType;
+  icon: string;
 }
 
 export default function Subject({ index, name, duration, icon }: PropType) {
@@ -16,7 +16,7 @@ export default function Subject({ index, name, duration, icon }: PropType) {
         <Text type={["subTitle", 3, "M"]} color={["primary", 100]}>
           {index}교시
         </Text>
-        <Image source={icon} />
+        <Image source={{ uri: icon }} width={25} height={25} />
         <View style={{ gap: 2 }}>
           <Text type={["subTitle", 3, "M"]}>{name}</Text>
           <Text type={["caption", 2]} color={["neutral", 500]}>

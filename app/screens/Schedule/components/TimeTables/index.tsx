@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { View } from "react-native";
 import { path, queryKeys } from "@/constants";
-import * as I from "@/assets/tableIcons";
 import { Carousel } from "@layouts";
 import { Text } from "@commonents";
 import Subject from "./Subject";
@@ -70,9 +69,7 @@ export default function TimeTables() {
                 index={index + 1}
                 name={item.subject_name}
                 duration={times[index]}
-                icon={
-                  I[item.subject_name.replaceAll(" ", "")] || I["웹프로그래밍"]
-                }
+                icon={item.image}
               />
             )}
           />

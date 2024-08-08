@@ -1,12 +1,11 @@
-import { View, StyleSheet, Image, ImageSourcePropType } from "react-native";
-import * as I from "@/assets/tableIcons";
+import { View, StyleSheet, Image } from "react-native";
 import { Text } from "@commonents";
 import { Box } from "@layouts";
 
 interface PropType {
   index: number;
   name: string;
-  icon: ImageSourcePropType;
+  icon: string;
 }
 
 export default function Subject({ index, name, icon }: PropType) {
@@ -16,7 +15,7 @@ export default function Subject({ index, name, icon }: PropType) {
         <Text type={["subTitle", 3, "B"]} color={["primary", 100]}>
           {index}
         </Text>
-        <Image source={icon || I["웹프로그래밍"]} style={styles.imageElement} />
+        <Image source={{ uri: icon }} width={24} height={24} />
         <View style={[styles.flexContainer, { gap: 5 }]}>
           <Text type={["subTitle", 4, "M"]}>{name}</Text>
         </View>
@@ -29,9 +28,5 @@ const styles = StyleSheet.create({
   flexContainer: {
     flexDirection: "row",
     alignItems: "center",
-  },
-  imageElement: {
-    width: 24,
-    height: 24,
   },
 });

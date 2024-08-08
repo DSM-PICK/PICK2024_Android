@@ -2,7 +2,6 @@ import { FlatList } from "react-native-gesture-handler";
 import { useQuery } from "@tanstack/react-query";
 import { View, StyleSheet } from "react-native";
 import { path, queryKeys } from "@/constants";
-import * as I from "@/assets/tableIcons";
 import { get, getToday } from "@/utils";
 import { Text } from "@commonents";
 import Subject from "./Subject";
@@ -39,7 +38,7 @@ export default function TimeTable() {
               <Subject
                 index={index + 1}
                 name={item.subject_name}
-                icon={I[item.subject_name.replaceAll(" ", "")]}
+                icon={item.image}
               />
             )}
           />
