@@ -32,7 +32,9 @@ export default function Meal() {
             contentContainerStyle={{ gap: 10 }}
             keyExtractor={(_, index) => index.toString()}
             renderItem={({ item }) => (
-              <MenuItem menu={item as [string, string[]]} />
+              <MenuItem
+                menu={item as [string, { menu: string[]; cal: string }]}
+              />
             )}
           />
         </View>
