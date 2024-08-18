@@ -37,7 +37,9 @@ export const Meal = () => {
           data={mealData}
           keyExtractor={(_, index) => index.toString()}
           renderItem={({ item }) => (
-            <MenuItem menu={item as [string, string[]]} />
+            <MenuItem
+              menu={item as [string, { menu: string[]; cal: string }]}
+            />
           )}
         />
       </View>
