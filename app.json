@@ -13,7 +13,7 @@
     },
     "assetBundlePatterns": ["**/*"],
     "android": {
-      "versionCode": 7,
+      "versionCode": 9,
       "adaptiveIcon": {
         "foregroundImage": "./app/assets/icon.png",
         "backgroundColor": "#ffffff"
