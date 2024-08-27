@@ -43,10 +43,10 @@ export const Apply = () => {
           <Box color={["primary", 1200]}>
             <View style={styles.endMealBoxContainer}>
               <TernaryView
-                data={date <= 7}
+                data={date}
                 onTrue={
                   <>
-                    <Text type={["body", 2]}>{month}월 주말 급식 신청</Text>
+                    <Text type={["body", 2]}>10월 주말 급식 신청</Text>
                     <View style={styles.buttonContainer}>
                       <MealButton
                         setVisible={setVisible}
