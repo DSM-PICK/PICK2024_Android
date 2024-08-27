@@ -24,14 +24,16 @@ export const Pass = ({ route }) => {
     <Layout name="외출증">
       <View style={styles.container}>
         <View style={styles.detailContainer}>
-          <Text
-            type={["heading", 6, "M"]}
-          >{`${data?.school_num} ${data?.username}`}</Text>
+          <Text type={["heading", 6, "M"]}>
+            {data?.type === "EARLY_RETURN"
+              ? `${data?.grade}${data?.class_num}${data?.num
+                  .toString()
+                  .padStart(2, 0)} ${data?.username}`
+              : `${data?.school_num} ${data?.username}`}
+          </Text>
           <View style={{ gap: 20 }}>
             <Label title={`${names[type]} 시간`}>
-              {data?.end_time
-                ? `${data?.start_time}~${data?.end_time}`
-                : data?.start_time}
+              {data?.end ? `${data?.start}~${data?.end}` : data?.start_time}
             </Label>
             <Label title="사유">{data?.reason}</Label>
             <Label title="확인 교사">{data?.teacher_name + " 선생님"}</Label>

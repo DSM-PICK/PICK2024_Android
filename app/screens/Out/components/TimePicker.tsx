@@ -13,7 +13,7 @@ const defaultData = { hour: "00", minute: "00" };
 export default function TimePicker({ visible, setVisible, onDone }: PropType) {
   const [time, setTime] = useState(defaultData);
   const { hour, minute } = time;
-  const type = visible[1] === "start_time";
+  const type = visible[1] === "start";
 
   const handleScroll = (item: number, id: string) => {
     setTime({ ...time, [id]: item.toString() });

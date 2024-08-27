@@ -10,31 +10,39 @@ import { queryKeys } from "@/constants";
 export const Out = ({ navigation, route }) => {
   const queryClient = useQueryClient();
   const [out, setOut] = useState({
-    start_time: undefined,
-    end_time: undefined,
+    start: undefined,
+    end: undefined,
     reason: "",
+    application_type: "TIME",
   });
   const [pickVisible, setPickVisible] = useState<[boolean, string]>([
     false,
     "",
   ]);
-  const { start_time: start, end_time: end } = out;
+  const { start: start, end: end } = out;
   const { type } = route.params;
   const toast = useToast();
 
   const isOut = (item1: any, item2: any) => (type === "외출" ? item1 : item2);
 
   const { mutate: outMutate } = useMutation({
-    mutationFn: () => post(isOut("/application", "/early-return/create"), out),
+    mutationFn: () =>
+      post(isOut("/application", "/early-return/create"), {
+        start: out.start + ":00",
+        end: out.end + ":00",
+        reason: out.reason,
+        application_type: out.application_type,
+      }),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: queryKeys.anyApply });
       await navigation.reset({ routes: [{ name: "홈" as never }] });
       toast.success(`${type} 신청이 완료되었습니다.`);
     },
-    onError: ({ status }: any) =>
+    onError: ({ status }: any) => {
       toast.error(
         status === "409" ? "이미 신청되었습니다" : "오류가 발생했습니다"
-      ),
+      );
+    },
   });
 
   const handleChange = (item: any, type: string) => {
@@ -54,13 +62,13 @@ export const Out = ({ navigation, route }) => {
             onTrue={
               <>
                 <PickerBox
-                  setVisible={() => setPickVisible([true, "start_time"])}
-                  time={out.start_time}
+                  setVisible={() => setPickVisible([true, "start"])}
+                  time={out.start}
                   placeholder="출발 시간"
                 />
                 <Text type={["subTitle", 1, "M"]}>~</Text>
                 <PickerBox
-                  setVisible={() => setPickVisible([true, "end_time"])}
+                  setVisible={() => setPickVisible([true, "end"])}
                   time={end}
                   placeholder="도착 시간"
                 />
@@ -69,7 +77,7 @@ export const Out = ({ navigation, route }) => {
             onFalse={
               <PickerBox
                 full
-                setVisible={() => setPickVisible([true, "start_time"])}
+                setVisible={() => setPickVisible([true, "start"])}
                 time={start}
                 placeholder="출발 시간"
               />

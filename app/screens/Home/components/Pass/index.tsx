@@ -11,12 +11,11 @@ interface PropType {
 }
 
 const Types = {
-  EARLYRETURN: ({ username, start_time }) =>
-    Home({ name: username, data: start_time }),
+  EARLYRETURN: ({ username, start }) => Home({ name: username, data: start }),
   CLASSROOM: ({ classroom, start_period, end_period }) =>
     Move({ locate: classroom, data: [start_period, end_period] }),
-  APPLICATION: ({ username, end_time, start_time }) =>
-    Out({ name: username, data: [start_time, end_time] }),
+  APPLICATION: ({ username, end, start }) =>
+    Out({ name: username, data: [start, end] }),
 };
 
 export default function Pass({ type, data }: PropType) {
